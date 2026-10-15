@@ -1,0 +1,1496 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SafeMeal | Đoàn Văn Tâm — Demo mở ngay</title>
+<style>
+:root{--bg:#f4f7f5;--ink:#193d33;--muted:#71847c;--line:#e4ebe6;--green:#06785b;--green2:#0fa97b;--light:#e7f6ef;--warn:#c6861e;--red:#d95250;--nav:#0a3028}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#234038;font:14px/1.5 system-ui,-apple-system,Segoe UI,Arial,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}.app{display:flex;min-height:100vh}.sidebar{position:sticky;top:0;width:258px;height:100vh;flex-shrink:0;background:linear-gradient(164deg,#123d31,#06251f);color:#fff;display:flex;flex-direction:column;padding:28px 16px 20px}.brand{display:flex;align-items:center;gap:12px;padding:6px 12px 27px}.logo{display:grid;place-items:center;width:42px;height:42px;border-radius:13px;background:#d5ffd9;color:#065938;font-weight:900;font-size:22px;transform:rotate(-6deg)}.brand strong{font-size:22px;letter-spacing:-.7px}.brand small{display:block;color:#a0c3ae;font-size:10px;letter-spacing:2.4px;margin-top:1px}.navlabel{color:#80ac9d;font-size:10px;letter-spacing:2px;font-weight:800;margin:18px 12px 9px}.navitem{width:100%;display:flex;align-items:center;gap:12px;background:none;color:#bbd2c9;border:0;text-align:left;border-radius:11px;padding:12px 14px;font-weight:600;margin:2px 0;transition:.2s}.navitem:hover,.navitem.active{background:#235c49;color:#fff}.navitem.active{box-shadow:inset 3px 0 #a0ebaf}.ni{display:grid;place-items:center;background:#ffffff14;width:28px;height:28px;border-radius:9px;font-size:15px}.sbfoot{margin-top:auto;border-top:1px solid #ffffff25;padding:19px 10px 5px;color:#c1d8cc;font-size:12px}.sbfoot b{display:block;color:#fff;margin-bottom:4px}.main{flex:1;min-width:0}.topbar{height:74px;background:white;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;padding:0 37px;gap:14px}.topbar .crumb{color:#7b9185;font-size:13px}.topbar .crumb b{color:#234a3e}.right{display:flex;align-items:center;gap:12px}.avatar{height:39px;width:39px;display:grid;place-items:center;background:#ddefe3;color:#0e6f4e;border-radius:13px;font-weight:900}.mode{border:1px solid #a5ddc2;background:#eaf8ef;padding:7px 11px;border-radius:30px;color:#146c4a;font-size:11px;font-weight:800;white-space:nowrap}.actor{border:1px solid #d7e5db;background:#fff;border-radius:9px;padding:9px;max-width:190px;color:#245e49;font-size:12px}.content{max-width:1470px;margin:auto;padding:34px 37px 90px}.intro{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:24px}.eyebrow{font-size:10px;letter-spacing:2.4px;font-weight:900;color:#12956a;margin-bottom:9px}.intro h1{font-size:31px;letter-spacing:-1.1px;line-height:1.18;margin:0 0 7px;color:#113f30}.intro p{color:#778980;margin:0;font-size:13px}.btn{border:1px solid transparent;padding:10px 15px;border-radius:10px;font-size:12px;font-weight:800;white-space:nowrap;display:inline-flex;justify-content:center;align-items:center;gap:6px}.primary{background:#087a59;color:#fff}.primary:hover{background:#06593e}.outline{background:#fff;color:#24634d;border-color:#dbe8dd}.outline:hover{background:#edf8f0}.danger{background:#fff1ef;color:#b63838;border-color:#ffd5cf}.warn{background:#fff4e1;color:#9d6111;border-color:#fbe7bd}.btn:focus-visible,.navitem:focus-visible{outline:3px solid #38aa7c;outline-offset:2px}.gridstats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:17px;margin-bottom:22px}.card{background:#fff;border:1px solid #e2ebe5;border-radius:16px;box-shadow:0 3px 15px #1b5c3010}.stat{padding:23px 24px}.stat .top{display:flex;justify-content:space-between;gap:10px}.stat .label{color:#788b80;font-size:12px;font-weight:700}.stat .symbol{height:40px;width:40px;border-radius:13px;display:grid;place-items:center;background:#e9f7ed;font-size:21px}.stat .num{font-size:33px;font-weight:900;letter-spacing:-1.7px;color:#143f32;margin:11px 0 1px}.stat .sub{font-size:11px;color:#8c9c93}.sectionbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:20px 0 14px}.sectionbar h2{margin:0;color:#163e32;font-size:16px}.cols{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(260px,1fr);gap:20px}.panel{padding:22px}.tablebox{overflow:auto}.table{width:100%;border-collapse:collapse;min-width:620px}.table th{padding:13px 12px;text-align:left;background:#f6faf7;color:#8a9c91;font-size:10px;text-transform:uppercase;letter-spacing:1px}.table td{padding:13px 12px;border-bottom:1px solid #edf2ee;font-size:12px;vertical-align:middle}.table tr:last-child td{border-bottom:none}.table b{color:#184736}.sub{display:block;color:#93a49a;font-size:11px;margin-top:3px}.tag{display:inline-flex;align-items:center;border-radius:40px;background:#ebf7ef;color:#22805a;padding:4px 8px;font-size:10px;font-weight:800;white-space:nowrap}.tag.pending{background:#fff3db;color:#9b641a}.tag.held,.tag.recalled,.tag.bad{background:#ffe8e7;color:#b53e3f}.tag.blue{background:#e8f2ff;color:#4269a5}.mono{font-family:ui-monospace,Consolas,monospace;color:#266c52;font-size:11px;word-break:break-all}.flowline{display:flex;align-items:center;gap:11px;padding:17px 0;border-bottom:1px solid #edf2ee}.flowline:last-child{border:0}.round{height:41px;width:41px;flex-shrink:0;border-radius:13px;background:#e8f7ed;display:grid;place-items:center;font-size:18px}.flowline b{display:block;font-size:12px}.flowline p{font-size:11px;margin:2px 0;color:#819189}.callout{padding:15px 17px;border-radius:12px;background:#eaf6ef;color:#2a7050;border:1px solid #cde9d7;font-size:12px;margin:18px 0}.callout.warncall{background:#fff8e8;border-color:#f5e4be;color:#8b651d}.hero{background:linear-gradient(115deg,#0a4a39,#138361);padding:28px;border-radius:18px;color:white;margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;gap:18px;overflow:hidden;position:relative}.hero:after{content:'✺';font-size:230px;line-height:1;position:absolute;right:90px;top:-70px;opacity:.08}.hero h2{font-size:23px;margin:4px 0 8px;letter-spacing:-.5px}.hero p{color:#c6e7d8;max-width:550px;margin:0}.hero small{font-size:11px;color:#b6e6c9;font-weight:800;letter-spacing:2px}.hero .heroicon{font-size:68px;padding:10px 28px;z-index:1}.flex{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.grow{flex:1}.search{background:#fff;padding:12px 14px;border:1px solid #dce8df;border-radius:10px;width:260px;max-width:100%;font-size:12px}.empty{text-align:center;padding:45px;color:#85958c}.meals{display:grid;grid-template-columns:repeat(3,minmax(220px,1fr));gap:18px}.meal{padding:20px}.meal .emoji{height:65px;font-size:46px;text-align:center;background:#f3faf5;border-radius:14px;padding-top:3px;margin:15px 0}.meal h3{margin:12px 0 2px;font-size:16px}.meal p{color:#819188;font-size:12px}.meal .source{display:flex;flex-wrap:wrap;gap:5px;margin:15px 0}.source span{font-size:10px;background:#f1f5f2;padding:5px 7px;border-radius:7px;color:#608374}.alert{padding:20px;margin:13px 0;display:flex;gap:15px}.alert h3{margin:2px 0 7px;font-size:16px}.alert p{font-size:12px;color:#778b7e;margin:5px 0 15px}.bars{height:8px;background:#f0f3f0;border-radius:9px;overflow:hidden;margin-top:13px}.bars i{display:block;background:#19ad76;height:100%;border-radius:9px}.barlabel{font-size:10px;color:#859489;margin-top:7px}.input{display:block;width:100%;padding:12px;border:1px solid #d9e5dc;background:#fff;border-radius:10px;color:#244e3d;font-size:13px;outline-color:#23b387}.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{margin:9px 0}.field label{display:block;color:#51685b;font-size:11px;font-weight:800;margin-bottom:6px}.field.full{grid-column:1/-1}.modalbg{position:fixed;inset:0;background:#0c261f8c;z-index:4;display:flex;justify-content:center;align-items:center;padding:16px}.modal{width:640px;max-height:90vh;overflow:auto;background:white;border-radius:17px;box-shadow:0 24px 100px #001b1245}.modal.wide{width:810px}.modalhead{padding:22px 25px;border-bottom:1px solid #e9eee9;display:flex;justify-content:space-between;gap:15px;align-items:start}.modalhead h2{margin:3px 0;font-size:21px}.modalhead p{font-size:12px;color:#85958a;margin:0}.close{border:0;background:#f0f4f1;border-radius:9px;width:34px;height:34px;font-size:20px}.modalbody{padding:20px 25px 24px}.modalfooter{display:flex;justify-content:flex-end;gap:8px;margin-top:21px;border-top:1px solid #edf3ee;padding-top:17px}.toast{position:fixed;bottom:25px;right:25px;background:#073c2c;color:#fff;box-shadow:0 12px 45px #124a3429;padding:14px 19px;border-radius:12px;z-index:8;max-width:430px}.toast.err{background:#8d3635}.details{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.details>div{padding:12px;background:#f7faf7;border-radius:9px}.details label{font-size:10px;letter-spacing:.5px;color:#8a9c90;display:block}.details strong{display:block;margin-top:5px;font-size:13px;word-wrap:break-word}.timeline{border-left:2px solid #d6e9dc;padding-left:15px;margin-left:7px}.timeline>div{position:relative;margin:15px 0}.timeline>div:before{content:'';width:10px;height:10px;background:#299f6a;border:3px solid white;outline:1px solid #d7eadb;position:absolute;left:-23px;top:4px;border-radius:50%}.timeline strong{font-size:12px}.timeline span{color:#87988d;font-size:11px;display:block}.qrbox{background:white;border:1px solid #dce9df;border-radius:13px;padding:18px;display:inline-block}.qrbox svg{display:block;max-width:100%;height:auto}.public{max-width:850px;margin:60px auto;padding:0 20px}.publicheader{display:flex;justify-content:space-between;align-items:center}.publiccard{padding:31px;margin-top:25px}.publiccard h1{font-size:30px}.skeleton{display:none}.clip{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px}.kbd{font-family:Consolas,monospace;color:#0d7855;font-size:11px}.footer{margin-top:28px;color:#9baaa0;font-size:11px}.note{font-size:11px;color:#84958a;margin:13px 0}.mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.mini-grid .card{padding:17px} @media(max-width:1100px){.sidebar{width:210px}.content{padding:25px}.topbar{padding:0 25px}.gridstats{grid-template-columns:repeat(2,1fr)}.meals{grid-template-columns:repeat(2,1fr)}}@media(max-width:780px){.app{display:block}.sidebar{position:relative;width:100%;height:auto;padding:10px;display:block}.brand{padding:7px 9px}.navlabel,.sbfoot{display:none}.navs{display:flex;overflow:auto}.navitem{width:auto;white-space:nowrap;flex-shrink:0;padding:6px 10px}.navitem .ni{display:none}.topbar{height:auto;min-height:65px;flex-wrap:wrap;padding:10px 14px}.topbar .crumb{display:none}.content{padding:18px 13px}.cols{grid-template-columns:1fr}.meals{grid-template-columns:1fr}.gridstats{gap:10px}.stat{padding:16px}.intro{align-items:flex-start}.intro h1{font-size:24px}.hero .heroicon{display:none}.actor{max-width:175px}.fields,.details{grid-template-columns:1fr}.modalbody{padding:15px}.sectionbar{flex-wrap:wrap}.search{width:100%}}
+
+/* SafeMeal V3: inspection journey & one consolidated cert */
+.v2-steps{display:grid;grid-template-columns:1fr 28px 1fr 28px 1fr;align-items:center;gap:9px;margin:20px 0}.v2-step{padding:23px 18px;min-height:195px}.v2-step b{display:block;font-size:14px;color:#144637}.v2-step p,.v2-techitem p{font-size:12px;color:#7d9286;margin:9px 0}.v2-large{font-size:32px;margin-bottom:10px}.v2-arrow{text-align:center;color:#07845e;font-weight:900;font-size:23px}.v2-lot,.v2-case{padding:21px 24px;margin:14px 0}.v2-lotname{font-size:16px;color:#174a37}.v2-progress{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:18px 0 2px}.v2-progressitem{background:#f5f6f5;border:1px solid #e5e8e5;border-radius:9px;padding:12px 8px;text-align:center;color:#7c8a81;font-size:12px;font-weight:700}.v2-progressitem.completed{background:#e9f7ee;border-color:#c8e8d4;color:#136949}.v2-progressitem.failed{background:#fff0ee;border-color:#ffd3cf;color:#b14842}.v2-tech{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.v2-techitem{padding:21px}.v2-techitem b{font-size:16px;color:#154631}.v2-case p{font-size:12px;color:#657f70}.v2-lot .flowline,.v2-step .flowline{padding:10px 0}@media(max-width:1000px){.v2-steps{grid-template-columns:1fr}.v2-arrow{transform:rotate(90deg)}.v2-tech{grid-template-columns:1fr}}@media(max-width:700px){.v2-progress{grid-template-columns:1fr}.v2-step{min-height:unset}}
+</style>
+</head>
+<body><div id="app"></div><div id="overlay"></div><div id="toast"></div>
+<script id="qr-library">
+/* Open source QR algorithm credited to Kazuhiko Arase (MIT); bundled locally. */
+(()=>{let defs={},mods={};function require(name){name=name.replace(/^.\//,'');if(mods[name])return mods[name].exports;if(!defs[name])throw Error('Missing QR module '+name);const module={exports:{}};mods[name]=module;defs[name](module,require);return module.exports;}
+defs['QR8bitByte']=function(module,require){
+var QRMode = require('./QRMode');
+
+function QR8bitByte(data) {
+	this.mode = QRMode.MODE_8BIT_BYTE;
+	this.data = data;
+}
+
+QR8bitByte.prototype = {
+
+	getLength : function() {
+		return this.data.length;
+	},
+	
+	write : function(buffer) {
+		for (var i = 0; i < this.data.length; i++) {
+			// not JIS ...
+			buffer.put(this.data.charCodeAt(i), 8);
+		}
+	}
+};
+
+module.exports = QR8bitByte;
+
+};
+defs['QRBitBuffer']=function(module,require){
+function QRBitBuffer() {
+	this.buffer = [];
+	this.length = 0;
+}
+
+QRBitBuffer.prototype = {
+
+	get : function(index) {
+		var bufIndex = Math.floor(index / 8);
+		return ( (this.buffer[bufIndex] >>> (7 - index % 8) ) & 1) == 1;
+	},
+	
+	put : function(num, length) {
+		for (var i = 0; i < length; i++) {
+			this.putBit( ( (num >>> (length - i - 1) ) & 1) == 1);
+		}
+	},
+	
+	getLengthInBits : function() {
+		return this.length;
+	},
+	
+	putBit : function(bit) {
+	
+		var bufIndex = Math.floor(this.length / 8);
+		if (this.buffer.length <= bufIndex) {
+			this.buffer.push(0);
+		}
+	
+		if (bit) {
+			this.buffer[bufIndex] |= (0x80 >>> (this.length % 8) );
+		}
+	
+		this.length++;
+	}
+};
+
+module.exports = QRBitBuffer;
+
+};
+defs['QRErrorCorrectLevel']=function(module,require){
+module.exports = {
+	L : 1,
+	M : 0,
+	Q : 3,
+	H : 2
+};
+
+
+};
+defs['QRMaskPattern']=function(module,require){
+module.exports = {
+	PATTERN000 : 0,
+	PATTERN001 : 1,
+	PATTERN010 : 2,
+	PATTERN011 : 3,
+	PATTERN100 : 4,
+	PATTERN101 : 5,
+	PATTERN110 : 6,
+	PATTERN111 : 7
+};
+
+};
+defs['QRMath']=function(module,require){
+var QRMath = {
+
+	glog : function(n) {
+	
+		if (n < 1) {
+			throw new Error("glog(" + n + ")");
+		}
+		
+		return QRMath.LOG_TABLE[n];
+	},
+	
+	gexp : function(n) {
+	
+		while (n < 0) {
+			n += 255;
+		}
+	
+		while (n >= 256) {
+			n -= 255;
+		}
+	
+		return QRMath.EXP_TABLE[n];
+	},
+	
+	EXP_TABLE : new Array(256),
+	
+	LOG_TABLE : new Array(256)
+
+};
+	
+for (var i = 0; i < 8; i++) {
+	QRMath.EXP_TABLE[i] = 1 << i;
+}
+for (var i = 8; i < 256; i++) {
+	QRMath.EXP_TABLE[i] = QRMath.EXP_TABLE[i - 4]
+		^ QRMath.EXP_TABLE[i - 5]
+		^ QRMath.EXP_TABLE[i - 6]
+		^ QRMath.EXP_TABLE[i - 8];
+}
+for (var i = 0; i < 255; i++) {
+	QRMath.LOG_TABLE[QRMath.EXP_TABLE[i] ] = i;
+}
+
+module.exports = QRMath;
+
+};
+defs['QRMode']=function(module,require){
+module.exports = {
+    MODE_NUMBER :       1 << 0,
+    MODE_ALPHA_NUM :    1 << 1,
+    MODE_8BIT_BYTE :    1 << 2,
+    MODE_KANJI :        1 << 3
+};
+
+};
+defs['QRPolynomial']=function(module,require){
+var QRMath = require('./QRMath');
+
+function QRPolynomial(num, shift) {
+	if (num.length === undefined) {
+		throw new Error(num.length + "/" + shift);
+	}
+
+	var offset = 0;
+
+	while (offset < num.length && num[offset] === 0) {
+		offset++;
+	}
+
+	this.num = new Array(num.length - offset + shift);
+	for (var i = 0; i < num.length - offset; i++) {
+		this.num[i] = num[i + offset];
+	}
+}
+
+QRPolynomial.prototype = {
+
+	get : function(index) {
+		return this.num[index];
+	},
+	
+	getLength : function() {
+		return this.num.length;
+	},
+	
+	multiply : function(e) {
+	
+		var num = new Array(this.getLength() + e.getLength() - 1);
+	
+		for (var i = 0; i < this.getLength(); i++) {
+			for (var j = 0; j < e.getLength(); j++) {
+				num[i + j] ^= QRMath.gexp(QRMath.glog(this.get(i) ) + QRMath.glog(e.get(j) ) );
+			}
+		}
+	
+		return new QRPolynomial(num, 0);
+	},
+	
+	mod : function(e) {
+	
+		if (this.getLength() - e.getLength() < 0) {
+			return this;
+		}
+	
+		var ratio = QRMath.glog(this.get(0) ) - QRMath.glog(e.get(0) );
+	
+		var num = new Array(this.getLength() );
+		
+		for (var i = 0; i < this.getLength(); i++) {
+			num[i] = this.get(i);
+		}
+		
+		for (var x = 0; x < e.getLength(); x++) {
+			num[x] ^= QRMath.gexp(QRMath.glog(e.get(x) ) + ratio);
+		}
+	
+		// recursive call
+		return new QRPolynomial(num, 0).mod(e);
+	}
+};
+
+module.exports = QRPolynomial;
+
+};
+defs['QRRSBlock']=function(module,require){
+var QRErrorCorrectLevel = require('./QRErrorCorrectLevel');
+
+function QRRSBlock(totalCount, dataCount) {
+	this.totalCount = totalCount;
+	this.dataCount  = dataCount;
+}
+
+QRRSBlock.RS_BLOCK_TABLE = [
+
+	// L
+	// M
+	// Q
+	// H
+
+	// 1
+	[1, 26, 19],
+	[1, 26, 16],
+	[1, 26, 13],
+	[1, 26, 9],
+	
+	// 2
+	[1, 44, 34],
+	[1, 44, 28],
+	[1, 44, 22],
+	[1, 44, 16],
+
+	// 3
+	[1, 70, 55],
+	[1, 70, 44],
+	[2, 35, 17],
+	[2, 35, 13],
+
+	// 4		
+	[1, 100, 80],
+	[2, 50, 32],
+	[2, 50, 24],
+	[4, 25, 9],
+	
+	// 5
+	[1, 134, 108],
+	[2, 67, 43],
+	[2, 33, 15, 2, 34, 16],
+	[2, 33, 11, 2, 34, 12],
+	
+	// 6
+	[2, 86, 68],
+	[4, 43, 27],
+	[4, 43, 19],
+	[4, 43, 15],
+	
+	// 7		
+	[2, 98, 78],
+	[4, 49, 31],
+	[2, 32, 14, 4, 33, 15],
+	[4, 39, 13, 1, 40, 14],
+	
+	// 8
+	[2, 121, 97],
+	[2, 60, 38, 2, 61, 39],
+	[4, 40, 18, 2, 41, 19],
+	[4, 40, 14, 2, 41, 15],
+	
+	// 9
+	[2, 146, 116],
+	[3, 58, 36, 2, 59, 37],
+	[4, 36, 16, 4, 37, 17],
+	[4, 36, 12, 4, 37, 13],
+	
+	// 10		
+	[2, 86, 68, 2, 87, 69],
+	[4, 69, 43, 1, 70, 44],
+	[6, 43, 19, 2, 44, 20],
+	[6, 43, 15, 2, 44, 16],
+
+	// 11
+	[4, 101, 81],
+	[1, 80, 50, 4, 81, 51],
+	[4, 50, 22, 4, 51, 23],
+	[3, 36, 12, 8, 37, 13],
+
+	// 12
+	[2, 116, 92, 2, 117, 93],
+	[6, 58, 36, 2, 59, 37],
+	[4, 46, 20, 6, 47, 21],
+	[7, 42, 14, 4, 43, 15],
+
+	// 13
+	[4, 133, 107],
+	[8, 59, 37, 1, 60, 38],
+	[8, 44, 20, 4, 45, 21],
+	[12, 33, 11, 4, 34, 12],
+
+	// 14
+	[3, 145, 115, 1, 146, 116],
+	[4, 64, 40, 5, 65, 41],
+	[11, 36, 16, 5, 37, 17],
+	[11, 36, 12, 5, 37, 13],
+
+	// 15
+	[5, 109, 87, 1, 110, 88],
+	[5, 65, 41, 5, 66, 42],
+	[5, 54, 24, 7, 55, 25],
+	[11, 36, 12],
+
+	// 16
+	[5, 122, 98, 1, 123, 99],
+	[7, 73, 45, 3, 74, 46],
+	[15, 43, 19, 2, 44, 20],
+	[3, 45, 15, 13, 46, 16],
+
+	// 17
+	[1, 135, 107, 5, 136, 108],
+	[10, 74, 46, 1, 75, 47],
+	[1, 50, 22, 15, 51, 23],
+	[2, 42, 14, 17, 43, 15],
+
+	// 18
+	[5, 150, 120, 1, 151, 121],
+	[9, 69, 43, 4, 70, 44],
+	[17, 50, 22, 1, 51, 23],
+	[2, 42, 14, 19, 43, 15],
+
+	// 19
+	[3, 141, 113, 4, 142, 114],
+	[3, 70, 44, 11, 71, 45],
+	[17, 47, 21, 4, 48, 22],
+	[9, 39, 13, 16, 40, 14],
+
+	// 20
+	[3, 135, 107, 5, 136, 108],
+	[3, 67, 41, 13, 68, 42],
+	[15, 54, 24, 5, 55, 25],
+	[15, 43, 15, 10, 44, 16],
+
+	// 21
+	[4, 144, 116, 4, 145, 117],
+	[17, 68, 42],
+	[17, 50, 22, 6, 51, 23],
+	[19, 46, 16, 6, 47, 17],
+
+	// 22
+	[2, 139, 111, 7, 140, 112],
+	[17, 74, 46],
+	[7, 54, 24, 16, 55, 25],
+	[34, 37, 13],
+
+	// 23
+	[4, 151, 121, 5, 152, 122],
+	[4, 75, 47, 14, 76, 48],
+	[11, 54, 24, 14, 55, 25],
+	[16, 45, 15, 14, 46, 16],
+
+	// 24
+	[6, 147, 117, 4, 148, 118],
+	[6, 73, 45, 14, 74, 46],
+	[11, 54, 24, 16, 55, 25],
+	[30, 46, 16, 2, 47, 17],
+
+	// 25
+	[8, 132, 106, 4, 133, 107],
+	[8, 75, 47, 13, 76, 48],
+	[7, 54, 24, 22, 55, 25],
+	[22, 45, 15, 13, 46, 16],
+
+	// 26
+	[10, 142, 114, 2, 143, 115],
+	[19, 74, 46, 4, 75, 47],
+	[28, 50, 22, 6, 51, 23],
+	[33, 46, 16, 4, 47, 17],
+
+	// 27
+	[8, 152, 122, 4, 153, 123],
+	[22, 73, 45, 3, 74, 46],
+	[8, 53, 23, 26, 54, 24],
+	[12, 45, 15, 28, 46, 16],
+
+	// 28
+	[3, 147, 117, 10, 148, 118],
+	[3, 73, 45, 23, 74, 46],
+	[4, 54, 24, 31, 55, 25],
+	[11, 45, 15, 31, 46, 16],
+
+	// 29
+	[7, 146, 116, 7, 147, 117],
+	[21, 73, 45, 7, 74, 46],
+	[1, 53, 23, 37, 54, 24],
+	[19, 45, 15, 26, 46, 16],
+
+	// 30
+	[5, 145, 115, 10, 146, 116],
+	[19, 75, 47, 10, 76, 48],
+	[15, 54, 24, 25, 55, 25],
+	[23, 45, 15, 25, 46, 16],
+
+	// 31
+	[13, 145, 115, 3, 146, 116],
+	[2, 74, 46, 29, 75, 47],
+	[42, 54, 24, 1, 55, 25],
+	[23, 45, 15, 28, 46, 16],
+
+	// 32
+	[17, 145, 115],
+	[10, 74, 46, 23, 75, 47],
+	[10, 54, 24, 35, 55, 25],
+	[19, 45, 15, 35, 46, 16],
+
+	// 33
+	[17, 145, 115, 1, 146, 116],
+	[14, 74, 46, 21, 75, 47],
+	[29, 54, 24, 19, 55, 25],
+	[11, 45, 15, 46, 46, 16],
+
+	// 34
+	[13, 145, 115, 6, 146, 116],
+	[14, 74, 46, 23, 75, 47],
+	[44, 54, 24, 7, 55, 25],
+	[59, 46, 16, 1, 47, 17],
+
+	// 35
+	[12, 151, 121, 7, 152, 122],
+	[12, 75, 47, 26, 76, 48],
+	[39, 54, 24, 14, 55, 25],
+	[22, 45, 15, 41, 46, 16],
+
+	// 36
+	[6, 151, 121, 14, 152, 122],
+	[6, 75, 47, 34, 76, 48],
+	[46, 54, 24, 10, 55, 25],
+	[2, 45, 15, 64, 46, 16],
+
+	// 37
+	[17, 152, 122, 4, 153, 123],
+	[29, 74, 46, 14, 75, 47],
+	[49, 54, 24, 10, 55, 25],
+	[24, 45, 15, 46, 46, 16],
+
+	// 38
+	[4, 152, 122, 18, 153, 123],
+	[13, 74, 46, 32, 75, 47],
+	[48, 54, 24, 14, 55, 25],
+	[42, 45, 15, 32, 46, 16],
+
+	// 39
+	[20, 147, 117, 4, 148, 118],
+	[40, 75, 47, 7, 76, 48],
+	[43, 54, 24, 22, 55, 25],
+	[10, 45, 15, 67, 46, 16],
+
+	// 40
+	[19, 148, 118, 6, 149, 119],
+	[18, 75, 47, 31, 76, 48],
+	[34, 54, 24, 34, 55, 25],
+	[20, 45, 15, 61, 46, 16]
+];
+
+QRRSBlock.getRSBlocks = function(typeNumber, errorCorrectLevel) {
+	
+	var rsBlock = QRRSBlock.getRsBlockTable(typeNumber, errorCorrectLevel);
+	
+	if (rsBlock === undefined) {
+		throw new Error("bad rs block @ typeNumber:" + typeNumber + "/errorCorrectLevel:" + errorCorrectLevel);
+	}
+
+	var length = rsBlock.length / 3;
+	
+	var list = [];
+	
+	for (var i = 0; i < length; i++) {
+
+		var count = rsBlock[i * 3 + 0];
+		var totalCount = rsBlock[i * 3 + 1];
+		var dataCount  = rsBlock[i * 3 + 2];
+
+		for (var j = 0; j < count; j++) {
+			list.push(new QRRSBlock(totalCount, dataCount) );	
+		}
+	}
+	
+	return list;
+};
+
+QRRSBlock.getRsBlockTable = function(typeNumber, errorCorrectLevel) {
+
+	switch(errorCorrectLevel) {
+	case QRErrorCorrectLevel.L :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 0];
+	case QRErrorCorrectLevel.M :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 1];
+	case QRErrorCorrectLevel.Q :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 2];
+	case QRErrorCorrectLevel.H :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 3];
+	default :
+		return undefined;
+	}
+};
+
+module.exports = QRRSBlock;
+
+};
+defs['QRUtil']=function(module,require){
+var QRMode = require('./QRMode');
+var QRPolynomial = require('./QRPolynomial');
+var QRMath = require('./QRMath');
+var QRMaskPattern = require('./QRMaskPattern');
+
+var QRUtil = {
+
+    PATTERN_POSITION_TABLE : [
+        [],
+        [6, 18],
+        [6, 22],
+        [6, 26],
+        [6, 30],
+        [6, 34],
+        [6, 22, 38],
+        [6, 24, 42],
+        [6, 26, 46],
+        [6, 28, 50],
+        [6, 30, 54],        
+        [6, 32, 58],
+        [6, 34, 62],
+        [6, 26, 46, 66],
+        [6, 26, 48, 70],
+        [6, 26, 50, 74],
+        [6, 30, 54, 78],
+        [6, 30, 56, 82],
+        [6, 30, 58, 86],
+        [6, 34, 62, 90],
+        [6, 28, 50, 72, 94],
+        [6, 26, 50, 74, 98],
+        [6, 30, 54, 78, 102],
+        [6, 28, 54, 80, 106],
+        [6, 32, 58, 84, 110],
+        [6, 30, 58, 86, 114],
+        [6, 34, 62, 90, 118],
+        [6, 26, 50, 74, 98, 122],
+        [6, 30, 54, 78, 102, 126],
+        [6, 26, 52, 78, 104, 130],
+        [6, 30, 56, 82, 108, 134],
+        [6, 34, 60, 86, 112, 138],
+        [6, 30, 58, 86, 114, 142],
+        [6, 34, 62, 90, 118, 146],
+        [6, 30, 54, 78, 102, 126, 150],
+        [6, 24, 50, 76, 102, 128, 154],
+        [6, 28, 54, 80, 106, 132, 158],
+        [6, 32, 58, 84, 110, 136, 162],
+        [6, 26, 54, 82, 110, 138, 166],
+        [6, 30, 58, 86, 114, 142, 170]
+    ],
+
+    G15 : (1 << 10) | (1 << 8) | (1 << 5) | (1 << 4) | (1 << 2) | (1 << 1) | (1 << 0),
+    G18 : (1 << 12) | (1 << 11) | (1 << 10) | (1 << 9) | (1 << 8) | (1 << 5) | (1 << 2) | (1 << 0),
+    G15_MASK : (1 << 14) | (1 << 12) | (1 << 10)    | (1 << 4) | (1 << 1),
+
+    getBCHTypeInfo : function(data) {
+        var d = data << 10;
+        while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) >= 0) {
+            d ^= (QRUtil.G15 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) ) );    
+        }
+        return ( (data << 10) | d) ^ QRUtil.G15_MASK;
+    },
+
+    getBCHTypeNumber : function(data) {
+        var d = data << 12;
+        while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) >= 0) {
+            d ^= (QRUtil.G18 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) ) );    
+        }
+        return (data << 12) | d;
+    },
+
+    getBCHDigit : function(data) {
+
+        var digit = 0;
+
+        while (data !== 0) {
+            digit++;
+            data >>>= 1;
+        }
+
+        return digit;
+    },
+
+    getPatternPosition : function(typeNumber) {
+        return QRUtil.PATTERN_POSITION_TABLE[typeNumber - 1];
+    },
+
+    getMask : function(maskPattern, i, j) {
+        
+        switch (maskPattern) {
+            
+        case QRMaskPattern.PATTERN000 : return (i + j) % 2 === 0;
+        case QRMaskPattern.PATTERN001 : return i % 2 === 0;
+        case QRMaskPattern.PATTERN010 : return j % 3 === 0;
+        case QRMaskPattern.PATTERN011 : return (i + j) % 3 === 0;
+        case QRMaskPattern.PATTERN100 : return (Math.floor(i / 2) + Math.floor(j / 3) ) % 2 === 0;
+        case QRMaskPattern.PATTERN101 : return (i * j) % 2 + (i * j) % 3 === 0;
+        case QRMaskPattern.PATTERN110 : return ( (i * j) % 2 + (i * j) % 3) % 2 === 0;
+        case QRMaskPattern.PATTERN111 : return ( (i * j) % 3 + (i + j) % 2) % 2 === 0;
+
+        default :
+            throw new Error("bad maskPattern:" + maskPattern);
+        }
+    },
+
+    getErrorCorrectPolynomial : function(errorCorrectLength) {
+
+        var a = new QRPolynomial([1], 0);
+
+        for (var i = 0; i < errorCorrectLength; i++) {
+            a = a.multiply(new QRPolynomial([1, QRMath.gexp(i)], 0) );
+        }
+
+        return a;
+    },
+
+    getLengthInBits : function(mode, type) {
+
+        if (1 <= type && type < 10) {
+
+            // 1 - 9
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 10;
+            case QRMode.MODE_ALPHA_NUM  : return 9;
+            case QRMode.MODE_8BIT_BYTE  : return 8;
+            case QRMode.MODE_KANJI      : return 8;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else if (type < 27) {
+
+            // 10 - 26
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 12;
+            case QRMode.MODE_ALPHA_NUM  : return 11;
+            case QRMode.MODE_8BIT_BYTE  : return 16;
+            case QRMode.MODE_KANJI      : return 10;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else if (type < 41) {
+
+            // 27 - 40
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 14;
+            case QRMode.MODE_ALPHA_NUM  : return 13;
+            case QRMode.MODE_8BIT_BYTE  : return 16;
+            case QRMode.MODE_KANJI      : return 12;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else {
+            throw new Error("type:" + type);
+        }
+    },
+
+    getLostPoint : function(qrCode) {
+        
+        var moduleCount = qrCode.getModuleCount();
+        var lostPoint = 0;
+        var row = 0; 
+        var col = 0;
+
+        
+        // LEVEL1
+        
+        for (row = 0; row < moduleCount; row++) {
+
+            for (col = 0; col < moduleCount; col++) {
+
+                var sameCount = 0;
+                var dark = qrCode.isDark(row, col);
+
+                for (var r = -1; r <= 1; r++) {
+
+                    if (row + r < 0 || moduleCount <= row + r) {
+                        continue;
+                    }
+
+                    for (var c = -1; c <= 1; c++) {
+
+                        if (col + c < 0 || moduleCount <= col + c) {
+                            continue;
+                        }
+
+                        if (r === 0 && c === 0) {
+                            continue;
+                        }
+
+                        if (dark === qrCode.isDark(row + r, col + c) ) {
+                            sameCount++;
+                        }
+                    }
+                }
+
+                if (sameCount > 5) {
+                    lostPoint += (3 + sameCount - 5);
+                }
+            }
+        }
+
+        // LEVEL2
+
+        for (row = 0; row < moduleCount - 1; row++) {
+            for (col = 0; col < moduleCount - 1; col++) {
+                var count = 0;
+                if (qrCode.isDark(row,     col    ) ) count++;
+                if (qrCode.isDark(row + 1, col    ) ) count++;
+                if (qrCode.isDark(row,     col + 1) ) count++;
+                if (qrCode.isDark(row + 1, col + 1) ) count++;
+                if (count === 0 || count === 4) {
+                    lostPoint += 3;
+                }
+            }
+        }
+
+        // LEVEL3
+
+        for (row = 0; row < moduleCount; row++) {
+            for (col = 0; col < moduleCount - 6; col++) {
+                if (qrCode.isDark(row, col) && 
+                        !qrCode.isDark(row, col + 1) && 
+                         qrCode.isDark(row, col + 2) && 
+                         qrCode.isDark(row, col + 3) && 
+                         qrCode.isDark(row, col + 4) && 
+                        !qrCode.isDark(row, col + 5) && 
+                         qrCode.isDark(row, col + 6) ) {
+                    lostPoint += 40;
+                }
+            }
+        }
+
+        for (col = 0; col < moduleCount; col++) {
+            for (row = 0; row < moduleCount - 6; row++) {
+                if (qrCode.isDark(row, col) &&
+                        !qrCode.isDark(row + 1, col) &&
+                         qrCode.isDark(row + 2, col) &&
+                         qrCode.isDark(row + 3, col) &&
+                         qrCode.isDark(row + 4, col) &&
+                        !qrCode.isDark(row + 5, col) &&
+                         qrCode.isDark(row + 6, col) ) {
+                    lostPoint += 40;
+                }
+            }
+        }
+
+        // LEVEL4
+        
+        var darkCount = 0;
+
+        for (col = 0; col < moduleCount; col++) {
+            for (row = 0; row < moduleCount; row++) {
+                if (qrCode.isDark(row, col) ) {
+                    darkCount++;
+                }
+            }
+        }
+        
+        var ratio = Math.abs(100 * darkCount / moduleCount / moduleCount - 50) / 5;
+        lostPoint += ratio * 10;
+
+        return lostPoint;       
+    }
+
+};
+
+module.exports = QRUtil;
+
+};
+defs['index']=function(module,require){
+//---------------------------------------------------------------------
+// QRCode for JavaScript
+//
+// Copyright (c) 2009 Kazuhiko Arase
+//
+// URL: http://www.d-project.com/
+//
+// Licensed under the MIT license:
+//   http://www.opensource.org/licenses/mit-license.php
+//
+// The word "QR Code" is registered trademark of 
+// DENSO WAVE INCORPORATED
+//   http://www.denso-wave.com/qrcode/faqpatent-e.html
+//
+//---------------------------------------------------------------------
+// Modified to work in node for this project (and some refactoring)
+//---------------------------------------------------------------------
+
+var QR8bitByte = require('./QR8bitByte');
+var QRUtil = require('./QRUtil');
+var QRPolynomial = require('./QRPolynomial');
+var QRRSBlock = require('./QRRSBlock');
+var QRBitBuffer = require('./QRBitBuffer');
+
+function QRCode(typeNumber, errorCorrectLevel) {
+	this.typeNumber = typeNumber;
+	this.errorCorrectLevel = errorCorrectLevel;
+	this.modules = null;
+	this.moduleCount = 0;
+	this.dataCache = null;
+	this.dataList = [];
+}
+
+QRCode.prototype = {
+	
+	addData : function(data) {
+		var newData = new QR8bitByte(data);
+		this.dataList.push(newData);
+		this.dataCache = null;
+	},
+	
+	isDark : function(row, col) {
+		if (row < 0 || this.moduleCount <= row || col < 0 || this.moduleCount <= col) {
+			throw new Error(row + "," + col);
+		}
+		return this.modules[row][col];
+	},
+
+	getModuleCount : function() {
+		return this.moduleCount;
+	},
+	
+	make : function() {
+		// Calculate automatically typeNumber if provided is < 1
+		if (this.typeNumber < 1 ){
+			var typeNumber = 1;
+			for (typeNumber = 1; typeNumber < 40; typeNumber++) {
+				var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, this.errorCorrectLevel);
+
+				var buffer = new QRBitBuffer();
+				var totalDataCount = 0;
+				for (var i = 0; i < rsBlocks.length; i++) {
+					totalDataCount += rsBlocks[i].dataCount;
+				}
+
+				for (var x = 0; x < this.dataList.length; x++) {
+					var data = this.dataList[x];
+					buffer.put(data.mode, 4);
+					buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber) );
+					data.write(buffer);
+				}
+				if (buffer.getLengthInBits() <= totalDataCount * 8)
+					break;
+			}
+			this.typeNumber = typeNumber;
+		}
+		this.makeImpl(false, this.getBestMaskPattern() );
+	},
+	
+	makeImpl : function(test, maskPattern) {
+		
+		this.moduleCount = this.typeNumber * 4 + 17;
+		this.modules = new Array(this.moduleCount);
+		
+		for (var row = 0; row < this.moduleCount; row++) {
+			
+			this.modules[row] = new Array(this.moduleCount);
+			
+			for (var col = 0; col < this.moduleCount; col++) {
+				this.modules[row][col] = null;//(col + row) % 3;
+			}
+		}
+	
+		this.setupPositionProbePattern(0, 0);
+		this.setupPositionProbePattern(this.moduleCount - 7, 0);
+		this.setupPositionProbePattern(0, this.moduleCount - 7);
+		this.setupPositionAdjustPattern();
+		this.setupTimingPattern();
+		this.setupTypeInfo(test, maskPattern);
+		
+		if (this.typeNumber >= 7) {
+			this.setupTypeNumber(test);
+		}
+	
+		if (this.dataCache === null) {
+			this.dataCache = QRCode.createData(this.typeNumber, this.errorCorrectLevel, this.dataList);
+		}
+	
+		this.mapData(this.dataCache, maskPattern);
+	},
+
+	setupPositionProbePattern : function(row, col)  {
+		
+		for (var r = -1; r <= 7; r++) {
+			
+			if (row + r <= -1 || this.moduleCount <= row + r) continue;
+			
+			for (var c = -1; c <= 7; c++) {
+				
+				if (col + c <= -1 || this.moduleCount <= col + c) continue;
+				
+				if ( (0 <= r && r <= 6 && (c === 0 || c === 6) ) || 
+                     (0 <= c && c <= 6 && (r === 0 || r === 6) ) || 
+                     (2 <= r && r <= 4 && 2 <= c && c <= 4) ) {
+					this.modules[row + r][col + c] = true;
+				} else {
+					this.modules[row + r][col + c] = false;
+				}
+			}		
+		}		
+	},
+	
+	getBestMaskPattern : function() {
+	
+		var minLostPoint = 0;
+		var pattern = 0;
+	
+		for (var i = 0; i < 8; i++) {
+			
+			this.makeImpl(true, i);
+	
+			var lostPoint = QRUtil.getLostPoint(this);
+	
+			if (i === 0 || minLostPoint >  lostPoint) {
+				minLostPoint = lostPoint;
+				pattern = i;
+			}
+		}
+	
+		return pattern;
+	},
+	
+	createMovieClip : function(target_mc, instance_name, depth) {
+	
+		var qr_mc = target_mc.createEmptyMovieClip(instance_name, depth);
+		var cs = 1;
+	
+		this.make();
+
+		for (var row = 0; row < this.modules.length; row++) {
+			
+			var y = row * cs;
+			
+			for (var col = 0; col < this.modules[row].length; col++) {
+	
+				var x = col * cs;
+				var dark = this.modules[row][col];
+			
+				if (dark) {
+					qr_mc.beginFill(0, 100);
+					qr_mc.moveTo(x, y);
+					qr_mc.lineTo(x + cs, y);
+					qr_mc.lineTo(x + cs, y + cs);
+					qr_mc.lineTo(x, y + cs);
+					qr_mc.endFill();
+				}
+			}
+		}
+		
+		return qr_mc;
+	},
+
+	setupTimingPattern : function() {
+		
+		for (var r = 8; r < this.moduleCount - 8; r++) {
+			if (this.modules[r][6] !== null) {
+				continue;
+			}
+			this.modules[r][6] = (r % 2 === 0);
+		}
+	
+		for (var c = 8; c < this.moduleCount - 8; c++) {
+			if (this.modules[6][c] !== null) {
+				continue;
+			}
+			this.modules[6][c] = (c % 2 === 0);
+		}
+	},
+	
+	setupPositionAdjustPattern : function() {
+	
+		var pos = QRUtil.getPatternPosition(this.typeNumber);
+		
+		for (var i = 0; i < pos.length; i++) {
+		
+			for (var j = 0; j < pos.length; j++) {
+			
+				var row = pos[i];
+				var col = pos[j];
+				
+				if (this.modules[row][col] !== null) {
+					continue;
+				}
+				
+				for (var r = -2; r <= 2; r++) {
+				
+					for (var c = -2; c <= 2; c++) {
+					
+						if (Math.abs(r) === 2 || 
+                            Math.abs(c) === 2 ||
+                            (r === 0 && c === 0) ) {
+							this.modules[row + r][col + c] = true;
+						} else {
+							this.modules[row + r][col + c] = false;
+						}
+					}
+				}
+			}
+		}
+	},
+	
+	setupTypeNumber : function(test) {
+	
+		var bits = QRUtil.getBCHTypeNumber(this.typeNumber);
+        var mod;
+	
+		for (var i = 0; i < 18; i++) {
+			mod = (!test && ( (bits >> i) & 1) === 1);
+			this.modules[Math.floor(i / 3)][i % 3 + this.moduleCount - 8 - 3] = mod;
+		}
+	
+		for (var x = 0; x < 18; x++) {
+			mod = (!test && ( (bits >> x) & 1) === 1);
+			this.modules[x % 3 + this.moduleCount - 8 - 3][Math.floor(x / 3)] = mod;
+		}
+	},
+	
+	setupTypeInfo : function(test, maskPattern) {
+	
+		var data = (this.errorCorrectLevel << 3) | maskPattern;
+		var bits = QRUtil.getBCHTypeInfo(data);
+        var mod;
+	
+		// vertical		
+		for (var v = 0; v < 15; v++) {
+	
+			mod = (!test && ( (bits >> v) & 1) === 1);
+	
+			if (v < 6) {
+				this.modules[v][8] = mod;
+			} else if (v < 8) {
+				this.modules[v + 1][8] = mod;
+			} else {
+				this.modules[this.moduleCount - 15 + v][8] = mod;
+			}
+		}
+	
+		// horizontal
+		for (var h = 0; h < 15; h++) {
+	
+			mod = (!test && ( (bits >> h) & 1) === 1);
+			
+			if (h < 8) {
+				this.modules[8][this.moduleCount - h - 1] = mod;
+			} else if (h < 9) {
+				this.modules[8][15 - h - 1 + 1] = mod;
+			} else {
+				this.modules[8][15 - h - 1] = mod;
+			}
+		}
+	
+		// fixed module
+		this.modules[this.moduleCount - 8][8] = (!test);
+	
+	},
+	
+	mapData : function(data, maskPattern) {
+		
+		var inc = -1;
+		var row = this.moduleCount - 1;
+		var bitIndex = 7;
+		var byteIndex = 0;
+		
+		for (var col = this.moduleCount - 1; col > 0; col -= 2) {
+	
+			if (col === 6) col--;
+	
+			while (true) {
+	
+				for (var c = 0; c < 2; c++) {
+					
+					if (this.modules[row][col - c] === null) {
+						
+						var dark = false;
+	
+						if (byteIndex < data.length) {
+							dark = ( ( (data[byteIndex] >>> bitIndex) & 1) === 1);
+						}
+	
+						var mask = QRUtil.getMask(maskPattern, row, col - c);
+	
+						if (mask) {
+							dark = !dark;
+						}
+						
+						this.modules[row][col - c] = dark;
+						bitIndex--;
+	
+						if (bitIndex === -1) {
+							byteIndex++;
+							bitIndex = 7;
+						}
+					}
+				}
+								
+				row += inc;
+	
+				if (row < 0 || this.moduleCount <= row) {
+					row -= inc;
+					inc = -inc;
+					break;
+				}
+			}
+		}
+		
+	}
+
+};
+
+QRCode.PAD0 = 0xEC;
+QRCode.PAD1 = 0x11;
+
+QRCode.createData = function(typeNumber, errorCorrectLevel, dataList) {
+	
+	var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, errorCorrectLevel);
+	
+	var buffer = new QRBitBuffer();
+	
+	for (var i = 0; i < dataList.length; i++) {
+		var data = dataList[i];
+		buffer.put(data.mode, 4);
+		buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber) );
+		data.write(buffer);
+	}
+
+	// calc num max data.
+	var totalDataCount = 0;
+	for (var x = 0; x < rsBlocks.length; x++) {
+		totalDataCount += rsBlocks[x].dataCount;
+	}
+
+	if (buffer.getLengthInBits() > totalDataCount * 8) {
+		throw new Error("code length overflow. (" + 
+            buffer.getLengthInBits() + 
+            ">" +  
+            totalDataCount * 8 + 
+            ")");
+	}
+
+	// end code
+	if (buffer.getLengthInBits() + 4 <= totalDataCount * 8) {
+		buffer.put(0, 4);
+	}
+
+	// padding
+	while (buffer.getLengthInBits() % 8 !== 0) {
+		buffer.putBit(false);
+	}
+
+	// padding
+	while (true) {
+		
+		if (buffer.getLengthInBits() >= totalDataCount * 8) {
+			break;
+		}
+		buffer.put(QRCode.PAD0, 8);
+		
+		if (buffer.getLengthInBits() >= totalDataCount * 8) {
+			break;
+		}
+		buffer.put(QRCode.PAD1, 8);
+	}
+
+	return QRCode.createBytes(buffer, rsBlocks);
+};
+
+QRCode.createBytes = function(buffer, rsBlocks) {
+
+	var offset = 0;
+	
+	var maxDcCount = 0;
+	var maxEcCount = 0;
+	
+	var dcdata = new Array(rsBlocks.length);
+	var ecdata = new Array(rsBlocks.length);
+	
+	for (var r = 0; r < rsBlocks.length; r++) {
+
+		var dcCount = rsBlocks[r].dataCount;
+		var ecCount = rsBlocks[r].totalCount - dcCount;
+
+		maxDcCount = Math.max(maxDcCount, dcCount);
+		maxEcCount = Math.max(maxEcCount, ecCount);
+		
+		dcdata[r] = new Array(dcCount);
+		
+		for (var i = 0; i < dcdata[r].length; i++) {
+			dcdata[r][i] = 0xff & buffer.buffer[i + offset];
+		}
+		offset += dcCount;
+		
+		var rsPoly = QRUtil.getErrorCorrectPolynomial(ecCount);
+		var rawPoly = new QRPolynomial(dcdata[r], rsPoly.getLength() - 1);
+
+		var modPoly = rawPoly.mod(rsPoly);
+		ecdata[r] = new Array(rsPoly.getLength() - 1);
+		for (var x = 0; x < ecdata[r].length; x++) {
+            var modIndex = x + modPoly.getLength() - ecdata[r].length;
+			ecdata[r][x] = (modIndex >= 0)? modPoly.get(modIndex) : 0;
+		}
+
+	}
+	
+	var totalCodeCount = 0;
+	for (var y = 0; y < rsBlocks.length; y++) {
+		totalCodeCount += rsBlocks[y].totalCount;
+	}
+
+	var data = new Array(totalCodeCount);
+	var index = 0;
+
+	for (var z = 0; z < maxDcCount; z++) {
+		for (var s = 0; s < rsBlocks.length; s++) {
+			if (z < dcdata[s].length) {
+				data[index++] = dcdata[s][z];
+			}
+		}
+	}
+
+	for (var xx = 0; xx < maxEcCount; xx++) {
+		for (var t = 0; t < rsBlocks.length; t++) {
+			if (xx < ecdata[t].length) {
+				data[index++] = ecdata[t][xx];
+			}
+		}
+	}
+
+	return data;
+
+};
+
+module.exports = QRCode;
+
+};
+window.SafeQR=require('index');window.SafeQRLevel=require('QRErrorCorrectLevel');})();
+</script>
+<script>
+'use strict';
+const KEY='safemeal_offline_v3';
+const actors=[{id:'supplier_a',name:'Nông trại An Phúc',role:'supplier',symbol:'AP'},{id:'supplier_b',name:'Thực phẩm Bình Minh',role:'supplier',symbol:'BM'},{id:'carrier',name:'Vận tải FreshGo',role:'carrier',symbol:'FG'},{id:'canteen',name:'Căng tin Đại học',role:'canteen',symbol:'CT'},{id:'inspector',name:'Ban kiểm định',role:'inspector',symbol:'KD'}];
+const $=s=>document.querySelector(s), byId=id=>document.getElementById(id), esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const money=n=>new Intl.NumberFormat('vi-VN',{maximumFractionDigits:2}).format(n||0),ts=()=>new Date().toISOString(),date=s=>new Date(s).toLocaleString('vi-VN',{dateStyle:'short',timeStyle:'short'}),fmtHash=h=>String(h).slice(0,14)+'…';
+function shaBytes(input){const b=Array.from(input),l=b.length*8;b.push(128);while(b.length%64!==56)b.push(0);const hi=Math.floor(l/0x100000000),lo=l>>>0;for(let i=3;i>=0;i--)b.push((hi>>>(i*8))&255);for(let i=3;i>=0;i--)b.push((lo>>>(i*8))&255);const k=[];let primes=[];for(let p=2;primes.length<64;p++){let prime=true;for(let j=2;j*j<=p;j++)if(p%j===0){prime=false;break}if(prime)primes.push(p)}const hexfrac=x=>Math.floor((x-Math.floor(x))*0x100000000)>>>0;let h=primes.slice(0,8).map(p=>hexfrac(Math.sqrt(p)));for(let p of primes)k.push(hexfrac(Math.cbrt(p)));const rr=(x,n)=>x>>>n|x<<32-n;for(let j=0;j<b.length;j+=64){let w=Array(64);for(let i=0;i<16;i++)w[i]=(b[j+i*4]<<24|b[j+i*4+1]<<16|b[j+i*4+2]<<8|b[j+i*4+3])>>>0;for(let i=16;i<64;i++)w[i]=(w[i-16]+(rr(w[i-15],7)^rr(w[i-15],18)^(w[i-15]>>>3))+w[i-7]+(rr(w[i-2],17)^rr(w[i-2],19)^(w[i-2]>>>10)))>>>0;let [a,bb,c,d,e,f,g,hh]=h;for(let i=0;i<64;i++){const t1=(hh+(rr(e,6)^rr(e,11)^rr(e,25))+((e&f)^(~e&g))+k[i]+w[i])>>>0;const t2=((rr(a,2)^rr(a,13)^rr(a,22))+((a&bb)^(a&c)^(bb&c)))>>>0;hh=g;g=f;f=e;e=(d+t1)>>>0;d=c;c=bb;bb=a;a=(t1+t2)>>>0}h=h.map((v,i)=>(v+[a,bb,c,d,e,f,g,hh][i])>>>0)}return h.map(v=>v.toString(16).padStart(8,'0')).join('')}
+const hash=s=>shaBytes(new TextEncoder().encode(s));
+function initial(){const s={lots:[],transfers:[],meals:[],readings:[],docs:[],events:[],votes:{}};
+const makeLot=(id,product,origin,supplier,quantity,unit,threshold)=>{s.lots.push({id,product,origin,supplier,quantity,remaining:quantity,unit,threshold,status:'active',created:ts()});const content=JSON.stringify({id,product,origin,supplier,quantity,unit});s.docs.push({id:s.docs.length+1,lot:id,name:`Chung-tu-${id}.json`,content,sha:hash(content),tampered:false,created:ts()});entry(s,'LOT_CREATED',id,supplier,{product,document_sha256:hash(content)})};
+makeLot('L001','Rau xà lách Đà Lạt','Đà Lạt, Lâm Đồng','supplier_a',120,'kg',8);
+makeLot('L002','Thịt gà phi lê','Đồng Nai','supplier_b',80,'kg',5);
+makeLot('L003','Cà rốt hữu cơ','Đơn Dương, Lâm Đồng','supplier_a',100,'kg',8);
+makeLot('L004','Sữa tươi thanh trùng','Củ Chi, TP.HCM','supplier_b',50,'lít',6);
+for(let [lot,owner,st] of [['L001','supplier_a','accepted'],['L002','supplier_b','accepted'],['L003','supplier_a','pending']]){s.transfers.push({id:s.transfers.length+1,lot,from:owner,to:'canteen',status:st,created:ts(),accepted:st==='accepted'?ts():null});entry(s,'TRANSFER_REQUESTED',lot,owner,{to:'canteen'});if(st==='accepted')entry(s,'TRANSFER_ACCEPTED',lot,'canteen',{confirmed:true})}
+for(let [id,arr] of [['L001',[4.2,4.8,9.6]],['L002',[2.1,3.2,2.8]],['L003',[5.6]]]){arr.forEach((temp,i)=>s.readings.push({lot:id,temp,seq:i+1,device:'SENSOR-DEMO-01',created:ts()}));entry(s,'SENSOR_SUMMARY',id,'carrier',{count:arr.length,max_temp:Math.max(...arr),simulated:true})}
+seedMeal(s,'M01','Cơm gà rau củ',120,[{lot:'L001',amount:20},{lot:'L002',amount:35}]);seedMeal(s,'M02','Salad rau xanh',80,[{lot:'L001',amount:15}]);return s}
+function entry(s,type,entity,actor,payload){const prev=s.events.length?s.events[s.events.length-1].digest:'0'.repeat(64);const ev={seq:s.events.length+1,type,entity,actor,payload,prev,time:ts()};ev.digest=hash(JSON.stringify(ev));s.events.push(ev);return ev}
+function seedMeal(s,id,name,servings,ingredients){for(const x of ingredients){let l=s.lots.find(l=>l.id===x.lot);l.remaining-=x.amount}const manifest=JSON.stringify({id,name,servings,ingredients});const digest=hash(manifest);s.meals.push({id,name,servings,ingredients,manifest:digest,created:ts()});s.docs.push({id:s.docs.length+1,lot:null,name:`Manifest-${id}.json`,content:manifest,sha:digest,tampered:false,created:ts()});entry(s,'MEAL_CREATED',id,'canteen',{manifest_sha256:digest,ingredients})}
+function load(){try{const x=localStorage.getItem(KEY);if(x){let s=JSON.parse(x);if(s?.lots?.length&&s.events)return s}}catch(e){console.warn('Storage unavailable',e)}return initial()}
+let s=load(),page='overview',actorId='canteen',search='',storageWorks=true,publicMealId=null;
+function save(){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){storageWorks=false;toast('Trình duyệt không cho lưu thay đổi; dữ liệu vẫn dùng được trong phiên này.',true)}}
+const name=id=>actors.find(a=>a.id===id)?.name||id||'—',role=()=>actors.find(a=>a.id===actorId)?.role,may=r=>role()===r,lot=id=>s.lots.find(l=>l.id===id),tr=id=>s.transfers.find(t=>t.lot===id),used=id=>s.meals.filter(m=>m.ingredients.some(i=>i.lot===id)),meas=id=>s.readings.filter(x=>x.lot===id),maxTemp=id=>Math.max(-100,...meas(id).map(x=>x.temp)),warn=id=>maxTemp(id)>lot(id).threshold,affected=m=>m.ingredients.some(x=>lot(x.lot)?.status!=='active'||warn(x.lot)),status=(v)=>v==='active'?'<span class="tag">Đang theo dõi</span>':v==='held'?'<span class="tag held">Tạm giữ</span>':v==='recalled'?'<span class="tag recalled">Thu hồi</span>':v==='pending'?'<span class="tag pending">Chờ xác nhận</span>':'<span class="tag">Đã nhận</span>';
+function button(txt,act,id='',cls='outline',extra=''){return `<button type="button" class="btn ${cls}" data-action="${act}" data-id="${esc(id)}" ${extra}>${txt}</button>`}
+function navItem(p,emoji,label){return `<button data-nav="${p}" class="navitem ${page===p?'active':''}"><span class="ni">${emoji}</span>${label}</button>`}
+function shell(body){$('#app').innerHTML=`<div class="app"><aside class="sidebar"><div class="brand"><div class="logo">✦</div><div><strong>SafeMeal</strong><small>WEB3 VISION</small></div></div><div class="navlabel">KHÔNG GIAN LÀM VIỆC</div><nav class="navs">${navItem('overview','◫','Tổng quan')}${navItem('quality','🌱','Kiểm định 3 bước → 1 mã')}${navItem('complaints','⚑','Phản ánh chất lượng')}${navItem('security','🔐','Mã hóa AES-256')}${navItem('lots','▤','Lô nguyên liệu')}${navItem('transfers','⇄','Bàn giao')}${navItem('meals','▦','Mẻ ăn & QR')}${navItem('alerts','⚑','Kiểm định')}${navItem('docs','♢','Hồ sơ & Hash')}${navItem('ledger','⌁','Nhật ký xác nhận')}</nav><div class="sbfoot"><b>Đề tài sinh viên</b>Đoàn Văn Tâm<br>MSSV: 20010921<br><br>DEMO OFFLINE · KHÔNG PHẢI BLOCKCHAIN THẬT</div></aside><main class="main"><header class="topbar"><div class="crumb">Ứng dụng <b>/ ${['overview','quality','complaints','security','lots','transfers','meals','alerts','docs','ledger'].includes(page)?{overview:'Tổng quan',quality:'Kiểm định 3 bước → 1 mã',complaints:'Phản ánh chất lượng',security:'Mã hóa AES-256',lots:'Lô nguyên liệu',transfers:'Bàn giao',meals:'Mẻ ăn & QR',alerts:'Kiểm định',docs:'Hồ sơ & Hash',ledger:'Nhật ký'}[page]:''}</b></div><div class="right"><span class="mode">● BẢN MỞ NGAY</span><select class="actor" id="actor-select" aria-label="Vai trò demo">${actors.map(a=>`<option value="${a.id}" ${actorId===a.id?'selected':''}>${esc(a.name)}</option>`).join('')}</select><div class="avatar">ĐT</div></div></header><div class="content">${body}<div class="footer">SafeMeal • Bản thực hành offline, dữ liệu và vai trò giả lập. Lịch sử SHA-256 nội bộ không phải đồng thuận Blockchain. <b>Đoàn Văn Tâm</b>.</div></div></main></div>`}
+function intro(k,title,desc,actions=''){return `<div class="intro"><div><div class="eyebrow">${k}</div><h1>${title}</h1><p>${desc}</p></div><div class="flex">${actions}</div></div>`}
+function stat(label,n,sub,emoji){return `<div class="card stat"><div class="top"><span class="label">${label}</span><span class="symbol">${emoji}</span></div><div class="num">${money(n)}</div><div class="sub">${sub}</div></div>`}
+function table(head,rows){return `<div class="card tablebox"><table class="table"><thead><tr>${head.map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>${rows||`<tr><td colspan="${head.length}"><div class="empty">Chưa có dữ liệu.</div></td></tr>`}</tbody></table></div>`}
+function viewOverview(){let flagged=s.lots.filter(l=>warn(l.id)||l.status!=='active').length;const latest=s.events.slice(-6).reverse();shell(`${intro('HỆ THỐNG TRUY XUẤT NGUỒN GỐC','Chào mừng, Đoàn Văn Tâm 👋','Theo dõi ba chặng kiểm định và mã tổng hợp cấp tại điểm bán.',button('↻ Khôi phục dữ liệu mẫu','reset','','outline'))}<div class="hero"><div><small>SAFE MEAL • FOOD TRACEABILITY</small><h2>Mỗi bữa ăn, một hành trình minh bạch.</h2><p>Ba phiếu kiểm định được đối chiếu bằng 1 mã SMKD sau khi điểm bán nhận hàng. Bản offline dùng cho bài thuyết trình, không cần cài đặt.</p></div><span class="heroicon">🥬</span></div><div class="gridstats">${stat('Lô nguyên liệu',s.lots.length,'Theo dõi nhà cung cấp','🥬')}${stat('Bàn giao đã xác nhận',s.transfers.filter(t=>t.status==='accepted').length,'Có thông tin hai bên','🤝')}${stat('Mẻ ăn được tạo',s.meals.length,'Liên kết với nguyên liệu','🍱')}${stat('Lô cần chú ý',flagged,'Cảnh báo đo và trạng thái','⚠️')}</div><div class="cols"><section class="card panel"><div class="sectionbar"><h2>Hành trình lô nguyên liệu</h2>${button('Xem lô →','goto','lots')}</div>${s.lots.slice(0,5).map(l=>`<div class="flowline"><div class="round">${l.id==='L002'?'🍗':l.id==='L004'?'🥛':'🥬'}</div><div class="grow"><b>${esc(l.product)} <span class="mono">${l.id}</span></b><p>${esc(name(l.supplier))} · ${used(l.id).length} mẻ liên quan</p></div><div>${status(l.status)}${warn(l.id)?'<div><span class="tag pending" style="margin-top:5px">Nhiệt độ bất thường</span></div>':''}</div></div>`).join('')}</section><section class="card panel"><div class="sectionbar"><h2>Quy trình demo</h2></div>${[['①','Kiểm định vùng trồng','Bước 1 tại nguồn'],['②','Kiểm định sản xuất','Bước 2 tại xưởng'],['③','Nhận hàng & kiểm định điểm bán','Bước 3 tại căng tin'],['④','Cấp 1 mã SMKD','Tra cứu 3 phiếu, phản ánh, truy vết']].map(x=>`<div class="flowline"><div class="round">${x[0]}</div><div><b>${x[1]}</b><p>${x[2]}</p></div></div>`).join('')}<div class="callout">💡 Hãy chọn từng vai trò ở góc phải để minh họa sự phân quyền nghiệp vụ.</div></section></div><div class="sectionbar"><h2>Hoạt động gần đây</h2>${button('Xem nhật ký đầy đủ →','goto','ledger')}</div>${table(['Mã','Sự kiện','Đối tượng','Vai trò','Thời điểm'],latest.map(e=>`<tr><td class="mono">#${e.seq}</td><td><b>${esc(labelEvent(e.type))}</b></td><td class="mono">${esc(e.entity)}</td><td>${esc(name(e.actor))}</td><td>${date(e.time)}</td></tr>`).join(''))}`)}
+function viewLots(){let ls=s.lots.filter(l=>(l.id+' '+l.product+' '+l.origin).toLowerCase().includes(search.toLowerCase()));shell(`${intro('QUẢN LÝ CHUỖI CUNG ỨNG','Lô nguyên liệu','Lưu thông tin xuất xứ, giám sát số lượng và truy ngược tới từng mẻ ăn.',button('＋ Tạo lô mới','newlot','','primary'))}<div class="flex" style="margin-bottom:16px"><input class="search" id="search" placeholder="Tìm mã lô, tên thực phẩm, nơi xuất xứ..." value="${esc(search)}">${button('Tìm kiếm','search')}<span style="color:#819488;font-size:12px">${ls.length} kết quả</span></div>${table(['Mã lô / Sản phẩm','Nguồn gốc','Nhà cung cấp','Tồn kho','Trạng thái','Hành động'],ls.map(l=>`<tr><td><b>${esc(l.product)}</b><span class="sub mono">${l.id}</span></td><td>${esc(l.origin)}</td><td>${esc(name(l.supplier))}</td><td><b>${money(l.remaining)} / ${money(l.quantity)}</b><span class="sub">${esc(l.unit)}</span></td><td>${status(l.status)}${warn(l.id)?'<span class="sub" style="color:#b77b14">⚠ Đo vượt ngưỡng</span>':''}</td><td>${button('Chi tiết →','lot',l.id)}</td></tr>`).join(''))}`)}
+function viewTransfers(){shell(`${intro('XÁC NHẬN LIÊN TỔ CHỨC','Bàn giao nguyên liệu','Nhà cung cấp gửi đề nghị, chỉ vai trò căng tin được chấp nhận bàn giao.')}${table(['Mã lô','Giao / Nhận','Thời gian','Trạng thái','Thao tác'],s.transfers.map(t=>{const l=lot(t.lot);return `<tr><td><b>${t.lot}</b><span class="sub">${esc(l?.product)}</span></td><td>${esc(name(t.from))}<br><span class="sub">→ ${esc(name(t.to))}</span></td><td>${date(t.created)}</td><td>${status(t.status)}</td><td>${t.status==='pending'?button('Xác nhận nhận','accept',t.lot,'primary',may('canteen')&&l.status==='active'?'':'disabled title="Chỉ căng tin mới xác nhận"'):'<span class="tag">Đã hoàn tất</span>'}</td></tr>`}).join(''))}<div class="callout">🔒 Quy tắc: chỉ đúng vai trò căng tin mới nhận được hàng, phiếu đã xác nhận không thể được duyệt thêm lần thứ hai. Quyền được mô phỏng bằng chuyển vai trò, không phải đăng nhập hay chữ ký thật.</div>`)}
+function viewMeals(){shell(`${intro('TRUY XUẤT TỪ MẺ ĂN','Mẻ ăn & mã QR','Liên kết một hoặc nhiều lô nguyên liệu với mỗi mẻ chế biến.',button('＋ Tạo mẻ ăn','newmeal','','primary'))}<div class="meals">${s.meals.map(m=>`<div class="card meal"><div class="flex" style="justify-content:space-between"><span class="tag ${affected(m)?'pending':''}">${affected(m)?'⚠ Cần đối chiếu':'✓ Đã ghi hồ sơ'}</span><span class="mono">${m.id}</span></div><div class="emoji">${m.name.toLowerCase().includes('salad')?'🥗':'🍱'}</div><h3>${esc(m.name)}</h3><p>${money(m.servings)} suất · ${date(m.created)}</p><div class="source">${m.ingredients.map(i=>`<span>${i.lot} · ${money(i.amount)} ${esc(lot(i.lot)?.unit)}</span>`).join('')}</div><div class="flex">${button('▦ Mã QR','qr',m.id,'primary')}${button('Hồ sơ công bố ↗','public',m.id)}</div></div>`).join('')}</div><div class="callout warncall">Mã QR của bản offline chứa <b>mã tham chiếu mẻ</b>, không phải URL máy chủ công khai. Nút “Hồ sơ công bố” mở trực tiếp trong ứng dụng; muốn quét trên điện thoại và truy cập trang web phải dùng bản có máy chủ.</div>`)}
+function viewAlerts(){let flagged=s.lots.filter(l=>warn(l.id)||l.status!=='active');shell(`${intro('PHÁT HIỆN VÀ PHẢN ỨNG','Trung tâm kiểm định','Cảnh báo chỉ để xem xét, không tự động khẳng định chất lượng thực phẩm.')}<div class="mini-grid" style="margin-bottom:18px">${stat('Lô có cảnh báo',flagged.length,'Giả lập dựa trên ngưỡng','⚠️')}${stat('Lô tạm giữ',s.lots.filter(l=>l.status==='held').length,'Không tiếp nhận thêm','⏸️')}${stat('Lô bị thu hồi',s.lots.filter(l=>l.status==='recalled').length,'Cần xử lý thực tế','🚨')}</div>${flagged.length?flagged.map(l=>`<div class="card alert"><div class="round">⚠</div><div class="grow"><div class="flex"><span class="mono">${l.id}</span>${status(l.status)}</div><h3>${esc(l.product)}</h3><p>${warn(l.id)?`Nhiệt độ lớn nhất <b>${maxTemp(l.id)}°C</b> vượt ngưỡng ${l.threshold}°C (dữ liệu cảm biến giả lập).`: 'Lô có trạng thái kiểm định cần chú ý.'} Đã sử dụng cho <b>${used(l.id).length}</b> mẻ ăn: ${used(l.id).map(m=>m.id).join(', ')||'chưa có'}.</p><div class="flex">${button('Chi tiết & truy vết','lot',l.id)}${l.status==='active'?button('Tạm giữ','hold',l.id,'warn',may('inspector')?'':'disabled'):''}${l.status!=='recalled'?button('Thu hồi','recall',l.id,'danger',may('inspector')?'':'disabled'):''}${l.status==='held'?button('Bỏ phiếu gỡ giữ 2/3','vote',l.id,'outline',['supplier_a','canteen','inspector'].includes(actorId)?'':'disabled'):''}</div></div></div>`).join(''):'<div class="card panel">Chưa có cảnh báo trong dữ liệu hiện tại.</div>'}<div class="callout">🔍 Tình huống mẫu: <b>L001</b> (9,6°C) xuất hiện trong <b>M01 và M02</b>. Chọn vai trò <b>Ban kiểm định</b>, tạm giữ L001 rồi mở công bố M01 và M02 để thấy cảnh báo lan truyền.</div>`)}
+function docHash(d){if(d.content.startsWith('BASE64:')){try{return shaBytes(Uint8Array.from(atob(d.content.slice(7)),c=>c.charCodeAt(0)))}catch(e){return hash(d.content)}}return hash(d.content)}
+function viewDocs(){shell(`${intro('CHỨNG TỪ VÀ TÍNH TOÀN VẸN','Hồ sơ & SHA-256','So sánh nội dung tài liệu với dấu vân tay đã ghi từ trước.',button('＋ Thêm chứng từ','newdoc','','primary'))}${table(['Tài liệu','Mã lô','SHA-256 đã ghi','Đối chiếu','Hành động'],s.docs.map(d=>`<tr><td><b>${esc(d.name)}</b><span class="sub">${date(d.created)}</span></td><td>${d.lot?`<span class="mono">${esc(d.lot)}</span>`:'<span class="tag blue">MANIFEST</span>'}</td><td><code class="mono">${fmtHash(d.sha)}</code></td><td>${docHash(d)===d.sha?'<span class="tag">✓ Trùng khớp</span>':'<span class="tag bad">✕ Bị sửa đổi</span>'}</td><td><div class="flex">${button('Kiểm tra','doc',d.id)}${button('Tải xuống','downloadDoc',d.id)}${d.lot?button('Giả lập sửa','tamper',d.id,'warn',may('inspector')?'':'disabled'):''}</div></td></tr>`).join(''))}<div class="callout">🛡️ SHA-256 kiểm tra sự trùng khớp byte, <b>không chứng minh dữ liệu ban đầu là sự thật</b>. Dữ liệu và hash ở đây cùng lưu trên trình duyệt; chưa neo hash lên một Blockchain độc lập.</div>`)}
+const labelEvent=x=>({LOT_CREATED:'Tạo lô',TRANSFER_REQUESTED:'Đề nghị bàn giao',TRANSFER_ACCEPTED:'Đã nhận hàng',SENSOR_SUMMARY:'Dữ liệu cảm biến mẫu',SENSOR_READING:'Đo nhiệt độ',MEAL_CREATED:'Tạo mẻ ăn',LOT_HELD:'Tạm giữ',LOT_RECALLED:'Thu hồi',RELEASE_APPROVED:'Phiếu phê duyệt',LOT_RELEASED:'Gỡ tạm giữ',EVIDENCE_ADDED:'Bổ sung chứng từ'})[x]||x;
+function verifyChain(){let prev='0'.repeat(64);for(const e of s.events){let v={seq:e.seq,type:e.type,entity:e.entity,actor:e.actor,payload:e.payload,prev:e.prev,time:e.time};if(e.prev!==prev||hash(JSON.stringify(v))!==e.digest)return {ok:false,index:e.seq};prev=e.digest}return {ok:true,count:s.events.length,head:prev}}
+function viewLedger(){let v=verifyChain();shell(`${intro('LỊCH SỬ KHÔNG GHI ĐÈ','Nhật ký xác nhận','Dấu SHA-256 nối từng sự kiện với sự kiện trước (sổ ghi cục bộ).',button('🛡 Kiểm tra chuỗi hash','verifychain','','primary'))}<div class="callout ${v.ok?'':'warncall'}">${v.ok?'✓ Chuỗi hash cục bộ khớp '+v.count+' sự kiện.':'⚠ Nhật ký đã bị sửa tại sự kiện #'+v.index} Đây không phải giao dịch blockchain, không đảm bảo chống lại người quản trị có thể tính lại sổ.</div>${table(['STT','Sự kiện','Đối tượng','Người thao tác','Thời gian','Hash sự kiện'],s.events.slice().reverse().map(e=>`<tr><td class="mono">#${e.seq}</td><td><b>${esc(labelEvent(e.type))}</b></td><td class="mono">${esc(e.entity)}</td><td>${esc(name(e.actor))}</td><td>${date(e.time)}</td><td><span class="mono" title="${e.digest}">${fmtHash(e.digest)}</span></td></tr>`).join(''))}`)}
+function render(){if(publicMealId){renderPublic(publicMealId);return}const fn={quality:v2ViewPipeline,complaints:v2ViewComplaints,security:v2ViewSecurity,overview:viewOverview,lots:viewLots,transfers:viewTransfers,meals:viewMeals,alerts:viewAlerts,docs:viewDocs,ledger:viewLedger}[page]||viewOverview;fn()}
+function modal(title,subtitle,body,w=false){$('#overlay').innerHTML=`<div class="modalbg" id="modalbg"><div class="modal ${w?'wide':''}" role="dialog" aria-modal="true"><div class="modalhead"><div><div class="eyebrow">SAFEMEAL • THAO TÁC DEMO</div><h2>${esc(title)}</h2><p>${esc(subtitle)}</p></div><button data-action="close" class="close" title="Đóng">×</button></div><div class="modalbody">${body}</div></div></div>`}
+function foot(submit='Lưu dữ liệu'){return `<div class="modalfooter">${button('Huỷ','close') }<button type="submit" class="btn primary">✓ ${submit}</button></div>`}
+function field(n,label,type='text',val='',extra=''){return `<div class="field"><label for="f-${n}">${label}</label><input class="input" id="f-${n}" name="${n}" type="${type}" value="${esc(val)}" ${extra} required></div>`}
+function options(data,selected=''){return data.map(([v,t])=>`<option value="${esc(v)}" ${v===selected?'selected':''}>${esc(t)}</option>`).join('')}
+function optField(name,label,opts,required=true){return `<div class="field"><label for="f-${name}">${label}</label><select class="input" id="f-${name}" name="${name}" ${required?'required':''}>${opts}</select></div>`}
+function openNewLot(){if(!may('supplier'))return toast('Hãy đổi sang vai trò nhà cung cấp để tạo lô.',true);modal('Tạo lô nguyên liệu mới','Dữ liệu được lưu trong trình duyệt hiện tại.',`<form id="form-lot"><div class="fields">${field('product','Tên nguyên liệu','text','','minlength="2" maxlength="120"')}${field('origin','Nơi xuất xứ')}${field('quantity','Số lượng nhập','number','50','min="0.01" step="0.01"')}${optField('unit','Đơn vị',options([['kg','kg'],['lít','lít'],['thùng','thùng']]))}${field('threshold','Giới hạn nhiệt độ (°C)','number','8','min="-40" max="50" step="0.1"')}</div>${foot('Tạo lô')}</form>`)}
+function openNewMeal(){if(!may('canteen'))return toast('Chỉ vai trò căng tin mới tạo được mẻ ăn.',true);let avail=s.lots.filter(l=>tr(l.id)?.status==='accepted'&&l.remaining>0&&l.status==='active');if(!avail.length)return toast('Không có lô đã nhận, đang hoạt động và còn hàng.',true);const opts=options(avail.map(l=>[l.id,`${l.id} — ${l.product} (${money(l.remaining)} ${l.unit})`]));modal('Tạo mẻ ăn mới','Mẻ ăn có thể lấy từ 1 hoặc 2 lô nguyên liệu đã bàn giao.',`<form id="form-meal"><div class="fields">${field('name','Tên mẻ ăn')}${field('servings','Số suất ăn','number','50','min="1" step="1"')}${optField('lot1','Lô nguyên liệu thứ nhất',opts)}${field('amount1','Lượng sử dụng lô 1','number','3','min="0.01" step="0.01"')}<div class="field"><label for="f-lot2">Lô nguyên liệu thứ hai (không bắt buộc)</label><select class="input" name="lot2" id="f-lot2"><option value="">Không chọn</option>${opts}</select></div><div class="field"><label for="f-amount2">Lượng sử dụng lô 2</label><input class="input" type="number" name="amount2" id="f-amount2" min="0" step="0.01" placeholder="Chỉ nhập nếu chọn lô 2"></div></div>${foot('Tạo mẻ ăn & manifest')}</form>`)}
+function openNewDoc(){if(!may('supplier'))return toast('Chuyển sang vai trò nhà cung cấp để tải chứng từ.',true);const ls=s.lots.filter(l=>l.supplier===actorId&&l.status==='active');modal('Thêm chứng từ','Tệp nhỏ được lưu trong bộ nhớ trình duyệt và băm SHA-256.',`<form id="form-doc">${optField('lot','Lô nguyên liệu',options(ls.map(l=>[l.id,`${l.id} — ${l.product}`])))}<div class="field"><label for="f-file">Chọn tệp (tối đa 200 KB)</label><input type="file" name="file" id="f-file" class="input" required></div>${foot('Lưu & băm chứng từ')}</form>`)}
+function viewLot(id){const l=lot(id);if(!l)return toast('Không tìm thấy lô.',true);let t=tr(id),v=meas(id),docs=s.docs.filter(d=>d.lot===id);modal(`Chi tiết lô ${id}`,l.product,`<div class="details"><div><label>Xuất xứ</label><strong>${esc(l.origin)}</strong></div><div><label>Nhà cung cấp</label><strong>${esc(name(l.supplier))}</strong></div><div><label>Tồn kho</label><strong>${money(l.remaining)} / ${money(l.quantity)} ${esc(l.unit)}</strong></div><div><label>Trạng thái</label><strong>${status(l.status)}</strong></div><div><label>Bàn giao</label><strong>${t?status(t.status):'<span class="tag pending">Chưa lập đề nghị</span>'}</strong></div><div><label>Nhiệt cao nhất / ngưỡng</label><strong>${v.length?maxTemp(id)+'°C / '+l.threshold+'°C':'Không có số đo'}</strong></div></div><div class="sectionbar"><h2>Mẻ ăn có liên quan</h2></div>${used(id).length?used(id).map(m=>`<div class="flowline"><div class="round">🍱</div><div class="grow"><b>${m.id} · ${esc(m.name)}</b><p>Đã dùng ${money(m.ingredients.find(i=>i.lot===id).amount)} ${l.unit}</p></div>${button('Xem công bố','public',m.id)}</div>`).join(''):'<p class="note">Chưa dùng cho mẻ ăn nào.</p>'}<div class="sectionbar"><h2>Chứng từ liên quan</h2></div>${docs.map(d=>`<p style="font-size:12px">◈ ${esc(d.name)} <span class="mono">${fmtHash(d.sha)}</span> ${button('Kiểm tra','doc',d.id)}</p>`).join('')}<div class="sectionbar"><h2>Thao tác theo vai trò</h2></div><div class="flex">${!t&&l.status==='active'&&l.supplier===actorId?button('Tạo đề nghị bàn giao','request',id,'primary'):''}${may('carrier')?button('＋ Ghi đo cảm biến giả lập','newreading',id):''}${button('Xuất gói bằng chứng JSON','export',id)}${button('Xem kiểm định 3 bước','goto','quality')} ${s.packages.find(p=>p.lot===id)?button('Xem 1 mã kiểm định tổng hợp','v2tag',s.packages.find(p=>p.lot===id).code):''}</div><p class="note">Dữ liệu đo và danh tính trong bản HTML là mô phỏng. Nút xuất bằng chứng tạo tệp JSON để xem được mà không có máy chủ.</p>`,true)}
+function viewDoc(id){const d=s.docs.find(x=>x.id===+id);if(!d)return toast('Không tìm thấy tài liệu',true);const result=docHash(d),ok=result===d.sha;modal(`Đối chiếu chứng từ #${id}`,d.name,`<div class="callout ${ok?'':'warncall'}">${ok?'✓ TÀI LIỆU CHƯA BỊ THAY ĐỔI':'✕ PHÁT HIỆN NỘI DUNG KHÔNG KHỚP'}</div><div class="details"><div><label>SHA-256 ban đầu</label><strong class="mono">${d.sha}</strong></div><div><label>SHA-256 tính lại</label><strong class="mono" style="color:${ok?'#19845c':'#c33d3d'}">${result}</strong></div></div><div class="flex" style="margin-top:16px">${d.tampered?button('Khôi phục chứng từ','restore',id,'primary',may('inspector')?'':'disabled'):''}${button('Tải chứng từ hiện tại','downloadDoc',id)}</div>`)}
+function qrSvg(textValue){if(typeof SafeQR==='undefined')return `<p>Không thể tải bộ tạo QR nội bộ.</p>`;const qr=new SafeQR(-1,SafeQRLevel.M);qr.addData(textValue);qr.make();const n=qr.getModuleCount(),step=5,m=3,size=(n+m*2)*step;let rects=`<rect width="${size}" height="${size}" fill="white"/>`;for(let y=0;y<n;y++)for(let x=0;x<n;x++)if(qr.isDark(y,x))rects+=`<rect x="${(x+m)*step}" y="${(y+m)*step}" width="${step}" height="${step}" fill="#133e33"/>`;return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}" width="225" height="225" role="img" aria-label="QR của mẻ ${esc(textValue)}">${rects}</svg>`}
+function viewQr(id){const m=s.meals.find(m=>m.id===id);if(!m)return;modal(`Mã QR – ${id}`,m.name,`<div style="text-align:center"><div class="qrbox">${qrSvg('SAFEMEAL-DEMO:'+id)}</div><p><b>${id} · ${esc(m.name)}</b></p><p class="note">QR này mã hóa <b>SAFEMEAL-DEMO:${id}</b>; quét bằng điện thoại cho ra mã tham chiếu, không mở trang trực tuyến. Bấm bên dưới để xem trang công bố trong bản offline.</p><div class="flex" style="justify-content:center">${button('Xem trang công bố →','public',id,'primary')}${button('Đóng','close')}</div></div>`)}
+function renderPublic(id){const m=s.meals.find(m=>m.id===id);if(!m){$('#app').innerHTML=`<div class="public"><h1>Không tìm thấy mẻ ăn ${esc(id)}</h1>${button('Về ứng dụng','gohome')}</div>`;return}const hasIssues=affected(m);$('#app').innerHTML=`<div class="public"><div class="publicheader"><div class="brand" style="padding:0"><div class="logo">✦</div><div><strong style="color:#0d543b">SafeMeal</strong><small style="color:#6f9685">HỒ SƠ CÔNG BỐ</small></div></div>${button('← Về bảng điều khiển','gohome','','outline')}</div><section class="card publiccard"><div class="eyebrow">TRA CỨU NGUỒN GỐC MẺ ĂN</div><h1 style="color:#154b37">${esc(m.name)}</h1><p style="color:#799287">Mã mẻ: ${m.id} · ${money(m.servings)} suất · ${date(m.created)}</p><div class="callout ${hasIssues?'warncall':''}">${hasIssues?'⚠ Một hoặc nhiều nguyên liệu có cảnh báo nhiệt độ hoặc trạng thái kiểm định. Hồ sơ cần xem xét thêm.':'✓ Đã ghi nhận liên kết nguyên liệu trong bản demo. Không có cảnh báo ở thời điểm xem.'}</div><div class="sectionbar"><h2>Nguồn gốc nguyên liệu</h2></div>${m.ingredients.map(i=>{let l=lot(i.lot),t=tr(i.lot);return `<div class="flowline"><div class="round">🥬</div><div class="grow"><b>${esc(l.product)} — ${i.lot}</b><p>Xuất xứ: ${esc(l.origin)} • Nhà cung cấp: ${esc(name(l.supplier))}<br>Lượng sử dụng: ${money(i.amount)} ${l.unit}; ${t?.status==='accepted'?'Đã ghi nhận bên nhận hàng':'Thiếu xác nhận bàn giao'}</p></div>${status(l.status)}</div>`}).join('')}<div class="sectionbar"><h2>Kiểm định 3 bước → 1 mã tổng hợp cho mỗi lô</h2></div>${m.ingredients.map(i=>{const p=s.packages.find(x=>x.lot===i.lot);return `<div class="flowline"><div class="grow"><b>${esc(i.lot)}</b> ${v2TraceStatus(i.lot)}<p class="mono">${p?esc(p.code):'Chưa cấp mã'}</p></div>${p?button('Xem QR/mã','v2tag',p.code):''}</div>`}).join('')}<div class="sectionbar"><h2>Thông tin kiểm chứng</h2></div><div class="details"><div><label>Mã mẻ</label><strong>${m.id}</strong></div><div><label>Nguồn dữ liệu</label><strong>Chứng từ và vai trò giả lập</strong></div><div style="grid-column:1/-1"><label>SHA-256 Manifest</label><strong class="mono">${m.manifest}</strong></div></div><div class="callout warncall">Đây là hồ sơ của <b>bản demo offline</b>. Chưa có xác nhận Blockchain, kiểm định thực tế hoặc chữ ký số từ cơ quan có thẩm quyền.</div></section><p class="footer">SafeMeal demo • Đoàn Văn Tâm • MSSV 20010921</p></div>`}
+function toast(msg,error=false){const o=$('#toast');o.innerHTML=`<div class="toast ${error?'err':''}">${esc(msg)}</div>`;setTimeout(()=>{if(o)o.innerHTML=''},3700)}
+function downloadFile(filename,content,type='application/json'){const a=document.createElement('a'),blob=new Blob([content],{type});const url=URL.createObjectURL(blob);a.href=url;a.download=filename;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1200)}
+function goPublic(id){publicMealId=id;$('#overlay').innerHTML='';render()}
+function goHome(){publicMealId=null;page='overview';render()}
+function act(cmd,id){if(cmd==='close'&&typeof v2StopCamera==='function')v2StopCamera();if(cmd.startsWith('v2')||cmd.startsWith('v3')){v2Action(cmd,id);return;}try{switch(cmd){case 'close':$('#overlay').innerHTML='';break;case 'goto':page=id;search='';render();break;case 'gohome':goHome();break;case 'newlot':openNewLot();break;case 'newmeal':openNewMeal();break;case 'newdoc':openNewDoc();break;case 'lot':viewLot(id);break;case 'doc':viewDoc(id);break;case 'qr':viewQr(id);break;case 'public':goPublic(id);break;case 'verifychain':{let v=verifyChain();toast(v.ok?`Hợp lệ: ${v.count} sự kiện cùng hash khớp nhau.`:`Sai lệch ở bản ghi #${v.index}.`,!v.ok);break}case 'request':{const l=lot(id);if(!may('supplier')||l.supplier!==actorId)throw Error('Chỉ nhà cung cấp sở hữu lô mới được lập phiếu.');if(!v2Approved(id,2))throw Error('Cần qua bước 1 và 2 trước khi gửi hàng đến điểm bán.');if(tr(id)||l.status!=='active')throw Error('Lô đã có bàn giao hoặc bị chặn.');s.transfers.push({id:s.transfers.length+1,lot:id,from:actorId,to:'canteen',status:'pending',created:ts(),accepted:null});entry(s,'TRANSFER_REQUESTED',id,actorId,{to:'canteen'});save();$('#overlay').innerHTML='';render();toast('Đã tạo phiếu chờ bên nhận xác nhận.');break}case 'accept':{const t=tr(id),l=lot(id);if(!may('canteen'))throw Error('Chỉ căng tin có quyền xác nhận.');if(!v2Approved(id,2))throw Error('Lô chưa qua đủ 2 bước đầu.');if(!t||t.status!=='pending'||l.status!=='active')throw Error('Phiếu không hợp lệ hoặc đã được xử lý.');t.status='accepted';t.accepted=ts();entry(s,'TRANSFER_ACCEPTED',id,actorId,{confirmed:true});save();render();toast('Đã xác nhận bàn giao lô '+id);break}case 'hold':case 'recall':{const l=lot(id);if(!may('inspector'))throw Error('Chỉ Ban kiểm định thực hiện được.');if(cmd==='hold'&&l.status!=='active'||cmd==='recall'&&l.status==='recalled')throw Error('Trạng thái lô không cho phép.');if(!confirm(cmd==='hold'?`Tạm giữ lô ${id}?`:`Đánh dấu THU HỒI lô ${id}?`))return;l.status=cmd==='hold'?'held':'recalled';if(cmd==='hold')s.votes[id]=[];entry(s,cmd==='hold'?'LOT_HELD':'LOT_RECALLED',id,actorId,{status:l.status});save();render();toast('Đã cập nhật trạng thái '+id);break}case 'vote':{const l=lot(id);if(!['supplier_a','canteen','inspector'].includes(actorId)||l.status!=='held')throw Error('Tài khoản không đủ quyền hoặc lô không ở trạng thái tạm giữ.');let votes=s.votes[id]||[];if(votes.includes(actorId))throw Error('Vai trò này đã bỏ phiếu.');votes.push(actorId);s.votes[id]=votes;entry(s,'RELEASE_APPROVED',id,actorId,{count:votes.length,required:2});if(votes.length>=2){l.status='active';entry(s,'LOT_RELEASED',id,'governance',{votes})}save();render();toast(votes.length>=2?'Đủ 2/3 bên phê duyệt: lô đã được gỡ tạm giữ.':'Đã nhận phiếu thứ nhất, cần thêm một bên độc lập.');break}case 'newreading':{if(!may('carrier'))throw Error('Chỉ vận chuyển nhập dữ liệu mô phỏng.');const l=lot(id),last=Math.max(0,...meas(id).map(x=>x.seq));modal('Thêm số đo mô phỏng',`Lô ${id} · Số thứ tự kế tiếp ${last+1}`,`<form id="form-reading"><input type="hidden" name="lot" value="${id}">${field('temp','Nhiệt độ °C','number','4.5','min="-40" max="90" step="0.1"')}${field('seq','Số thứ tự mẫu','number',last+1,'min="1" step="1"')}${foot('Ghi nhiệt độ')}</form>`);break}case 'downloadDoc':{const d=s.docs.find(x=>x.id===+id);downloadFile(d.name,d.content.startsWith('BASE64:')?Uint8Array.from(atob(d.content.slice(7)),c=>c.charCodeAt(0)):d.content,'application/octet-stream');toast('Đã xuất tệp cho trình duyệt tải xuống.');break}case 'tamper':{if(!may('inspector'))throw Error('Chỉ kiểm định thực hiện thử nghiệm sửa file.');const d=s.docs.find(x=>x.id===+id);if(d.tampered)throw Error('Tệp đã sửa; hãy khôi phục trước.');d.content+='\nTHAY_DOI_MOT_DOAN_DE_KIEM_TRA';d.tampered=true;save();render();toast('Nội dung đã đổi; so sánh SHA-256 sẽ báo không khớp.');break}case 'restore':{if(!may('inspector'))throw Error('Chỉ kiểm định được khôi phục chứng từ trong demo.');const d=s.docs.find(x=>x.id===+id);d.content=d.content.replace(/\nTHAY_DOI_MOT_DOAN_DE_KIEM_TRA$/,'');d.tampered=false;save();$('#overlay').innerHTML='';render();toast('Đã khôi phục nội dung gốc.');break}case 'export':{const l=lot(id);const bundle={notice:'Local browser demo; not actual blockchain/IPFS or signed proof',generated_at:ts(),lot:l,transfers:tr(id),readings:meas(id),meals:used(id),documents:s.docs.filter(d=>d.lot===id).map(({id,name,sha,created})=>({id,name,sha,created})),history:s.events.filter(e=>e.entity===id)};downloadFile(`SafeMeal-${id}-bang-chung.json`,JSON.stringify(bundle,null,2));toast('Đã xuất gói bằng chứng JSON cho lô '+id);break}case 'search':search=byId('search')?.value||'';render();break;case 'reset':{if(!confirm('Xoá thay đổi và khôi phục toàn bộ dữ liệu mẫu SafeMeal?'))return;s=initial();v2Init();save();page='overview';render();toast('Đã khôi phục dữ liệu mẫu.');break}default:console.warn('Unknown action:',cmd)}}catch(e){console.error(e);toast(e.message||'Thao tác không thực hiện được.',true)}}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-action]');if(b){e.preventDefault();act(b.dataset.action,b.dataset.id)}const nav=e.target.closest('[data-nav]');if(nav){publicMealId=null;page=nav.dataset.nav;search='';render()}});
+document.addEventListener('change',e=>{if(e.target.id==='actor-select'){actorId=e.target.value;render()}});
+document.addEventListener('submit',async e=>{const f=e.target;if(!['form-lot','form-meal','form-doc','form-reading'].includes(f.id))return;e.preventDefault();try{const data=Object.fromEntries(new FormData(f));if(f.id==='form-lot'){if(!may('supplier'))throw Error('Sai vai trò');const quantity=+data.quantity,threshold=+data.threshold;if(quantity<=0)throw Error('Số lượng cần lớn hơn 0.');let n=1,id;do{id='L'+String(++n+3).padStart(3,'0')}while(lot(id));let l={id,product:data.product.trim(),origin:data.origin.trim(),supplier:actorId,quantity,remaining:quantity,unit:data.unit,threshold,status:'active',created:ts()};s.lots.push(l);const content=JSON.stringify(l);s.docs.push({id:Math.max(0,...s.docs.map(x=>x.id))+1,lot:id,name:`Chung-tu-${id}.json`,content,sha:hash(content),tampered:false,created:ts()});entry(s,'LOT_CREATED',id,actorId,{product:l.product});toast('Đã tạo lô '+id)}else if(f.id==='form-meal'){if(!may('canteen'))throw Error('Sai vai trò');const ingredients=[{lot:data.lot1,amount:+data.amount1}];if(data.lot2){if(data.lot2===data.lot1)throw Error('Không thể chọn trùng lô nguyên liệu.');ingredients.push({lot:data.lot2,amount:+data.amount2})}if(!Number.isInteger(+data.servings)||+data.servings<1||ingredients.some(x=>!(x.amount>0)))throw Error('Số suất và lượng sử dụng phải lớn hơn 0.');for(let i of ingredients){const l=lot(i.lot);if(!l||!v2Approved(l.id)||!s.packages.some(p=>p.lot===l.id&&v3CodeStatus(p).valid)||l.status!=='active'||tr(l.id)?.status!=='accepted'||l.remaining<i.amount)throw Error('Lô '+i.lot+' không hợp lệ, chưa nhận hoặc không đủ tồn kho.')}let id='M'+String(Math.max(0,...s.meals.map(x=>+x.id.slice(1)))+1).padStart(2,'0');seedMeal(s,id,data.name.trim(),+data.servings,ingredients);toast('Đã tạo mẻ ăn '+id)}else if(f.id==='form-reading'){if(!may('carrier'))throw Error('Sai vai trò');const id=data.lot,seq=+data.seq,need=Math.max(0,...meas(id).map(x=>x.seq))+1;if(seq!==need)throw Error('Số thứ tự phải là '+need);const temp=+data.temp;if(!Number.isFinite(temp)||temp< -40||temp>90)throw Error('Nhiệt độ không hợp lệ.');s.readings.push({lot:id,temp,seq,device:'SENSOR-DEMO-01',created:ts()});entry(s,'SENSOR_READING',id,actorId,{temp,seq,simulated:true});toast('Đã ghi nhiệt độ mô phỏng.')}else if(f.id==='form-doc'){if(!may('supplier')||lot(data.lot)?.supplier!==actorId)throw Error('Sai vai trò hoặc lô không thuộc nhà cung cấp.');const file=byId('f-file').files[0];if(!file||file.size>200000||!file.size)throw Error('Chọn tệp có dung lượng 1–200 KB.');const bytes=new Uint8Array(await file.arrayBuffer()),digest=shaBytes(bytes);const binary=Array.from(bytes,x=>String.fromCharCode(x)).join('');const content=btoa(binary);let d={id:Math.max(0,...s.docs.map(x=>x.id))+1,lot:data.lot,name:file.name,content:'BASE64:'+content,sha:digest,byte_hash:digest,tampered:false,created:ts()};s.docs.push(d);entry(s,'EVIDENCE_ADDED',d.lot,actorId,{name:d.name,sha256:digest});toast('Đã ghi chứng từ và SHA-256 nội dung gốc '+digest.slice(0,8)+'…')}save();$('#overlay').innerHTML='';render()}catch(err){console.error(err);toast(err.message||'Không thể lưu dữ liệu.',true)}});
+window.addEventListener('popstate',render);
+if(hash('abc')!=='ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad')console.error('SHA256 self-check failed');
+
+/* SafeMeal V3 — 3-stage point-of-sale inspection and unified certificate. Bundled inline into standalone HTML by tao_ban_chay.py.
+   The Web3 blockchain interface in this version is SIMULATED, but WebCrypto encryption is REAL. */
+const STAGE_NAMES=['','Kiểm định vùng trồng / đầu nguồn','Kiểm định cơ sở sản xuất / đóng gói','Kiểm định tại điểm bán'];
+const STAGE_ROLES=['','supplier','processor','canteen'];
+const STAGE_SYMBOLS=['','🌱','🏭','🏪'];
+function v2Stages(id){return [1,2,3].map(step=>[...(s.stages||[])].reverse().find(x=>x.lot===id&&x.step===step)||null)}
+function v2Approved(id,step=3){return v2Stages(id).slice(0,step).every(x=>x&&x.result==='pass'&&x.digest===hash(JSON.stringify({lot:x.lot,step:x.step,actor:x.actor,meta:x.meta,result:x.result,time:x.time})))}
+function v2SeedRecord(id,step,result,actor,meta){const x={id:`ST-${s.stages.length+1}`,lot:id,step,result,actor,time:ts(),meta};x.digest=hash(JSON.stringify({lot:x.lot,step:x.step,actor:x.actor,meta:x.meta,result:x.result,time:x.time}));s.stages.push(x);entry(s,'QUALITY_STEP',id,actor,{step,result,recordHash:x.digest,simulated:true});return x}
+// Một mã kiểm định tổng hợp cho mỗi lô; liên kết ba dấu SHA-256 của ba phiếu và phiếu bàn giao.
+function v3Canonical(id){
+ const t=tr(id), st=v2Stages(id);
+ if(!v2Approved(id)||!t||t.status!=='accepted'||!t.accepted)return null;
+ return {schema:'SafeMeal-Unified-Inspection-v1',lot:id,stepHashes:st.map(x=>x.digest),handover:{id:t.id,from:t.from,to:t.to,accepted:t.accepted}};
+}
+function v3CodeFor(id){const payload=v3Canonical(id);if(!payload)return null;const combinedHash=hash(JSON.stringify(payload));return {code:'SMKD-'+id+'-'+combinedHash.slice(0,12).toUpperCase(),combinedHash,payload}}
+function v3CodeStatus(p){
+ if(!p||!lot(p.lot))return {valid:false,why:'Không có lô tương ứng'};
+ const now=v3CodeFor(p.lot);
+ if(!now)return {valid:false,why:'Hồ sơ một trong ba bước hoặc bàn giao hiện không hợp lệ'};
+ if(p.code!==now.code||p.combinedHash!==now.combinedHash||p.integrity!==hash(p.code+'|'+p.combinedHash))return {valid:false,why:'Mã tổng hợp / SHA-256 không khớp ba bước hiện tại'};
+ return {valid:true,why:'Ba bước, phiếu bàn giao và mã tổng hợp cùng khớp'};
+}
+function v3IssueCode(id,who,fromSeed=false){
+ if(s.packages.some(p=>p.lot===id))throw Error('Mỗi lô chỉ được cấp một mã kiểm định tổng hợp.');
+ const c=v3CodeFor(id);if(!c)throw Error('Cần hoàn thành ba bước và có bàn giao đã xác nhận trước khi cấp mã.');
+ const p={code:c.code,lot:id,created:ts(),stepDigests:c.payload.stepHashes,combinedHash:c.combinedHash,integrity:hash(c.code+'|'+c.combinedHash),sample:fromSeed};
+ s.packages.push(p);
+ entry(s,'UNIFIED_INSPECTION_CODE_ISSUED',id,who,{codeHash:hash(p.code),combinedHash:p.combinedHash,stepDigests:p.stepDigests,simulated:true});
+ return p;
+}
+
+function v2Init(){
+ if(!actors.some(x=>x.id==='processor'))actors.splice(2,0,{id:'processor',name:'Xưởng chế biến GreenFood',role:'processor',symbol:'GF'});
+ if(s.v2Version===3&&Array.isArray(s.stages)&&Array.isArray(s.packages)&&Array.isArray(s.complaints)&&Array.isArray(s.secureDocs))return;
+ const fromOld=Array.isArray(s.stages)&&s.stages.length>0;
+ s.stages=s.stages||[];s.packages=s.packages||[];s.complaints=s.complaints||[];s.secureDocs=s.secureDocs||[];
+ const src={L001:['Đà Lạt - nông trại An Phúc','2026-10-01','Nhật ký trồng và thu hoạch DEMO'],L002:['Đồng Nai - trang trại Bình Minh','2026-10-01','Nhật ký chăn nuôi DEMO'],L003:['Đơn Dương - nông trại An Phúc','2026-10-02','Nhật ký canh tác DEMO'],L004:['Củ Chi - trang trại Bình Minh','2026-10-01','Nhật ký đầu nguồn DEMO']};
+ const factory={L001:['Xưởng GreenFood','2026-10-02','2026-10-18'],L002:['Xưởng GreenFood','2026-10-02','2026-10-16'],L004:['Xưởng GreenFood','2026-10-02','2026-10-24']};
+ for(const l of s.lots){
+  if(!v2Stages(l.id)[0])v2SeedRecord(l.id,1,'pass',l.supplier,{location:src[l.id]?.[0]||l.origin,date:src[l.id]?.[1]||'2026-10-02',reference:src[l.id]?.[2]||'Mẫu hồ sơ đầu nguồn (giả lập)'});
+  if(factory[l.id]&&!v2Stages(l.id)[1])v2SeedRecord(l.id,2,'pass','processor',{location:factory[l.id][0],date:factory[l.id][1],expiry:factory[l.id][2],reference:'Phiếu sản xuất / đóng gói DEMO'});
+  if(['L001','L002'].includes(l.id)&&!v2Stages(l.id)[2])v2SeedRecord(l.id,3,'pass','canteen',{location:'Quầy nhận hàng – Căng tin Đại học',date:'2026-10-03',reference:'Phiếu kiểm định tại điểm bán (giả lập)',seal:'intact',displayTemp:'4'});
+ }
+ // Nâng cấp từ V2: mã tem phát ở bước 2 không còn hiệu lực; chuyển sang DUY NHẤT một mã sau bước 3.
+ // Các phiếu cũ không được âm thầm đổi người ký, nên bước 3 V2 ghi bởi inspector cần làm lại tại điểm bán.
+ if(fromOld&&s.v2Version===2){
+  s.stages=s.stages.filter(x=>x.step!==3||x.actor==='canteen');
+  entry(s,'QUALITY_POLICY_UPDATED','SYSTEM','demo',{message:'Bước 3 thay bằng kiểm định tại điểm bán. Tem V2 được thay thế bởi mã tổng hợp V3.'});
+ }
+ s.packages=[];
+ for(const l of s.lots)if(v3CodeFor(l.id))v3IssueCode(l.id,'canteen',true);
+ s.v2Version=3;save();
+}
+function v2StepLabel(r){return !r?'<span class="tag pending">Chưa thực hiện</span>':r.result==='pass'?'<span class="tag">Đã ghi đạt (mô phỏng)</span>':r.result==='fail'?'<span class="tag bad">Không đạt</span>':'<span class="tag pending">Chờ bổ sung</span>'}
+function v2TraceStatus(id){
+ const arr=v2Stages(id),num=arr.filter(x=>x?.result==='pass').length;
+ const p=s.packages.find(x=>x.lot===id),valid=p&&v3CodeStatus(p).valid;
+ return `<span class="tag ${num===3?'':'pending'}">${num}/3 bước</span> ${valid?'<span class="tag">Đã cấp 1 mã tổng hợp</span>':'<span class="tag pending">Chưa có mã tổng hợp hợp lệ</span>'}`;
+}
+function v2RecordStatus(id){let x=v2Stages(id);return x.map((r,i)=>`<div class="flowline"><div class="round">${STAGE_SYMBOLS[i+1]}</div><div class="grow"><b>Bước ${i+1}: ${STAGE_NAMES[i+1]}</b><p>${r?'Người ghi: '+esc(name(r.actor))+' · '+date(r.time)+'<br>SHA-256: '+esc(fmtHash(r.digest)):'Chưa có phiếu xác nhận'}</p></div>${v2StepLabel(r)}${r?button('Xem phiếu','v2detail',r.id):''}</div>`).join('')}
+function v2ViewPipeline(){
+ const certified=s.lots.filter(l=>{const p=s.packages.find(p=>p.lot===l.id);return p&&v3CodeStatus(p).valid}).length;
+ shell(`${intro('QUY TRÌNH MỚI · THEO YÊU CẦU GIẢNG VIÊN','Kiểm định 3 bước → 1 mã','Ba nơi kiểm định lập ba phiếu nội bộ; chỉ sau khi hàng đến điểm bán và đủ ba bước đạt, hệ thống mới cấp MỘT mã tổng hợp.')}<div class="v2-steps"><div class="card v2-step"><div class="v2-large">🌱</div><b>01. Kiểm định tại vùng trồng</b><p>Nguồn gốc, thu hoạch, nhật ký canh tác. Người xác nhận: Nhà cung cấp.</p></div><div class="v2-arrow">→</div><div class="card v2-step"><div class="v2-large">🏭</div><b>02. Kiểm định sản xuất</b><p>Quá trình sản xuất, đóng gói, nhãn và hạn dùng. Người xác nhận: Xưởng.</p></div><div class="v2-arrow">→</div><div class="card v2-step"><div class="v2-large">🏪</div><b>03. Kiểm định tại điểm bán</b><p>SAU KHI NHẬN HÀNG: đối chiếu tem, niêm phong, nhiệt độ và chứng từ. Người xác nhận: Căng tin / điểm bán.</p></div></div>
+ <div class="callout" style="margin-bottom:15px"><b>📦 Luồng thực tế:</b> Bước 1 đạt → Bước 2 đạt → giao hàng & điểm bán xác nhận nhận → Bước 3 tại điểm bán đạt → <b>cấp 1 mã SMKD cho cả lô</b>. Ba phiếu vẫn lưu riêng để kiểm chứng SHA-256, không phát 3 mã sản phẩm.</div>
+ <div class="mini-grid" style="margin:19px 0">${stat('Lô đã cấp mã tổng hợp',certified,'Mỗi lô tối đa một mã','🛡️')}${stat('Lô chưa đủ điều kiện',s.lots.length-certified,'Có thể thiếu bước hoặc bàn giao','◷')}${stat('Mã kiểm định được cấp',s.packages.length,'Liên kết 3 dấu SHA-256','▦')}</div>
+ <div class="sectionbar"><h2>Tiến độ và mã kiểm định từng lô</h2></div>
+ ${s.lots.map(l=>{const x=v2Stages(l.id);const next=x.findIndex(r=>r?.result!=='pass');const p=s.packages.find(p=>p.lot===l.id);const t=tr(l.id);const ready=next===2&&t?.status==='accepted';return `<div class="card v2-lot"><div class="flex" style="justify-content:space-between"><div><b class="v2-lotname">${esc(l.id)} · ${esc(l.product)}</b><span class="sub">${esc(l.origin)} · ${esc(name(l.supplier))}</span></div>${v2TraceStatus(l.id)}</div><div class="v2-progress">${x.map((r,i)=>`<div class="v2-progressitem ${r?.result==='pass'?'completed':r?.result==='fail'?'failed':''}">${STAGE_SYMBOLS[i+1]} ${i+1} · ${r?.result==='pass'?'Đạt':r?.result==='fail'?'Không đạt':'Chưa xong'}</div>`).join('')}</div>${v2RecordStatus(l.id)}<div class="callout" style="margin:10px 0">🚚 <b>Bàn giao đến điểm bán:</b> ${t?status(t.status):'<span class="tag pending">Chưa tạo phiếu bàn giao</span>'} ${next===2&&t?.status!=='accepted'?'<br><b>Phải xác nhận nhận hàng trước khi thực hiện bước 3.</b>':''}${p?`<br>🛡️ <b>MÃ KIỂM ĐỊNH TỔNG HỢP:</b> <span class="mono">${esc(p.code)}</span> ${v3CodeStatus(p).valid?'✓':'⚠ Bằng chứng không khớp'}`:'<br><b>Chưa cấp mã SMKD.</b>'}</div><div class="flex" style="margin-top:12px">${next!==-1?button('＋ Lập phiếu bước '+(next+1),'v2stage',l.id+':'+(next+1),'primary',may(STAGE_ROLES[next+1])&& (next!==2||ready)?'':'disabled'):''}${p?button('📱 Xem mã kiểm định duy nhất','v2tag',p.code,'primary'):''}${button('Chi tiết lô','lot',l.id)}</div></div>`}).join('')}
+ <div class="callout warncall">Dữ liệu và kết quả kiểm định là <b>giả lập để học tập</b>. Một mã SMKD tra được hồ sơ số, không phải chứng chỉ chất lượng pháp lý hoặc công nghệ chống sao chép tem.</div>`)
+}
+function v2OpenStep(arg){
+ const [id,st]=arg.split(':'),step=+st,l=lot(id);
+ if(!l||![1,2,3].includes(step))throw Error('Không có lô hoặc bước hợp lệ.');
+ if(!may(STAGE_ROLES[step]))throw Error('Vai trò hiện tại không được thực hiện bước '+step);
+ if(step>1&&!v2Approved(id,step-1))throw Error('Phải hoàn tất bước trước trước khi kiểm định tiếp.');
+ if(step===3&&tr(id)?.status!=='accepted')throw Error('Bước 3 tại điểm bán chỉ thực hiện SAU KHI điểm bán xác nhận nhận hàng.');
+ if(v2Stages(id)[step-1]?.result==='pass')throw Error('Bước đã đạt; không thể âm thầm ghi đè.');
+ let body=step===1?`${field('location','Tên và địa điểm vùng trồng','text',l.origin)}${field('date','Ngày thu hoạch','date','2026-10-03')}`:
+ step===2?`${field('location','Tên cơ sở chế biến','text','Xưởng GreenFood')}${field('date','Ngày sản xuất','date','2026-10-03')}${field('expiry','Hạn sử dụng','date','2026-10-22')}`:
+ `${field('location','Tên và địa chỉ điểm bán / quầy nhận hàng','text','Căng tin Đại học – quầy nhận hàng')}${field('date','Ngày kiểm định tại điểm bán','date','2026-10-03')}<div class="fields"><div class="field"><label>Niêm phong / nhãn hàng</label><select class="input" name="seal"><option value="intact">Còn nguyên, trùng chứng từ</option><option value="broken">Rách / có dấu hiệu can thiệp</option></select></div>${field('displayTemp','Nhiệt độ kiểm tra tại điểm bán (°C)','number','4','step="0.1" required')}</div>`;
+ modal('Phiếu nội bộ bước '+step,STAGE_NAMES[step],`<form id="form-v2-stage"><input name="lot" type="hidden" value="${esc(id)}"><input name="step" type="hidden" value="${step}">${body}${field('reference','Số / mô tả chứng từ kiểm định','text','','maxlength="220"')}<div class="field"><label>Kết quả kiểm định (demo)</label><select class="input" name="result"><option value="pass">Đạt</option><option value="pending">Cần bổ sung</option><option value="fail">Không đạt</option></select></div>${step===3?'<div class="callout">Sau khi ghi nhận <b>Đạt</b>, SafeMeal tự gộp hash của 3 phiếu cùng thông tin bàn giao để phát hành 1 mã kiểm định tổng hợp.</div>':''}${foot('Lưu phiếu SHA-256'+(step===3?' & xét cấp mã':'') )}</form>`)
+}
+function v2Detail(id){const r=s.stages.find(x=>x.id===id);if(!r)return;const ok=r.digest===hash(JSON.stringify({lot:r.lot,step:r.step,actor:r.actor,meta:r.meta,result:r.result,time:r.time}));modal('Phiếu '+r.id,STAGE_NAMES[r.step],`<div class="callout ${ok?'':'warncall'}">${ok?'✓ SHA-256 của phiếu còn khớp':'✕ Nội dung phiếu đã thay đổi!'}</div><div class="details"><div><label>Lô</label><strong>${esc(r.lot)}</strong></div><div><label>Bước</label><strong>${r.step} · ${esc(STAGE_NAMES[r.step])}</strong></div><div><label>Người thực hiện (vai trò demo)</label><strong>${esc(name(r.actor))}</strong></div><div><label>Kết quả</label><strong>${esc(r.result)}</strong></div>${Object.entries(r.meta).map(([k,v])=>`<div><label>${esc(k)}</label><strong>${esc(v)}</strong></div>`).join('')}<div style="grid-column:1/-1"><label>Dấu SHA-256</label><strong class="mono">${esc(r.digest)}</strong></div></div><p class="note">Hash chỉ giúp phát hiện sửa dữ liệu khi có giá trị gốc đáng tin; không phải chứng nhận của tổ chức độc lập.</p>`)}
+function v2MakePackage(id){
+ if(!may('canteen'))throw Error('Chỉ điểm bán được quyền ghi nhận bước 3; mã cấp tự động sau 3 bước, không có nút cấp mã thủ công.');
+ throw Error('Mã được cấp tự động khi bước 3 tại điểm bán đạt; mỗi lô chỉ có một mã.');
+}
+function v2ViewTag(code){
+ const p=s.packages.find(x=>x.code===code);if(!p)return;
+ const l=lot(p.lot),valid=v3CodeStatus(p),st=v2Stages(p.lot);
+ modal('MỘT MÃ KIỂM ĐỊNH TỔNG HỢP','Được cấp sau bước 3 tại điểm bán. Một mã quy chiếu ba phiếu và một lô.',
+ `<div style="text-align:center"><div class="qrbox">${qrSvg('SAFEMEAL-CERT:'+code)}</div><h2 class="mono" style="font-size:20px;word-break:break-word">${esc(code)}</h2><b>${esc(l.product)} • ${esc(l.id)}</b><p>${valid.valid?'<span class="tag">✓ Dấu SHA-256 khớp ba bước</span>':'<span class="tag bad">⚠ Hồ sơ tổng hợp có vấn đề</span>'}</p></div><div class="card panel" style="margin:15px 0"><div class="eyebrow">MỘT MÃ ⇄ BA PHIẾU NỘI BỘ</div>${st.map((r,i)=>`<div class="flowline"><div class="round">${STAGE_SYMBOLS[i+1]}</div><div class="grow"><b>0${i+1}. ${esc(STAGE_NAMES[i+1])}</b><p>Phiếu ${esc(r?.id||'chưa có')} · SHA-256: ${esc(fmtHash(r?.digest||''))}</p></div>${r?button('Xem phiếu','v2detail',r.id):''}</div>`).join('')}<p class="note">Dấu tổng hợp đầy đủ (SHA-256):<br><span class="mono" style="overflow-wrap:anywhere">${esc(p.combinedHash)}</span></p></div><div class="callout ${valid.valid?'':'warncall'}">${valid.valid?'Đã đối chiếu thành công với ba phiếu và bàn giao trong dữ liệu demo.':esc(valid.why)}<br>QR/mã kiểm định không tự chứng minh hàng vật lý là thật và có thể bị sao chép.</div><div class="flex" style="justify-content:center">${button('📩 Đối chiếu khi có phản ánh','v2complaintprefill',code,'primary')}${button('⬇ Xuất hồ sơ mã tổng hợp','v3download',code,'outline')}</div>`,true)
+}
+// Native QR scanning when supported; text entry always remains available.
+let v2ScanStream=null,v2ScanActive=false;
+function v2StopCamera(){v2ScanActive=false;if(v2ScanStream){for(const t of v2ScanStream.getTracks())t.stop();v2ScanStream=null}}
+async function v2CameraScan(){if(!('BarcodeDetector' in window)||!navigator.mediaDevices?.getUserMedia)throw Error('Chrome/Edge hiện tại không hỗ trợ quét QR bằng camera. Hãy nhập mã tem thủ công.');
+ v2StopCamera();modal('Quét tem QR sản phẩm','Hướng camera vào mã QR tem SafeMeal; cấp quyền máy ảnh khi được hỏi.',`<div style="text-align:center"><video id="v2-camera" autoplay playsinline muted style="width:100%;max-height:370px;border-radius:12px;background:#102d24"></video><p class="note">Nếu không có camera, hãy đóng cửa sổ và nhập mã vào ô tìm kiếm.</p></div>`);
+ try{const stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'},audio:false});v2ScanStream=stream;v2ScanActive=true;const video=byId('v2-camera');if(!video){v2StopCamera();return}video.srcObject=stream;await video.play();const detector=new BarcodeDetector({formats:['qr_code']});
+ const scan=async()=>{if(!v2ScanActive)return;try{const detected=await detector.detect(video);if(detected.length){let raw=detected[0].rawValue||'';if(raw.startsWith('SAFEMEAL-CERT:'))raw=raw.slice('SAFEMEAL-CERT:'.length);else if(raw.startsWith('SAFEMEAL-PRODUCT:'))raw=raw.slice('SAFEMEAL-PRODUCT:'.length);v2StopCamera();$('#overlay').innerHTML='';page='complaints';render();const f=byId('v2-code');if(f){f.value=raw;f.focus()}toast('Đã đọc mã QR, hãy bổ sung thông tin phản ánh.');return}}catch(err){console.warn('QR scan frame:',err)}requestAnimationFrame(scan)};requestAnimationFrame(scan);
+ }catch(e){v2StopCamera();$('#overlay').innerHTML='';throw Error('Không thể mở camera: '+e.message+'. Bạn vẫn có thể nhập mã thủ công.')}}
+function v2GetCaseData(code,printedLot,printedProduct,seal){
+ const p=s.packages.find(x=>x.code===code);
+ if(!p)return {kind:'unregistered',label:'Không tìm thấy mã kiểm định tổng hợp',desc:'Mã không khớp hồ sơ cấp phát SafeMeal. Không thể kết luận hàng giả khi chưa kiểm tra hóa đơn, mẫu và tem thực tế.',lot:null};
+ const l=lot(p.lot),checked=v3CodeStatus(p);
+ if(!checked.valid)return {kind:'tampered',label:'Mã có trong sổ nhưng hồ sơ không toàn vẹn',desc:checked.why+'; chuyển đến bộ phận kiểm tra.',lot:p.lot};
+ if((printedLot&&printedLot.toUpperCase()!==p.lot.toUpperCase())||(printedProduct&&printedProduct.trim().toLowerCase()!==l.product.trim().toLowerCase()))return {kind:'mismatch',label:'Thông tin bao bì không khớp mã kiểm định',desc:'Mã có trong hệ thống nhưng mã lô hoặc tên hàng in trên bao bì sai lệch. Cần xem xét khả năng nhầm lẫn hoặc sao chép mã.',lot:p.lot};
+ if(seal==='broken')return {kind:'seal',label:'Niêm phong bị can thiệp',desc:'Mã kiểm định trùng nhưng tem niêm phong hỏng. Cần kiểm tra mẫu hàng thực tế.',lot:p.lot};
+ if(l.status!=='active'||warn(l.id))return {kind:'risk',label:'Đúng mã tổng hợp nhưng lô đang có cảnh báo',desc:'Mã thuộc SafeMeal và ba bước kiểm định khớp. Hệ thống vẫn yêu cầu truy vết các mẻ sử dụng lô để xem xét tạm giữ/thu hồi.',lot:p.lot};
+ return {kind:'matched',label:'Khớp mã kiểm định tổng hợp và ba bước',desc:'Đã đối chiếu 1 mã với cả ba phiếu và phiếu bàn giao. Chưa thể xác định hàng vật lý là hàng thật nếu chỉ dựa QR.',lot:p.lot};
+}
+function v2ViewComplaints(){shell(`${intro('PHẢN HỒI CHẤT LƯỢNG','Nhận diện sản phẩm bị phản ánh','Tra cứu một mã SMKD tổng hợp để kiểm tra ba bước tại vùng trồng, nhà máy và điểm bán.')}
+ <div class="cols"><div class="card panel"><div class="eyebrow">BƯỚC 1 · NHẬN PHẢN ÁNH</div><h2>Tra cứu MỘT mã kiểm định tổng hợp</h2><form id="form-v2-complaint"><div class="field"><label>Mã kiểm định SMKD trên QR / bao bì</label><input class="input" name="code" id="v2-code" placeholder="Ví dụ: SMKD-L001-..." required autocomplete="off"/></div><div class="flex" style="margin:-3px 0 12px">${button('📷 Quét QR bằng camera (nếu hỗ trợ)','v2camera','','outline')}</div><div class="fields"><div class="field"><label for="v2-printed-lot">Mã lô in trên bao bì (nếu có)</label><input class="input" id="v2-printed-lot" name="printedLot" placeholder="L001"></div><div class="field"><label for="v2-printed-product">Tên sản phẩm in trên bao bì (nếu có)</label><input class="input" id="v2-printed-product" name="printedProduct" placeholder="Rau xà lách Đà Lạt"></div></div><div class="field"><label>Trạng thái tem niêm phong</label><select name="seal" class="input"><option value="unknown">Không rõ</option><option value="intact">Tem còn nguyên</option><option value="broken">Tem rách / bị mở</option></select></div><div class="field"><label>Nội dung phản ánh (không ghi dữ liệu cá nhân nhạy cảm)</label><textarea class="input" name="description" rows="3" required minlength="5" maxlength="600" placeholder="Ví dụ: rau có mùi lạ khi mở hộp..."></textarea></div><button type="submit" class="btn primary">🔎 Tiếp nhận & đối chiếu</button></form><div class="callout">Mã thử hợp lệ: <b class="mono">${esc(s.packages.find(p=>p.lot==='L001')?.code||'Hãy hoàn thành 3 bước để cấp mã')}</b><br>Mã thử không tìm thấy: <b class="mono">SM-FAKE-9999</b></div></div><div class="card panel"><div class="eyebrow">BƯỚC 2 → 3 · ĐÁNH GIÁ & XỬ LÝ</div><h2>Các lớp bằng chứng</h2>${['1. Tra cứu mã SMKD đã cấp sau ba bước','2. Kiểm tra hash gộp của ba phiếu nội bộ','3. Xác nhận bước 3 diễn ra tại điểm bán sau nhận hàng','4. Truy ngược mẻ ăn và cảnh báo liên quan','5. Kiểm tra tem chống bóc, hóa đơn, mẫu vật lý ngoài đời'].map((t,i)=>`<div class="flowline"><span class="round">${['▦','≡','✓','↩','🔬'][i]}</span><div class="grow"><b>${t}</b></div></div>`).join('')}<p class="callout warncall"><b>Không kết luận “hàng thật” chỉ từ QR.</b> Nếu QR bị sao chép, dữ liệu có thể khớp nhưng hàng hóa vẫn không rõ nguồn gốc. Cần bằng chứng vật lý và nhân viên kiểm tra.</p></div></div>
+ <div class="sectionbar"><h2>Hồ sơ phản ánh đã tiếp nhận</h2></div>${s.complaints.length?s.complaints.slice().reverse().map(c=>`<div class="card v2-case"><div class="flex" style="justify-content:space-between"><div><b>${esc(c.id)} · ${esc(c.code)}</b><span class="sub">${date(c.time)} • Lô ${esc(c.lot||'chưa xác định')}</span></div><span class="tag ${c.kind==='matched'?'':'pending'}">${esc(c.label)}</span></div><p>${esc(c.description)}</p><div class="flex">${button('Xem đối chiếu','v2result',c.id)}${c.lot?button('Truy vết lô','lot',c.lot):''}${may('inspector')&&c.status==='open'?button('Ghi xử lý (kiểm định)','v2resolve',c.id,'primary'):''}<span class="tag blue">${esc(c.status==='open'?'Đang xử lý':'Đã ghi kết quả')}</span></div></div>`).join(''):'<div class="card panel">Chưa có phản ánh. Hãy dùng mã mẫu để tạo một trường hợp và xem đối chiếu.</div>'}`)}
+function v2CaseResult(id){const c=s.complaints.find(x=>x.id===id);if(!c)return;const l=c.lot&&lot(c.lot);const associated=l?used(l.id):[];modal('Kết quả đối chiếu '+c.id,c.label,`<div class="callout ${c.kind==='matched'?'':'warncall'}"><b>${esc(c.label)}</b><br>${esc(c.details)}</div><div class="details"><div><label>Mã kiểm định tổng hợp</label><strong class="mono">${esc(c.code)}</strong></div><div><label>Mã lô đã nhận diện</label><strong>${esc(c.lot||'Chưa có')}</strong></div><div><label>Trạng thái hồ sơ</label><strong>${c.lot?v2TraceStatus(c.lot):'Chưa xác định'}</strong></div><div><label>Tình trạng niêm phong</label><strong>${esc(c.seal)}</strong></div></div>${l?`<div class="sectionbar"><h2>Mẻ ăn liên quan (${associated.length})</h2></div>${associated.length?associated.map(m=>`<div class="flowline"><div class="grow"><b>${esc(m.id)} · ${esc(m.name)}</b></div>${button('Xem công bố','public',m.id)}</div>`).join(''):'<p class="note">Chưa có mẻ ăn nào được liên kết.</p>'}<div class="sectionbar"><h2>Chuỗi 3 bước</h2></div>${v2RecordStatus(l.id)}`:''}<div class="callout warncall">Kết quả chỉ là <b>đối chiếu dữ liệu số trong bản demo</b>, không chứng nhận tính xác thực của hàng hóa thực tế.</div>`,true)}
+function v2OpenResolve(id){if(!may('inspector'))throw Error('Chỉ Ban kiểm định được ghi kết quả xử lý.');const c=s.complaints.find(x=>x.id===id);if(!c||c.status!=='open')throw Error('Phản ánh không tồn tại hoặc đã xử lý.');modal('Xử lý phản ánh '+id,'Ghi nhận đánh giá của nhân viên trong bản mô phỏng',`<form id="form-v2-resolve"><input type="hidden" name="id" value="${esc(id)}"><div class="field"><label>Nhận định sau đối chiếu</label><select class="input" name="decision"><option value="needs_physical">Cần kiểm tra mẫu vật lý</option><option value="likely_registered">Nhiều dấu hiệu trùng hồ sơ đã đăng ký</option><option value="suspected_forgery">Nghi vấn tem bị sao chép / sai sản phẩm</option></select></div><div class="field"><label>Biện pháp xử lý dự kiến</label><textarea class="input" name="action" required minlength="8" rows="3" placeholder="Ví dụ: giữ mẫu, đối chiếu hóa đơn, liên hệ nhà cung cấp..."></textarea></div>${foot('Ghi sự kiện xử lý')}</form>`)}
+function v2ViewSecurity(){const secureOk=Boolean(globalThis.crypto?.subtle);shell(`${intro('GIẢI THÍCH VÀ TRÌNH DIỄN MÃ HÓA','Bảo mật AES-256-GCM','Dùng Web Crypto API của trình duyệt để mã hóa thật; có thể thử mật khẩu đúng/sai.')}
+ <div class="v2-tech"><div class="card v2-techitem"><b>🔐 AES-256-GCM</b><p>Giấu nội dung chứng từ nội bộ, kiểm tra tag xác thực. Mã hóa bằng khóa suy ra từ mật khẩu PBKDF2.</p></div><div class="card v2-techitem"><b>🧬 SHA-256</b><p>Dấu vân tay chứng từ, phiếu kiểm định và nhật ký. <b>Không giấu nội dung!</b></p></div><div class="card v2-techitem"><b>✍️ Chữ ký số / Blockchain</b><p>Chưa có chữ ký tổ chức hoặc đồng thuận đa bên trong bản offline này. Đây là mục mở rộng.</p></div></div>
+ ${secureOk?`<div class="card panel" style="margin:22px 0"><div class="eyebrow">THỬ NGAY — MÃ HÓA THẬT</div><h2>Tạo ghi chú kiểm định được mã hóa</h2><form id="form-v2-secret"><div class="fields">${optField('lot','Gắn ghi chú với lô',options(s.lots.map(l=>[l.id,l.id+' — '+l.product])))}${field('title','Tiêu đề ghi chú','text','Phiếu kiểm tra nội bộ')}</div><div class="field"><label>Thông tin mật cần mã hóa (chỉ lưu ciphertext)</label><textarea class="input" name="plaintext" required minlength="5" rows="3" placeholder="Ví dụ: nhận định kiểm tra mẫu nội bộ..."></textarea></div><div class="field"><label>Mật khẩu giải mã tự đặt (từ 8 ký tự)</label><input class="input" type="password" name="password" minlength="8" required autocomplete="new-password"></div><button class="btn primary" type="submit">🔒 Mã hóa AES-256-GCM và lưu</button></form></div>`:`<div class="callout warncall">Trình duyệt này chưa cấp quyền WebCrypto. Hãy mở file bằng Chrome/Edge; có thể cần môi trường bảo mật.</div>`}
+ <div class="sectionbar"><h2>Kho ghi chú đã mã hóa</h2></div>${s.secureDocs.length?s.secureDocs.slice().reverse().map(d=>`<div class="card v2-case"><div class="flex" style="justify-content:space-between"><div><b>🔐 ${esc(d.title)}</b><span class="sub">Lô ${esc(d.lot)} • ${date(d.time)}</span></div><span class="tag blue">AES-256-GCM</span></div><p class="mono" style="max-width:100%;overflow-wrap:anywhere">Ciphertext (base64): ${esc(d.ciphertext.slice(0,125))}…</p><p class="note">Salt: ${esc(d.salt)} · IV: ${esc(d.iv)} · PBKDF2-SHA-256 ${d.iterations} vòng</p>${button('🔓 Giải mã (nhập mật khẩu)','v2decrypt',d.id,'primary')}${button('Kiểm tra sửa bản mã','v2tampercipher',d.id,'warn',may('inspector')?'':'disabled')}</div>`).join(''):'<div class="card panel">Chưa có tài liệu AES. Hãy tạo một ghi chú phía trên rồi thử giải mã.</div>'}
+ <div class="callout warncall"><b>Lưu ý bảo mật:</b> Bản demo lưu ciphertext ở localStorage của trình duyệt; không lưu mật khẩu. Mật khẩu yếu có thể bị đoán. Mô hình thực cần quản lý khóa chuyên dụng, cơ chế khôi phục, xác thực người dùng và phân quyền backend thực sự.</div>`)}
+const v2B64=b=>btoa(String.fromCharCode(...new Uint8Array(b)));
+const v2FromB64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function v2Key(password,salt,iterations){const raw=await crypto.subtle.importKey('raw',new TextEncoder().encode(password),'PBKDF2',false,['deriveKey']);return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations,hash:'SHA-256'},raw,{name:'AES-GCM',length:256},false,['encrypt','decrypt'])}
+async function v2Encrypt(plaintext,password){if(!crypto?.subtle)throw Error('WebCrypto không hỗ trợ ở trình duyệt này.');if(password.length<8)throw Error('Mật khẩu phải có ít nhất 8 ký tự.');const salt=crypto.getRandomValues(new Uint8Array(16)),iv=crypto.getRandomValues(new Uint8Array(12)),iterations=210000;const key=await v2Key(password,salt,iterations);const encrypted=await crypto.subtle.encrypt({name:'AES-GCM',iv},key,new TextEncoder().encode(plaintext));return {algorithm:'AES-256-GCM',kdf:'PBKDF2-SHA-256',iterations,salt:v2B64(salt),iv:v2B64(iv),ciphertext:v2B64(encrypted)}}
+async function v2Decrypt(e,password){const key=await v2Key(password,v2FromB64(e.salt),e.iterations);const plain=await crypto.subtle.decrypt({name:'AES-GCM',iv:v2FromB64(e.iv)},key,v2FromB64(e.ciphertext));return new TextDecoder().decode(plain)}
+function v2OpenDecrypt(id){const d=s.secureDocs.find(x=>x.id===id);if(!d)return;modal('Mở chứng từ AES '+id,'Mật khẩu không được lưu trong cơ sở dữ liệu hoặc localStorage.',`<form id="form-v2-decrypt"><input type="hidden" name="id" value="${esc(id)}"><div class="field"><label>Mật khẩu đã dùng khi mã hóa</label><input class="input" name="password" type="password" required autocomplete="off"></div><div id="v2-dec-result" class="note">Nhập mật khẩu rồi nhấn giải mã.</div>${foot('Giải mã')}</form>`)}
+function v2Action(cmd,id){try{if(cmd==='v2camera')v2CameraScan().catch(e=>toast(e.message,true));else if(cmd==='v2stage')v2OpenStep(id);else if(cmd==='v2detail')v2Detail(id);else if(cmd==='v2tag')v2ViewTag(id);else if(cmd==='v2mint')v2MakePackage(id);else if(cmd==='v3download'){const p=s.packages.find(x=>x.code===id);if(!p)throw Error('Không tìm thấy mã.');const checked=v3CodeStatus(p);downloadFile('SafeMeal-'+p.code+'.json',JSON.stringify({notice:'DEMO offline - KHONG PHAI GIAY CHUNG NHAN PHAP LY',unifiedCode:p.code,lot:p.lot,valid:checked.valid,why:checked.why,combinedHash:p.combinedHash,stages:v2Stages(p.lot),handover:tr(p.lot)},null,2));}else if(cmd==='v2result')v2CaseResult(id);else if(cmd==='v2resolve')v2OpenResolve(id);else if(cmd==='v2decrypt')v2OpenDecrypt(id);else if(cmd==='v2tampercipher'){if(!may('inspector'))throw Error('Cần vai trò Ban kiểm định.');const d=s.secureDocs.find(x=>x.id===id);if(!d)throw Error('Không tìm thấy chứng từ.');let v=d.ciphertext;d.ciphertext=(v[0]==='A'?'B':'A')+v.slice(1);entry(s,'ENCRYPTED_EVIDENCE_TAMPER_DEMO',d.lot,actorId,{doc:id});save();render();toast('Đã đổi byte ciphertext, giải mã sẽ bị từ chối.')}else if(cmd==='v2complaintprefill'){page='complaints';$('#overlay').innerHTML='';render();const f=byId('v2-code');if(f){f.value=id;f.focus()}}else if(cmd==='v2resetnotice')toast('Dữ liệu thử 3 bước và AES sẽ được tạo lại khi khôi phục mẫu.');else if(cmd==='v2export'){downloadFile('SafeMeal-V2-bang-chung.json',JSON.stringify({demo:true,stages:s.stages,packages:s.packages,complaints:s.complaints,encryptedDocs:s.secureDocs,events:s.events},null,2))}else toast('Không nhận biết hành động.',true)}catch(e){console.error(e);toast(e.message||'Có lỗi khi xử lý.',true)}}
+async function v2Submit(f){const d=Object.fromEntries(new FormData(f));try{
+ if(f.id==='form-v2-stage'){
+  const id=d.lot,step=+d.step;
+  if(!lot(id)||!Number.isInteger(step)||step<1||step>3)throw Error('Phiếu không hợp lệ.');
+  if(!may(STAGE_ROLES[step]))throw Error('Sai vai trò với bước kiểm định.');
+  if(step>1&&!v2Approved(id,step-1))throw Error('Chưa hoàn thành bước trước.');
+  if(v2Stages(id)[step-1]?.result==='pass')throw Error('Phiếu đã đạt không thể ghi đè.');
+  if(step===2&&new Date(d.expiry)<new Date(d.date))throw Error('Hạn dùng phải sau ngày sản xuất.');
+  if(step===3&&tr(id)?.status!=='accepted')throw Error('Phải nhận hàng ở điểm bán trước khi kiểm định bước 3.');
+  if(step===3){const temp=Number(d.displayTemp);if(!Number.isFinite(temp)||temp < -40||temp>90)throw Error('Nhiệt độ đo không hợp lệ.');if(d.result==='pass'&&(d.seal!=='intact'||temp>lot(id).threshold))throw Error('Điểm bán không thể xác nhận ĐẠT nếu niêm phong hỏng hoặc nhiệt độ kiểm tra vượt ngưỡng.');}
+  const meta={location:d.location,date:d.date,reference:d.reference};
+  if(step===2)meta.expiry=d.expiry;
+  if(step===3){meta.seal=d.seal;meta.displayTemp=d.displayTemp;}
+  const r=v2SeedRecord(id,step,d.result,actorId,meta);
+  if(step===3&&d.result==='pass'){
+   const p=v3IssueCode(id,actorId);
+   toast('Bước 3 đạt! ĐÃ CẤP 1 MÃ TỔNG HỢP: '+p.code);
+  }else toast('Đã lưu phiếu SHA-256 bước '+step+'. Chưa cấp mã khi chưa đủ ba bước.');
+  page='quality';
+ }
+ 
+else if(f.id==='form-v2-complaint'){const code=d.code.trim().toUpperCase();if(!code||d.description.trim().length<5)throw Error('Hãy nhập mã và nội dung phản ánh.');const result=v2GetCaseData(code,d.printedLot.trim(),d.printedProduct.trim(),d.seal);const c={id:'PA-'+String(s.complaints.length+1).padStart(3,'0'),code,printedLot:d.printedLot.trim(),printedProduct:d.printedProduct.trim(),seal:d.seal,description:d.description.trim(),lot:result.lot,kind:result.kind,label:result.label,details:result.desc,time:ts(),status:'open',review:null};s.complaints.push(c);entry(s,'QUALITY_COMPLAINT',c.lot||'UNKNOWN','public',{caseId:c.id,codeHash:hash(code),kind:c.kind});toast('Đã ghi phản ánh '+c.id);save();render();v2CaseResult(c.id);return}
+ else if(f.id==='form-v2-resolve'){if(!may('inspector'))throw Error('Chỉ nhân viên kiểm định ghi nhận xử lý.');const c=s.complaints.find(x=>x.id===d.id);if(!c||c.status!=='open')throw Error('Phản ánh không hợp lệ.');if(d.action.trim().length<8)throw Error('Mô tả biện pháp xử lý chi tiết hơn.');c.status='reviewed';c.review={actor:actorId,time:ts(),decision:d.decision,action:d.action.trim()};entry(s,'QUALITY_REVIEW',c.lot||'UNKNOWN',actorId,{caseId:c.id,decision:d.decision,reviewHash:hash(d.action.trim())});toast('Đã lưu kết quả đánh giá trong bản mô phỏng.');page='complaints'}
+ else if(f.id==='form-v2-secret'){if(!may('inspector'))throw Error('Chuyển sang vai trò Ban kiểm định để tạo ghi chú mật.');if(!crypto?.subtle)throw Error('Web Crypto API chưa hỗ trợ.');const e=await v2Encrypt(d.plaintext,d.password);const r={id:'AES-'+String(s.secureDocs.length+1).padStart(3,'0'),lot:d.lot,title:d.title.trim(),time:ts(),owner:actorId,...e};s.secureDocs.push(r);entry(s,'ENCRYPTED_EVIDENCE_ADDED',r.lot,actorId,{doc:r.id,cipherDigest:hash(r.ciphertext),algorithm:r.algorithm});toast('Đã mã hóa thật AES-256-GCM. Không lưu plaintext và mật khẩu.');page='security'}
+ else if(f.id==='form-v2-decrypt'){const el=byId('v2-dec-result'),r=s.secureDocs.find(x=>x.id===d.id);if(!r)throw Error('Không tìm thấy chứng từ.');if(!may('inspector'))throw Error('Chỉ Ban kiểm định có quyền giao diện giải mã.');try{const msg=await v2Decrypt(r,d.password);el.innerHTML=`<div class="callout"><b>✓ Giải mã thành công bằng AES-256-GCM</b><p style="white-space:pre-wrap;word-break:break-word">${esc(msg)}</p></div>`}catch(e){el.innerHTML='<div class="callout warncall"><b>✕ Sai mật khẩu hoặc ciphertext đã bị thay đổi.</b> AES-GCM từ chối giải mã.</div>'}return}
+ else return;
+ save();$('#overlay').innerHTML='';render();
+ }catch(e){console.error(e);toast(e.message||'Không lưu được.',true)}}
+document.addEventListener('submit',e=>{if(!['form-v2-stage','form-v2-complaint','form-v2-resolve','form-v2-secret','form-v2-decrypt'].includes(e.target.id))return;e.preventDefault();v2Submit(e.target)})
+
+v2Init();
+render();
+</script></body></html>
