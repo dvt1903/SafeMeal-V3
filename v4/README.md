@@ -67,3 +67,21 @@ Xem `contracts/README.md`. **Không gửi seed phrase/khóa riêng vào website.
 
 ## Repo và phiên bản
 Giữ nguyên `index.html` V3 của repository; V4 triển khai tại `/v4/` để không làm gián đoạn đường link đã nộp.
+
+
+## SafeMeal V4.2 — AI Inspection Studio (21/10/2026)
+
+Hệ thống hỗ trợ ra quyết định ở màn hình **🧠 Phòng lab AI**:
+- **Cảm biến chuỗi lạnh:** MAD robust, phát hiện vượt ngưỡng liên tiếp, trực quan dữ liệu nhập dưới dạng time,temp (CSV).
+- **NLP:** Multinomial Naive Bayes với 35 câu huấn luyện minh họa, phân loại nội dung phản ánh ra 5 nhóm để ưu tiên xử lý.
+- **Computer Vision:** MobileNet v2 pretrained với TensorFlow.js, trả dự đoán ImageNet và tạo vector đặc trưng để so sánh hai ảnh sản phẩm (cosine similarity).
+- **OCR:** Tesseract.js nhận diện văn bản trên nhãn, đối chiếu mã lô, tìm ngày tháng. Hai mô hình thị giác và OCR tải khi có Internet từ CDN; ảnh không chủ động upload lên SafeMeal backend.
+- **AI Risk Fusion:** Kết hợp nhiều nguồn chứng cứ, hiển thị điểm rủi ro heuristic và cảnh báo. **Không phải xác suất thực phẩm an toàn, không thay thế xét nghiệm hay quyết định của người kiểm định**.
+
+**Quy tắc mới:** Ở bước 3 tại điểm bán, để ghi "Đạt" cần một báo cáo AI chuỗi lạnh. Nếu kết quả có cảnh báo cao, chỉ vai trò Ban kiểm định có thể ghi nhận kết quả rà soát và giải trình để tiếp tục. Server lưu phiếu AI vào SQLite, tính lại chỉ số và ghi SHA-256; không tin chỉ số rủi ro do browser tự nhập.
+
+**API bổ sung:** `GET /api/ai-reports`, `POST /api/ai-reports`, `POST /api/ai-reports/:id/review`.
+
+**Kiểm thử:** `node --test tests/*.test.mjs` (28 bài kiểm tra logic/định tuyến giả lập, không phải chứng nhận độ chính xác MobileNet/OCR). Xem hướng dẫn trong `docs/KICH_BAN_AI_KIEM_DINH.md`.
+
+**Giới hạn nghiên cứu:** Chưa có dữ liệu thực phẩm thực địa đủ nhãn để đo precision/recall; ImageNet MobileNet không phải model nhận dạng độc tố, vi khuẩn hoặc nấm mốc chuyên biệt; OCR có lỗi đọc chữ; triển khai công khai GitHub Pages vẫn là demo tĩnh, không có máy chủ dùng chung.
