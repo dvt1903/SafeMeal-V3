@@ -5,7 +5,7 @@
 ## Chạy trên Windows, không cần npm install
 
 1. Cài Node.js **22.13 trở lên** tại https://nodejs.org/ nếu máy chưa có.
-2. Giải nén ZIP, nhấp đúp **`CHAY_SAFEMEAL_WINDOWS.bat`**.
+2. Giải nén ZIP, nhấp đúp **`CHAY_SAFEMEAL_WINDOWS.bat`**. Hoặc mở Terminal trong thư mục gốc và dùng **`npm run dev`** (không phải npm install).
 3. Giữ cửa sổ CMD mở và truy cập **http://127.0.0.1:8000**.
 4. Dùng các tài khoản **chỉ dành cho máy demo** dưới đây (cùng mật khẩu **`SafeMeal@2026`**):
 
@@ -49,7 +49,7 @@ Backend sử dụng `node:sqlite` và mật khẩu `scrypt` + salt ngẫu nhiên
 ## Chạy test
 
 ```bash
-node --test tests/*.test.mjs
+npm test  # tương đương node --test tests/*.test.mjs
 ```
 
 Kiểm thử gồm: mật khẩu, role, thứ tự bước, bàn giao, niêm phong, cấp mã, sửa chứng từ, hạn sử dụng, tìm mẻ, mã không đăng ký, tạm giữ, nhật ký hash. Không nhầm kiểm thử này với test blockchain hoặc kiểm thử tải/CI nếu chưa kích hoạt GitHub Actions.
