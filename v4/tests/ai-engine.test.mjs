@@ -1,0 +1,12 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {analyzeColdChain,classifyText,visualSimilarity,ocrEvidence,fuseEvidence,parseTemperature} from '../web/ai-engine.js';
+const normal='08:00,4\n08:30,4.2\n09:00,3.9\n09:30,4.4\n10:00,4.1\n10:30,4.2';
+const abnormal='08:00,4\n08:30,4.2\n09:00,11.2\n09:30,11.8\n10:00,10.2\n10:30,4.4';
+test('Cảm biến bình thường không tạo cảnh báo rủi ro cao',()=>{const r=analyzeColdChain(normal,8);assert.equal(r.exceed,0);assert.equal(r.level,'low')});
+test('Nhận diện đợt vượt ngưỡng liên tiếp và điểm lạ',()=>{const r=analyzeColdChain(abnormal,8);assert.equal(r.exceed,3);assert.equal(r.longest,3);assert.equal(r.level,'high');assert.equal(r.flagged.length,3)});
+test('Từ chối dữ liệu cảm biến không đủ hoặc giả nhiệt độ',()=>{assert.throws(()=>analyzeColdChain('08:00,4\n08:30,5',8));assert.equal(parseTemperature('time,temp\n08:00,3.8').length,1)});
+test('Naive Bayes học từ ví dụ để nhận nhóm phản ánh',()=>{assert.equal(classifyText('mã QR không trùng mã lô, nghi hàng giả').label,'identity');assert.equal(classifyText('rau bị mốc và có mùi hôi lạ').label,'spoilage')});
+test('OCR phát hiện mã đúng, sai và không thấy mã',()=>{assert.equal(ocrEvidence('NSX 01/10/2026 LOT L003', 'L003').lotMatch,true);assert.equal(ocrEvidence('L004','L003').lotMatch,false);assert.equal(ocrEvidence('Cà rốt hữu cơ','L003').lotMatch,null)});
+test('Cosine similarity đúng về mặt đại số',()=>{assert(Math.abs(visualSimilarity([1,0,0],[1,0,0])-1)<1e-9);assert.equal(visualSimilarity([1,0],[0,1]),0)});
+test('Risk fusion chỉ là chỉ số hỗ trợ, không tự chứng nhận',()=>{const r=fuseEvidence({coldchain:analyzeColdChain(abnormal,8)});assert.equal(r.level,'review-required');assert.match(r.decision,/người kiểm định/)});

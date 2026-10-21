@@ -12,12 +12,18 @@ function output(res,status,obj,extra={}){const body=JSON.stringify(obj);res.writ
 function getBody(req){return new Promise((ok,no)=>{let x='',size=0;req.on('data',chunk=>{size+=chunk.length;if(size>65536){no(Object.assign(new Error('Payload quá lớn'),{status:413}));req.destroy()}else x+=chunk});req.on('end',()=>{try{ok(x?JSON.parse(x):{})}catch{no(Object.assign(new Error('JSON không hợp lệ'),{status:400}))}});req.on('error',no)})}
 export async function handler(req,res){const url=new URL(req.url,'http://localhost'),path=url.pathname;const origin=req.headers.origin||'';if(origin&&ALLOWED.includes(origin)){res.setHeader('Access-Control-Allow-Origin',origin);res.setHeader('Vary','Origin');res.setHeader('Access-Control-Allow-Headers','Content-Type, Authorization');res.setHeader('Access-Control-Allow-Methods','GET,POST,OPTIONS');}
  if(req.method==='OPTIONS'){res.writeHead(origin&&ALLOWED.includes(origin)?204:403);return res.end()}
- if(path==='/'||path==='/index.html'||['/app.js','/style.css','/qr-lib.js','/keccak.js'].includes(path)){const fname=path==='/'?'index.html':path.slice(1);const mime=fname.endsWith('.html')?'text/html; charset=utf-8':fname.endsWith('.css')?'text/css; charset=utf-8':'text/javascript; charset=utf-8';res.writeHead(200,{'Content-Type':mime});return res.end(await readFile(join(here,'..','web',fname)))}
+ if(path==='/'||path==='/index.html'||['/app.js','/style.css','/qr-lib.js','/keccak.js','/ai-engine.js'].includes(path)){const fname=path==='/'?'index.html':path.slice(1);const mime=fname.endsWith('.html')?'text/html; charset=utf-8':fname.endsWith('.css')?'text/css; charset=utf-8':'text/javascript; charset=utf-8';res.writeHead(200,{'Content-Type':mime});return res.end(await readFile(join(here,'..','web',fname)))}
  if(!path.startsWith('/api/'))return output(res,404,{error:'Không tồn tại đường dẫn.'});
  try{const token=(req.headers.authorization||'').replace(/^Bearer /i,'');const user=svc.getUser(token);const data=req.method==='POST'?await getBody(req):{};
  if(req.method==='GET'&&path==='/api/health')return output(res,200,{ok:true,version:'4.0.0',mode:'local-fullstack'});
  if(req.method==='POST'&&path==='/api/auth/login'){const key=req.socket.remoteAddress||'local';const prev=loginAttempts.get(key)||{n:0,time:Date.now()};if(Date.now()-prev.time>60_000){prev.n=0;prev.time=Date.now()}if(prev.n>=12)return output(res,429,{error:'Thử lại sau ít phút.'});try{const result=svc.login(data.email,data.password);loginAttempts.delete(key);return output(res,200,result)}catch(e){prev.n++;loginAttempts.set(key,prev);throw e}}
  if(req.method==='GET'&&path==='/api/me')return output(res,user?200:401,user||{error:'Chưa đăng nhập'});
+ if(req.method==='GET'&&path==='/api/ai-reports')return output(res,user?200:401,user?svc.listAI(user,url.searchParams.get('lotId')||''):{error:'Cần đăng nhập để xem báo cáo AI'});
+ if(req.method==='POST'&&path==='/api/ai-reports')return output(res,201,svc.saveAI(user,data));
+ if(req.method==='POST'&&/^\/api\/ai-reports\/\d+\/review$/.test(path))return output(res,200,svc.reviewAI(user,Number(path.split('/')[3]),data.note));
+ if(req.method==='GET'&&path==='/api/ai-reports')return output(res,user?200:401,user?svc.listAI(user,url.searchParams.get('lotId')||''):{error:'Cần đăng nhập để xem báo cáo AI'});
+ if(req.method==='POST'&&path==='/api/ai-reports')return output(res,201,svc.saveAI(user,data));
+ if(req.method==='POST'&&/^\/api\/ai-reports\/\d+\/review$/.test(path))return output(res,200,svc.reviewAI(user,Number(path.split('/')[3]),data.note));
  if(req.method==='GET'&&path==='/api/lots')return output(res,200,svc.listLots());
  if(req.method==='POST'&&path==='/api/lots')return output(res,201,svc.createLot(user,data));
  if(req.method==='POST'&&/^\/api\/lots\/[^/]+\/handoff$/.test(path))return output(res,200,svc.handoff(user,decodeURIComponent(path.split('/')[3])));
