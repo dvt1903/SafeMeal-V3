@@ -13,3 +13,12 @@ test('Wallet EIP-1193 integration requests accounts and signature (mock provider
  await vm.runInContext('connectWallet()',ctx);vm.runInContext('page="wallet";render()',ctx);assert.match(el.innerHTML,/Đã kết nối địa chỉ ví/);
  await vm.runInContext('signWallet()',ctx);assert(calls.includes('eth_requestAccounts')&&calls.includes('personal_sign'));
 });
+
+test('Inspection wizard offers correct role switch and enables stage 2 for L003',async()=>{
+ vm.runInContext('page="pipeline";currentLot="L003";role="retailer";render()',ctx);
+ assert.match(el.innerHTML,/Bước cần thực hiện: 2\/3/);
+ assert.match(el.innerHTML,/data-act="setrole" data-id="factory"/);
+ await vm.runInContext('act({dataset:{act:"setrole",id:"factory"}})',ctx);
+ assert.match(el.innerHTML,/data-act="inspect" data-id="L003"/);
+ assert.doesNotMatch(el.innerHTML,/data-act="inspect" data-id="L003"[^>]*disabled/);
+});
