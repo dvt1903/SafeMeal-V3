@@ -1,0 +1,1 @@
+{"name":"safemeal-v4-express","version":"4.0.0","type":"module","private":true,"engines":{"node":">=22.13"},"scripts":{"start":"node index.mjs"},"dependencies":{"express":"^5.1.0"}}
