@@ -33,3 +33,35 @@ test('AI Studio renders four analyzers and can produce a cold-chain assessment',
  await vm.runInContext('aiDoAction("aicold","")',ctx);
  assert.match(el.innerHTML,/mẫu vượt ngưỡng/);
 });
+
+
+test('Guided lecturer demo completes 3 inspections and issues one verified SMKD',async()=>{
+ ctx.FormData=class {constructor(f){return new Map(Object.entries(f.data))}};
+ ctx.confirm=()=>true;
+ await vm.runInContext('act({dataset:{act:"demoStart",id:""}})',ctx);
+ assert.equal(vm.runInContext('currentLot',ctx),'L004');
+ assert.match(el.innerHTML,/Bước cần thực hiện: 1\/3/);
+ const form=data=>({data});
+ await vm.runInContext('doInspect(form)',Object.assign(ctx,{form:form({lot:'L004',step:'1',status:'pass',location:'Vùng trồng demo',notes:'Phiếu 01'})}));
+ await vm.runInContext('act({dataset:{act:"setrole",id:"factory"}})',ctx);
+ await vm.runInContext('doInspect(form)',Object.assign(ctx,{form:form({lot:'L004',step:'2',status:'pass',location:'Nhà máy demo',notes:'Phiếu 02',expiry:'2027-12-31'})}));
+ await vm.runInContext('act({dataset:{act:"setrole",id:"retailer"}})',ctx);
+ await vm.runInContext('doHandoff("L004")',ctx);
+ await vm.runInContext('aiDoAction("aiquick","")',ctx);
+ await vm.runInContext('aiDoAction("aisave","")',ctx);
+ await vm.runInContext('doInspect(form)',Object.assign(ctx,{form:form({lot:'L004',step:'3',status:'pass',location:'Điểm bán demo',notes:'Phiếu 03',seal:'intact',temperature:'4'})}));
+ const code=vm.runInContext('state.lots.find(l=>l.id==="L004").certificate.code',ctx);
+ const check=await vm.runInContext('verifyOffline('+JSON.stringify(code)+')',ctx);
+ assert.match(code,/^SMKD-L004-/);
+ assert.equal(check.status,'valid');
+});
+
+test('Changing AI input clears old analysis instead of reusing it',()=>{
+ vm.runInContext('page="ai";aiLotId="L004";aiSeries=AI_SAMPLES.alert;aiOutputs.cold=analyzeColdChain(aiSeries,6);aiNarrative="ghi chú cũ";aiOutputs.nlp=classifyText(aiNarrative);render()',ctx);
+ const old=ctx.document.querySelector;
+ ctx.document.querySelector=q=>({'#aiSeries':{value:'08:00,4\n08:30,4\n09:00,4\n09:30,4'},'#aiNarrative':{value:'Thông tin đã chỉnh sửa'}})[q]||old(q);
+ vm.runInContext('aiSetText()',ctx);
+ ctx.document.querySelector=old;
+ assert.equal(vm.runInContext('aiOutputs.cold',ctx),null);
+ assert.equal(vm.runInContext('aiOutputs.nlp',ctx),null);
+});
