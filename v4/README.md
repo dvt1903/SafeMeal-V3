@@ -85,3 +85,7 @@ Hệ thống hỗ trợ ra quyết định ở màn hình **🧠 Phòng lab AI**
 **Kiểm thử:** `node --test tests/*.test.mjs` (28 bài kiểm tra logic/định tuyến giả lập, không phải chứng nhận độ chính xác MobileNet/OCR). Xem hướng dẫn trong `docs/KICH_BAN_AI_KIEM_DINH.md`.
 
 **Giới hạn nghiên cứu:** Chưa có dữ liệu thực phẩm thực địa đủ nhãn để đo precision/recall; ImageNet MobileNet không phải model nhận dạng độc tố, vi khuẩn hoặc nấm mốc chuyên biệt; OCR có lỗi đọc chữ; triển khai công khai GitHub Pages vẫn là demo tĩnh, không có máy chủ dùng chung.
+
+
+## V4.5 — Demo thao tác nhanh
+Chọn **Bắt đầu demo 4 bước** để kiểm định L004. Sau bước 2 và nhận hàng, vào phòng lab AI → **Chạy demo AI nhanh** → **Lưu hồ sơ AI** rồi hoàn thành bước 3. Có nút tải CSV nhiệt độ và cảnh báo khi thay đổi dữ liệu. Backend từ chối cấp mã cho lô quá hạn; demo công khai chỉ lưu dữ liệu từng trình duyệt.
