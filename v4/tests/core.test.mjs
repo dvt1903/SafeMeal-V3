@@ -11,7 +11,7 @@ test('Chưa bàn giao không được kiểm định điểm bán',()=>{const {s
 test('Niêm phong hỏng chặn phiếu đạt',()=>{const {s,users:u}=make();s.inspect(u.farm,'L003',1,valid);s.inspect(u.factory,'L003',2,valid);s.handoff(u.store,'L003');s.saveAI(u.store,{lotId:'L003',stage:3,series:safeSeries});assert.throws(()=>s.inspect(u.store,'L003',3,{...valid,seal:'broken'}),/niêm phong/)});
 test('Đủ 3 bước phát 1 mã, cấm trùng',()=>{const {s,users:u}=make();const lot=finish(s,u);assert.match(lot.certificate.code,/^SMKD-L003-[A-F0-9]{12}$/);assert.throws(()=>s.issueCertificate('L003',u.store),/chỉ được cấp/);assert.equal(s.verify(lot.certificate.code).status,'valid')});
 test('Chỉnh sửa phiếu bị phát hiện khi đối chiếu root',()=>{const {s,users:u,db}=make();const lot=finish(s,u);db.prepare("UPDATE inspections SET digest='fakedigest' WHERE lot_id='L003' AND step=2").run();assert.equal(s.verify(lot.certificate.code).status,'tampered')});
-test('Không cấp mã mới cho lô đã hết hạn',()=>{const {s,users:u}=make();s.inspect(u.farm,'L003',1,valid);s.inspect(u.factory,'L003',2,{...valid,expiry:'2020-01-01'});s.handoff(u.store,'L003');s.saveAI(u.store,{lotId:'L003',stage:3,series:safeSeries});assert.throws(()=>s.inspect(u.store,'L003',3,valid),/hết hạn/);assert.equal(s.lotDetail('L003').certificate,null)});
+test('Không cấp chứng nhận mới cho lô đã hết hạn sử dụng',()=>{const {s,users:u}=make();s.inspect(u.farm,'L003',1,valid);s.inspect(u.factory,'L003',2,{...valid,expiry:'2020-01-01'});s.handoff(u.store,'L003');s.saveAI(u.store,{lotId:'L003',stage:3,series:safeSeries});assert.throws(()=>s.inspect(u.store,'L003',3,valid),/hết hạn/);assert.equal(s.lotDetail('L003').certificate,null)});
 test('Phản ánh nhận ra lô và các mẻ liên quan',()=>{const {s,users:u}=make();const lot=finish(s,u,'L001');const c=s.complain({code:lot.certificate.code,body:'Sản phẩm có mùi lạ khi mở',seal:'intact',printedLot:'L001'});assert.equal(c.classification,'matched');assert.equal(c.relatedMeals.length,2)});
 test('Mã ngoài hệ thống không bị kết luận hàng giả',()=>{const {s}=make();const c=s.complain({code:'SMKD-NO-UNKNOWN',body:'Tem không rõ từ đâu tới',seal:'unknown'});assert.equal(c.classification,'unregistered')});
 test('Tạm giữ khiến mã không còn được phép lưu hành',()=>{const {s,users:u}=make();const lot=finish(s,u);s.hold(u.inspector,'L003','Phản ánh lô có vấn đề');assert.equal(s.verify(lot.certificate.code).status,'held')});
@@ -20,3 +20,22 @@ test('Chuỗi audit còn nguyên vẹn',()=>{const {s,users:u}=make();finish(s,u
 test('Bước 3 phải có hồ sơ AI trước khi được Đạt',()=>{const {s,users:u}=make();s.inspect(u.farm,'L003',1,valid);s.inspect(u.factory,'L003',2,valid);s.handoff(u.store,'L003');assert.throws(()=>s.inspect(u.store,'L003',3,valid),/hồ sơ AI/)});
 test('Rủi ro chuỗi lạnh cao phải được kiểm định viên xem xét',()=>{const {s,users:u}=make();s.inspect(u.farm,'L003',1,valid);s.inspect(u.factory,'L003',2,valid);s.handoff(u.store,'L003');const report=s.saveAI(u.store,{lotId:'L003',stage:3,series:'08:00,4\n08:30,4.5\n09:00,11.5\n09:30,12\n10:00,10.5\n10:30,4'});assert.equal(report.summary.level,'review-required');assert.throws(()=>s.inspect(u.store,'L003',3,valid),/rủi ro cao/);assert.throws(()=>s.reviewAI(u.store,report.id,'Đã kiểm tra mẫu thực tế, có biên bản'),/quyền/);s.reviewAI(u.inspector,report.id,'Đã kiểm tra lại mẫu thực tế, cảm biến sai vị trí và xác nhận đo tại quầy 4 độ.');const result=s.inspect(u.store,'L003',3,valid);assert(result.certificate.code.startsWith('SMKD-L003-'))});
 test('API không chấp nhận điểm rủi ro giả từ client',()=>{const {s,users:u}=make();s.inspect(u.farm,'L003',1,valid);s.inspect(u.factory,'L003',2,valid);s.handoff(u.store,'L003');const r=s.saveAI(u.store,{lotId:'L003',stage:3,series:'08:00,4\n08:30,4.5\n09:00,11.5\n09:30,12\n10:00,10.5\n10:30,4',riskScore:0,level:'low'});assert.equal(r.summary.level,'review-required')});
+
+test('AI không được đính sẵn vào bước 3 trước khi điểm bán nhận hàng',()=>{
+ const {s,users:u}=make();s.inspect(u.farm,'L003',1,valid);s.inspect(u.factory,'L003',2,valid);
+ assert.throws(()=>s.saveAI(u.store,{lotId:'L003',stage:3,series:safeSeries,sourceKind:'demo'}),/nhận hàng/);
+});
+
+test('Dấu nguồn dữ liệu cảm biến được ghi nhưng không nhận là thiết bị đã chứng thực',()=>{
+ const {s,users:u}=make();s.inspect(u.farm,'L003',1,valid);s.inspect(u.factory,'L003',2,valid);s.handoff(u.store,'L003');
+ const x=s.saveAI(u.store,{lotId:'L003',stage:3,series:safeSeries,sourceKind:'csv',sourceNote:'cambien_03.csv'});
+ assert.equal(x.source.kind,'csv');assert.equal(x.source.note,'cambien_03.csv');
+ assert.equal(x.source.verifiedByIndependentSensor,false);
+ assert.match(x.source.seriesSHA256,/^[a-f0-9]{64}$/);
+ assert.throws(()=>s.saveAI(u.store,{lotId:'L003',stage:3,series:safeSeries,sourceKind:'live-iot'}),/Nguồn dữ liệu/);
+});
+
+test('AI báo cáo đã hoàn tất một bước không được đăng ký hồi tố',()=>{
+ const {s,users:u}=make();s.inspect(u.farm,'L003',1,valid);
+ assert.throws(()=>s.saveAI(u.farm,{lotId:'L003',stage:1,series:safeSeries}),/bước kiểm định tiếp theo/);
+});

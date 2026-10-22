@@ -1,4 +1,4 @@
-# SafeMeal V4 — Truy xuất & kiểm định thực phẩm + kết nối ví MetaMask
+# SafeMeal V4.5 — Truy xuất & kiểm định thực phẩm + kết nối ví MetaMask
 
 **Bài tập sinh viên:** Đoàn Văn Tâm · Nâng cấp từ SafeMeal V3. Ứng dụng gồm **frontend public demo** (chạy trên GitHub Pages), **Node.js REST API + SQLite có đăng nhập thật trong môi trường cục bộ**, **WebCrypto AES-256-GCM**, **EIP-1193 MetaMask** và **hợp đồng Solidity tùy chọn trên Sepolia**.
 
@@ -69,23 +69,24 @@ Xem `contracts/README.md`. **Không gửi seed phrase/khóa riêng vào website.
 Giữ nguyên `index.html` V3 của repository; V4 triển khai tại `/v4/` để không làm gián đoạn đường link đã nộp.
 
 
-## SafeMeal V4.2 — AI Inspection Studio (21/10/2026)
+## V4.5 — Chế độ demo dễ thao tác cho giảng viên (22/10/2026)
 
-Hệ thống hỗ trợ ra quyết định ở màn hình **🧠 Phòng lab AI**:
-- **Cảm biến chuỗi lạnh:** MAD robust, phát hiện vượt ngưỡng liên tiếp, trực quan dữ liệu nhập dưới dạng time,temp (CSV).
-- **NLP:** Multinomial Naive Bayes với 35 câu huấn luyện minh họa, phân loại nội dung phản ánh ra 5 nhóm để ưu tiên xử lý.
-- **Computer Vision:** MobileNet v2 pretrained với TensorFlow.js, trả dự đoán ImageNet và tạo vector đặc trưng để so sánh hai ảnh sản phẩm (cosine similarity).
-- **OCR:** Tesseract.js nhận diện văn bản trên nhãn, đối chiếu mã lô, tìm ngày tháng. Hai mô hình thị giác và OCR tải khi có Internet từ CDN; ảnh không chủ động upload lên SafeMeal backend.
-- **AI Risk Fusion:** Kết hợp nhiều nguồn chứng cứ, hiển thị điểm rủi ro heuristic và cảnh báo. **Không phải xác suất thực phẩm an toàn, không thay thế xét nghiệm hay quyết định của người kiểm định**.
+- Nhấn **Bắt đầu demo 4 bước** ở trang Tổng quan; ứng dụng chọn lô L004 chưa kiểm định, tự đưa về vai trò vùng trồng trên bản mô phỏng.
+- Hoàn thành kiểm định vùng trồng → xưởng chế biến → điểm bán xác nhận nhận hàng.
+- Bản V4.5 nhắc rõ báo cáo AI tại bước 3. Chọn **Mở phòng lab AI** → **Chạy demo AI nhanh** → **Lưu hồ sơ AI + SHA-256**, sau đó quay về phiếu bước 3 và ghi kết quả thực tế.
+- Tải CSV cảm biến (`time,temp`) trực tiếp từ máy; thay đổi nguồn CSV hoặc văn bản sẽ tự xóa kết quả cũ để tránh nhầm dữ liệu. Có thể **Tải hồ sơ JSON** đã phân tích.
+- Xem **Hộ chiếu & QR**, thử nhập mã, sau đó thực hiện phản ánh mẫu. Mã QR trên bản GitHub Pages chỉ tra được dữ liệu đã có trong chính trình duyệt (dữ liệu mới không tự đồng bộ).
+- Backend cũng từ chối bước 3 Đạt nếu sản phẩm đã hết hạn sử dụng, không chỉ dựa vào hash/AI. Lỗi nhập dữ liệu và tải model có thông báo riêng; nút AI lâu tạm khóa để tránh bấm trùng.
+- **Đã chạy kiểm thử `node --test tests/*.test.mjs`**; trình duyệt tự động trong môi trường tạo mã bị hạn chế khi mở URL localhost/file nên chưa thể xác minh bằng Playwright toàn bộ tương tác trên trình duyệt thực. Bạn nên kiểm thử trên Chrome/Edge trước buổi nộp.
 
-**Quy tắc mới:** Ở bước 3 tại điểm bán, để ghi "Đạt" cần một báo cáo AI chuỗi lạnh. Nếu kết quả có cảnh báo cao, chỉ vai trò Ban kiểm định có thể ghi nhận kết quả rà soát và giải trình để tiếp tục. Server lưu phiếu AI vào SQLite, tính lại chỉ số và ghi SHA-256; không tin chỉ số rủi ro do browser tự nhập.
+Bản web công khai chỉ là **demo hỗ trợ quyết định với dữ liệu tự khai hoặc giả lập**, chưa xác minh ảnh gốc qua backend và không được dùng làm hệ thống kiểm định pháp lý, chứng nhận an toàn thực phẩm, hay hệ thống nhiều tổ chức vận hành thật. Chức năng MobileNet / Tesseract yêu cầu Internet và tải thư viện bên ngoài khi được kích hoạt.
 
-**API bổ sung:** `GET /api/ai-reports`, `POST /api/ai-reports`, `POST /api/ai-reports/:id/review`.
+## SafeMeal V4.6 — ổn định luồng dữ liệu và kiểm thử tích hợp (22/10/2026)
 
-**Kiểm thử:** `node --test tests/*.test.mjs` (28 bài kiểm tra logic/định tuyến giả lập, không phải chứng nhận độ chính xác MobileNet/OCR). Xem hướng dẫn trong `docs/KICH_BAN_AI_KIEM_DINH.md`.
-
-**Giới hạn nghiên cứu:** Chưa có dữ liệu thực phẩm thực địa đủ nhãn để đo precision/recall; ImageNet MobileNet không phải model nhận dạng độc tố, vi khuẩn hoặc nấm mốc chuyên biệt; OCR có lỗi đọc chữ; triển khai công khai GitHub Pages vẫn là demo tĩnh, không có máy chủ dùng chung.
-
-
-## V4.5 — Demo thao tác nhanh
-Chọn **Bắt đầu demo 4 bước** để kiểm định L004. Sau bước 2 và nhận hàng, vào phòng lab AI → **Chạy demo AI nhanh** → **Lưu hồ sơ AI** rồi hoàn thành bước 3. Có nút tải CSV nhiệt độ và cảnh báo khi thay đổi dữ liệu. Backend từ chối cấp mã cho lô quá hạn; demo công khai chỉ lưu dữ liệu từng trình duyệt.
+- **34 bài test** (`npm test`) kiểm tra cả HTTP API thật (4 vai trò → lưu AI → cấp mã → phản ánh → tạm giữ) và quy tắc bảo vệ nghiệp vụ.
+- Đã sửa Express adapter thiếu API báo cáo AI và loại bỏ tuyến AI bị khai báo trùng trong Node HTTP server.
+- Báo cáo AI mới ghi loại nguồn `demo` / `csv` / `manual`, mô tả nguồn, SHA-256 của chuỗi nhiệt độ. Không tự nhận dữ liệu đầu vào đã có chữ ký cảm biến độc lập.
+- Backend không cho lập báo cáo bước 3 trước khi xác nhận nhận hàng; không cho đăng ký báo cáo hồi tố vào một bước đã hoàn thành. Bước 3 dùng báo cáo lập sau bàn giao.
+- Trang AI nhắc rõ nguồn mẫu/CSV/nhập tay và nhắc kiểm tra lại khi sửa dữ liệu đầu vào.
+- Các hướng dẫn: `docs/NGUON_DU_LIEU_V46.md`, `docs/HUONG_DAN_DEMO_V46.md`, `docs/TRANG_THAI_NOP_BAI_V46.md`.
+- **Giới hạn còn lại:** bản React/Express chưa build kiểm chứng do npm registry không truy cập được trong môi trường tạo; bản public vẫn chạy tĩnh, không có backend Internet dùng chung. Xem bảng kiểm trước khi nộp.

@@ -21,9 +21,6 @@ export async function handler(req,res){const url=new URL(req.url,'http://localho
  if(req.method==='GET'&&path==='/api/ai-reports')return output(res,user?200:401,user?svc.listAI(user,url.searchParams.get('lotId')||''):{error:'Cần đăng nhập để xem báo cáo AI'});
  if(req.method==='POST'&&path==='/api/ai-reports')return output(res,201,svc.saveAI(user,data));
  if(req.method==='POST'&&/^\/api\/ai-reports\/\d+\/review$/.test(path))return output(res,200,svc.reviewAI(user,Number(path.split('/')[3]),data.note));
- if(req.method==='GET'&&path==='/api/ai-reports')return output(res,user?200:401,user?svc.listAI(user,url.searchParams.get('lotId')||''):{error:'Cần đăng nhập để xem báo cáo AI'});
- if(req.method==='POST'&&path==='/api/ai-reports')return output(res,201,svc.saveAI(user,data));
- if(req.method==='POST'&&/^\/api\/ai-reports\/\d+\/review$/.test(path))return output(res,200,svc.reviewAI(user,Number(path.split('/')[3]),data.note));
  if(req.method==='GET'&&path==='/api/lots')return output(res,200,svc.listLots());
  if(req.method==='POST'&&path==='/api/lots')return output(res,201,svc.createLot(user,data));
  if(req.method==='POST'&&/^\/api\/lots\/[^/]+\/handoff$/.test(path))return output(res,200,svc.handoff(user,decodeURIComponent(path.split('/')[3])));
