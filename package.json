@@ -1,0 +1,14 @@
+{
+  "name": "safemeal-final-advanced-web",
+  "version": "4.6.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "dev": "node v4/scripts/start.mjs",
+    "start": "node v4/scripts/start.mjs",
+    "test": "node --test v4/tests/*.test.mjs"
+  }
+}

@@ -1,0 +1,22 @@
+name: Create final submission tag
+on:
+  push:
+    branches: [main]
+    paths: ['README.md', 'package.json', '.env.example', 'docs/NOP_BAI_HUONG_DAN.md']
+permissions:
+  contents: write
+jobs:
+  mark-final:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Tag this submission commit as final (only if tag does not exist)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SHA: ${{ github.sha }}
+          REPO: ${{ github.repository }}
+        run: |
+          if gh api "repos/$REPO/git/ref/tags/final" >/dev/null 2>&1; then
+            echo "Tag final exists; preserving previous tag."
+          else
+            gh api -X POST "repos/$REPO/git/refs" -f ref="refs/tags/final" -f sha="$SHA"
+          fi
