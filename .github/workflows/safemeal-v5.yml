@@ -16,4 +16,5 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22.16.0'
+      - run: node --check v5/js/app.mjs && node --check v5/js/engine.mjs
       - run: node --test v5/tests/*.test.mjs
