@@ -85,3 +85,10 @@ Các bài test kiểm soát thứ tự bước, phân quyền, khắc phục khi
 - Chỉ báo lưu thành công nếu đọc lại được hồ sơ trong localStorage; nếu thất bại thì không báo đã lưu.
 - Khi tải lại trang, lô được lấy từ bộ nhớ cục bộ; các tab cùng origin đồng bộ khi thay đổi. Không hỗ trợ đồng bộ tự động giữa các thiết bị.
 - Có bài kiểm tra tạo lô L987, hoàn thành 3 bước/AI/QR và kiểm tra lại danh sách sau khi tạo.
+
+## V5.4 — AI liên thông điểm bán
+
+- Màn hình bước 3 có nút **Tiếp tục** dẫn đúng theo quy trình: xác nhận nhận hàng (yêu cầu người dùng đồng ý) → tạo báo cáo AI sau bàn giao → Ban kiểm định xem xét nếu cảnh báo cao → mở phiếu kiểm định tại điểm bán.
+- Khi lưu báo cáo AI mức thấp, tự trở về Kiểm định và mở phiếu bước 3, không cần chọn thủ công vai trò. Quy trình vẫn bắt buộc nhập nhiệt độ, tình trạng niêm phong và ghi chú thực tế trước khi cấp mã QR.
+- Nếu AI đã lưu trước bàn giao thì phải lập báo cáo mới sau bàn giao; không hợp thức hóa báo cáo cũ.
+- Vai trò chỉ được đổi tự động trong giao diện mô phỏng của bản GitHub Pages, **không phải phân quyền backend thực**.

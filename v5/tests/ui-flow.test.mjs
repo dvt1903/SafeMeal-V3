@@ -59,7 +59,7 @@ test('freshly created unseeded L987 appears in all screens and completes full wo
  await run('onAction')('ai-save');
  assert.equal(run('getLot().aiReports.length'),1);
  await run('onAction')('goto','workflow');
- assert.match(element('#app').innerHTML,/Ghi phiếu kiểm định bước 3/);
+ assert.match(element('#app').innerHTML,/TIẾP TỤC KIỂM ĐỊNH BƯỚC 3/);
  await run('handleForm')(form('inspect-form',{step:'3',result:'pass',location:'Quầy thực phẩm Đức Trọng',notes:'Niêm phong nguyên và đo thực tế đạt',temperature:'1.3',seal:'intact'}));
  assert.equal(run('getLot().certificate.code').startsWith('SMKD-L987-'),true);
  await run('onAction')('lot-to-passport','L987');
@@ -81,14 +81,83 @@ test('freshly created unseeded L987 appears in all screens and completes full wo
 
 test('submit handler handles HTML form named id without native GET navigation',async()=>{
  await loadUI();
+ // Regression: HTMLFormElement.id is shadowed when a child input has name="id".
  const fakeForm={id:{tagName:'INPUT',name:'id'},getAttribute:name=>name==='id'?'new-lot-form':null,
   fields:{lotCode:'L998',name:'Sữa tươi thanh trùng',origin:'Hà Nội',qty:'40',unit:'lít',threshold:'6'}};
  let nativePrevented=false;
  assert.equal(typeof listeners.get('submit'),'function');
  listeners.get('submit')({target:fakeForm,preventDefault(){nativePrevented=true}});
  assert.equal(nativePrevented,true,'MUST prevent native form GET navigation');
- await new Promise(resolve=>setTimeout(resolve,75));
+ await new Promise(resolve=>setTimeout(resolve,70));
  assert.equal(JSON.parse(local.get('safemeal_v5_individual_demo')).lots[0].id,'L998');
  assert.equal(run('getLot().id'),'L998');
  assert.match(element('#app').innerHTML,/L998/);
+});
+
+
+test('L004 inspector with already saved low-risk AI continues directly into the step-3 form',async()=>{
+ await loadUI();
+ run('activeLot="L004";role="farm";page="workflow";render()');
+ const send=run('handleForm');
+ await send(form('inspect-form',{step:'1',result:'pass',location:'Nông trại Củ Chi',notes:'Nguồn sữa đã kiểm tra'}));
+ await run('onAction')('set-role','factory');
+ await send(form('inspect-form',{step:'2',result:'pass',location:'Nhà máy sữa Củ Chi',notes:'Đóng gói và tiệt trùng đạt',expiry:'2028-12-31'}));
+ await run('onAction')('set-role','retailer');
+ await run('onAction')('handoff');
+ run('aiCSV=aiSeriesFor(getLot(),"normal");aiResult=analyzeTemperature(aiCSV,getLot().threshold)');
+ await run('onAction')('ai-save');
+ assert.equal(run('getLot().aiReports.length'),1);
+ assert.equal(run('role'),'retailer');
+ assert.equal(run('page'),'workflow');
+ assert.match(element('#overlay').innerHTML,/Ghi phiếu kiểm định — Bước 3/);
+ await run('onAction')('close');
+ await run('onAction')('set-role','inspector');
+ assert.match(element('#app').innerHTML,/TIẾP TỤC KIỂM ĐỊNH BƯỚC 3/);
+ await run('onAction')('stage3-next');
+ assert.equal(run('role'),'retailer');
+ assert.match(element('#overlay').innerHTML,/Ghi phiếu kiểm định — Bước 3/);
+ await send(form('inspect-form',{step:'3',result:'pass',location:'Điểm bán',notes:'Phiếu cảm biến và niêm phong đạt',temperature:'4.1',seal:'intact'}));
+ assert.match(run('getLot().certificate.code'),/^SMKD-L004-/);
+});
+
+test('Stage 3 refuses stale AI made before handoff and explains next action',async()=>{
+ await loadUI();
+ run('activeLot="L004";page="workflow";role="farm";render()');
+ const send=run('handleForm');
+ await send(form('inspect-form',{step:'1',result:'pass',location:'Nông trại Củ Chi',notes:'Đạt kiểm soát đầu nguồn'}));
+ await run('onAction')('set-role','factory');
+ await send(form('inspect-form',{step:'2',result:'pass',location:'Xưởng chế biến',notes:'Hồ sơ đóng gói hợp lệ',expiry:'2028-12-31'}));
+ run('getLot().aiReports.push({id:"AI-OLD",stage:3,created:"2020-01-01T00:00:00.000Z",risk:{level:"low",score:8}})');
+ assert.equal(run('stage3AIReport(getLot())'),null);
+ await run('onAction')('stage3-next');
+ assert.equal(run('getLot().handoff!==null'),true);
+ assert.equal(run('page'),'ai');
+ await run('onAction')('stage3-next');
+ assert.equal(run('page'),'ai');
+ assert.equal(run('getLot().certificate'),null);
+});
+
+
+test('High-risk AI requires inspector review before POS step 3; then resumes',async()=>{
+ await loadUI();
+ run('activeLot="L004";page="workflow";role="farm";render()');
+ const send=run('handleForm');
+ await send(form('inspect-form',{step:'1',result:'pass',location:'Nông trại Củ Chi',notes:'Kiểm định nguồn sữa'}));
+ await run('onAction')('set-role','factory');
+ await send(form('inspect-form',{step:'2',result:'pass',location:'Nhà máy sữa',notes:'Đóng gói đạt',expiry:'2028-12-31'}));
+ await run('onAction')('set-role','retailer');
+ await run('onAction')('handoff');
+ await run('onAction')('goto','ai');
+ run('aiCSV=aiSeriesFor(getLot(),"alert");aiResult=analyzeTemperature(aiCSV,getLot().threshold)');
+ await run('onAction')('ai-save');
+ assert.equal(run('getLot().aiReports.at(-1).risk.level'),'high');
+ assert.notEqual(run('page'),'workflow');
+ await run('onAction')('stage3-next');
+ assert.equal(run('role'),'inspector');
+ assert.equal(run('page'),'ai');
+ run('globalThis.prompt=()=>"Đã kiểm tra hồ sơ nhiệt độ, cân nhắc biện pháp khắc phục, và đối chiếu thực tế tại quầy."');
+ await run('onAction')('ai-review');
+ assert.equal(run('role'),'retailer');
+ assert.equal(run('page'),'workflow');
+ assert.match(element('#overlay').innerHTML,/Ghi phiếu kiểm định — Bước 3/);
 });
