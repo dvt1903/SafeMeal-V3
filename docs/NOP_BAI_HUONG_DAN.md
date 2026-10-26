@@ -1,9 +1,29 @@
-# Checklist nộp cuối kỳ - SafeMeal
-1. Repo + tag final: root README và package.json chạy một lệnh npm run dev, .env.example có sẵn, workflow sẽ tạo tag final sau commit.
-2. Link bản demo công khai: https://dvt1903.github.io/SafeMeal-V3/v4/ (JS tĩnh; không có đăng nhập và CSDL dùng chung).
-3. Báo cáo PDF: tải tệp Bao_cao_cuoi_ky_SafeMeal_NOP_BAI.pdf trong gói tài liệu gửi qua ChatGPT; 8 trang, có API, CSDL, code và giới hạn.
-4. Bảng phân công: Bang_phan_cong_SafeMeal_CAN_XAC_NHAN.pdf. Mới có thông tin Đoàn Văn Tâm; phải xác minh nhóm và ký thật trước khi nộp.
-5. Video dự phòng: SafeMeal_V46_Video_Demo_Du_Phong_3p40.mp4 (3m41s; dựng từ màn hình app và thuyết minh tổng hợp, nên xem lại trước khi nộp).
+# Hướng dẫn nộp bài — SafeMeal V5.4
 
-Cần bổ sung tải PDF, bảng phân công đã ký và MP4 lên hệ thống LMS hoặc nơi giảng viên yêu cầu; các file này không tự nằm trên GitHub chỉ vì repo đã có code.
-Web tĩnh không thay thế backend live; API Node + SQLite chạy bằng npm run dev. React/Express source có nhưng build/hosting full-stack chưa xác nhận. 
+**Đề tài:** SafeMeal — Kiểm định thực phẩm ba giai đoạn, phân tích dữ liệu hỗ trợ và hộ chiếu QR.
+
+**Sinh viên:** Đoàn Văn Tâm · **Giảng viên hướng dẫn:** TS. Võ Thái Anh
+
+## Các mục nộp
+
+1. **Mã nguồn GitHub:** https://github.com/dvt1903/SafeMeal-V3/tree/final
+   - Có README, .env.example, .gitignore và hướng dẫn chạy bằng `npm run dev`.
+2. **Website đã triển khai:** https://dvt1903.github.io/SafeMeal-V3/v5/
+   - Bản trình diễn trực tuyến sử dụng dữ liệu lưu tại trình duyệt; không cần tài khoản.
+3. **Báo cáo:** `01_BAO_CAO_SAFEMEAL_PHENIKAA.pdf`
+   - Trình bày bài toán, chức năng, kiến trúc thực tế, dữ liệu, AI, QR, phân tích mã nguồn, kiểm thử và giới hạn.
+4. **Bảng phân công:** `03_BANG_PHAN_CONG_CA_NHAN.pdf`
+   - Đề tài cá nhân, Đoàn Văn Tâm thực hiện 100%; nộp bản có xác nhận phù hợp yêu cầu giảng viên.
+5. **Video dự phòng:** `05_VIDEO_DEMO_SAFEMEAL_4P48.mp4`
+   - Trình diễn nghiệp vụ chính; kiểm tra thời lượng và âm thanh trước khi nộp.
+
+**Slide:** `02_SLIDE_SAFEMEAL_SINH_VIEN.pptx`; có thể nộp bổ sung cùng bản PDF của slide theo yêu cầu giảng viên.
+
+## Những điều cần kiểm tra
+
+- Mở link website trên trình duyệt, tạo một lô mới, hoàn thành ba bước và kiểm tra hộ chiếu QR.
+- Kiểm tra từng file PDF, PowerPoint và MP4 trước khi tải lên hệ thống nộp bài.
+- Bản GitHub Pages là ứng dụng frontend tĩnh; dữ liệu lô tự tạo chưa tự đồng bộ giữa các thiết bị. QR tự chứa thông tin từ thời điểm tạo, không chứng minh tình trạng thu hồi trực tuyến.
+- Các công cụ phân tích dữ liệu/AI hỗ trợ ra quyết định, không thay thế kết luận của đơn vị kiểm định thực phẩm.
+
+**Lưu ý:** Tài liệu và video được nộp riêng theo biểu mẫu của giảng viên; chỉ có liên kết repository chưa được coi là đã nộp đầy đủ tệp.
