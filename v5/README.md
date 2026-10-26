@@ -7,7 +7,7 @@
 
 ## 1. Cách chạy chỉ bằng một lệnh
 
-Cài Node.js **22.13+** rồi chạy từ thư mục `v5`:
+Cài Node.js **22.13+** rồi chạy từ thư mục gốc repository hoặc thư mục `v5`:
 
 ```sh
 npm run dev

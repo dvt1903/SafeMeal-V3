@@ -13,3 +13,25 @@ test('expired, held certificate cannot be presented as sellable',async()=>{const
 test('cold chain and data validation',()=>{const text='08:00,4.1\n08:30,4.2\n09:00,11.4\n09:30,12.0\n10:00,4.3';let a=analyzeTemperature(text,8);assert.equal(a.exceed,2);assert.equal(a.level,'high');assert.equal(a.longest,2);assert.throws(()=>parseSeries('08:00,hello\n08:10,4.2'),/Sai định dạng/);});
 test('NLP and OCR support investigation but do not automatically certify',()=>{const n=classifyComplaint('Tem mã QR không khớp mã lô trên bao bì');assert(n.confidence>0);const r=matchOCR('L009 CA ROT HUU CO','L003' in {}?{id:'L009'}:{id:'L003'});assert.equal(r.match,false);assert.deepEqual(r.found,['L009']);});
 test('AI evidence fusion escalates OCR identity mismatch',async()=>{const {fuseEvidence}=await import('../js/ai.mjs');const cold=analyzeTemperature('08:00,4.0\n08:30,4.1\n09:00,4.2\n09:30,4.3',8);assert.equal(fuseEvidence({cold}).level,'low');const flagged=fuseEvidence({cold,ocr:{match:false}});assert.equal(flagged.level,'high');assert(flagged.reasons.some(x=>x.includes('OCR')));});
+
+test('one-command local HTTP serves root and /v5 aliases',async()=>{
+ const {spawn}=await import('node:child_process');
+ const url=new URL('../server.mjs',import.meta.url);
+ const p=spawn(process.execPath,[url.pathname],{env:{...process.env,HOST:'127.0.0.1',PORT:'18247'},stdio:'ignore'});
+ try{
+  let ok=false;
+  for(let n=0;n<50;n++){try{const r=await fetch('http://127.0.0.1:18247/');ok=r.ok;break}catch{await new Promise(resolve=>setTimeout(resolve,90))}}
+  assert(ok,'Local server did not start');
+  for(const path of ['/v5/','/v5/index.html','/passport.html','/v5/passport.html','/v5/js/passport-view.mjs','/v5/assets/style.css']){
+   const r=await fetch('http://127.0.0.1:18247'+path);assert.equal(r.status,200,path);assert((await r.text()).length>100,path);
+  }
+  const missing=await fetch('http://127.0.0.1:18247/missing.html');assert.equal(missing.status,404);
+ }finally{p.kill('SIGTERM')}
+});
+test('portable QR self-contained snapshot retains identity and stages',async()=>{
+ const db=seed();await seedCertified(db);const l=db.lots[0];
+ const p=await createPassport(l),decoded=await decodePassport(p.token);
+ assert.equal(decoded.record.n,l.name);assert.equal(decoded.record.o,l.origin);
+ assert.equal(decoded.record.st.length,3);assert.equal(decoded.record.c,l.certificate.code);
+ assert(p.url.startsWith('https://dvt1903.github.io/SafeMeal-V3/v5/passport.html#p='));
+});

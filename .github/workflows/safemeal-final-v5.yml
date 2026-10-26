@@ -1,0 +1,25 @@
+name: Mark final tag for SafeMeal V5
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'v5/server.mjs'
+      - 'v5/tests/domain.test.mjs'
+      - '.github/workflows/safemeal-final-v5.yml'
+permissions:
+  contents: write
+jobs:
+  update-final:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Point final tag to tested V5 source
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SHA: ${{ github.sha }}
+          REPO: ${{ github.repository }}
+        run: |
+          if gh api "repos/$REPO/git/ref/tags/final" >/dev/null 2>&1; then
+            gh api -X PATCH "repos/$REPO/git/refs/tags/final" -f sha="$SHA" -F force=true
+          else
+            gh api -X POST "repos/$REPO/git/refs" -f ref="refs/tags/final" -f sha="$SHA"
+          fi
