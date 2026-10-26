@@ -64,6 +64,11 @@ npm test
 
 Các bài test kiểm soát thứ tự bước, phân quyền, khắc phục khi Không đạt, AI làm điều kiện bước 3, chống cấp trùng, QR tự chứa, hết hạn, tạm giữ, NLP, OCR và dữ liệu cảm biến.
 
+## Báo cáo học phần phiên bản V5
+
+- [Báo cáo cuối kỳ V5 — PDF 8 trang](docs/BaoCao_SafeMeal_V5.pdf), cập nhật đúng mã nguồn và các giới hạn kiểm thử.
+- Video V4 trước đây **không phải** bản quay liên tục của V5; trước ngày nộp cần quay video 3–5 phút theo [kịch bản bảo vệ](docs/HUONG_DAN_BAO_VE.md).
+
 ## 7. Tác giả và tính chất nghiên cứu
 
 **Đoàn Văn Tâm — bài làm cá nhân (100%).** Giảng viên hướng dẫn: **TS. Võ Thái Anh**. Đây là **nguyên mẫu nghiên cứu/học tập**, không phải chứng nhận an toàn thực phẩm thực tế. Công cụ AI được dùng để hỗ trợ thiết kế và phát triển phần mềm; mọi phần cần được sinh viên giải thích và kiểm chứng trước khi nộp.

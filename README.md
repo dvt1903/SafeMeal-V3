@@ -14,3 +14,5 @@ Cài Node.js 22.13 trở lên, tại gốc repository chạy `npm run dev`, rồ
 **Giới hạn:** frontend công khai là ứng dụng tĩnh dùng localStorage; QR tự chứa không phải xác minh độc lập bởi đơn vị kiểm định và không đồng bộ tình trạng thu hồi thời gian thực. Không gọi đây là hệ thống chứng nhận thực phẩm thật. React/Express/SQLite ở phiên bản cũ vẫn có trong `v4/` nhưng **chưa được triển khai làm backend công khai cho V5**.
 
 Bản V4 cũ: https://dvt1903.github.io/SafeMeal-V3/v4/ ; bản V3 trước khi nâng cấp nằm trong lịch sử Git/tag cũ.
+
+**Báo cáo học phần V5 (8 trang):** [Tải PDF trực tiếp từ GitHub](v5/docs/BaoCao_SafeMeal_V5.pdf). Bài demo này chưa là một hệ thống REST/SQL đa người dùng trên Internet.

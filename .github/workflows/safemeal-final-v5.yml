@@ -3,8 +3,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'v5/server.mjs'
-      - 'v5/tests/domain.test.mjs'
+      - 'v5/**'
       - '.github/workflows/safemeal-final-v5.yml'
 permissions:
   contents: write
