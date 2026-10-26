@@ -72,3 +72,6 @@ Các bài test kiểm soát thứ tự bước, phân quyền, khắc phục khi
 ## 7. Tác giả và tính chất nghiên cứu
 
 **Đoàn Văn Tâm — bài làm cá nhân (100%).** Giảng viên hướng dẫn: **TS. Võ Thái Anh**. Đây là **nguyên mẫu nghiên cứu/học tập**, không phải chứng nhận an toàn thực phẩm thực tế. Công cụ AI được dùng để hỗ trợ thiết kế và phát triển phần mềm; mọi phần cần được sinh viên giải thích và kiểm chứng trước khi nộp.
+
+## V5.1 — Không giới hạn ở 4 lô mẫu
+Lô mới tạo ở **Quản lý lô** đi xuyên suốt kiểm định, AI, QR, phản ánh, nhật ký. Xem `docs/HUONG_DAN_LO_MOI.md`. Dữ liệu mẫu tự điều chỉnh ngưỡng cho lô tùy ý, không gán ảnh cà rốt/sữa cho lô khác. Có sao lưu JSON, không phải đồng bộ đa máy tự động.

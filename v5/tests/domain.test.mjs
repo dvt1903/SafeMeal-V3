@@ -35,3 +35,6 @@ test('portable QR self-contained snapshot retains identity and stages',async()=>
  assert.equal(decoded.record.st.length,3);assert.equal(decoded.record.c,l.certificate.code);
  assert(p.url.startsWith('https://dvt1903.github.io/SafeMeal-V3/v5/passport.html#p='));
 });
+
+
+test('custom lot L987: create through domain, inspect, AI, QR',async()=>{const s=seed(),l=makeLot({id:'L987',name:'Rau cải thử nghiệm',origin:'Đức Trọng',qty:45,unit:'kg',threshold:3.5});s.lots.push(l);await inspect(l,{step:1,result:'pass',actor:'farm',location:'Nông trại Đức Trọng',notes:'Đã đối chiếu nhật ký thu hoạch'});await inspect(l,{step:2,result:'pass',actor:'factory',location:'Xưởng chế biến',notes:'Bao bì và hạn dùng đạt',expiry:'2028-12-31'});handoff(l,'retailer');l.aiReports.push({stage:3,created:new Date(Date.now()+500).toISOString(),risk:{level:'low',score:10}});await inspect(l,{step:3,result:'pass',actor:'retailer',location:'Quầy bán hàng',notes:'Niêm phong đạt yêu cầu',temperature:1.5,seal:'intact'});await issueCertificate(l);const p=await createPassport(l);const v=await decodePassport(p.token);assert.equal(v.record.id,'L987');assert.equal(v.record.st.length,3);assert.equal(s.lots.length,5);});
