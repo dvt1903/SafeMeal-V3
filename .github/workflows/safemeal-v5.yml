@@ -1,0 +1,19 @@
+name: SafeMeal V5 automated tests
+on:
+  push:
+    paths:
+      - 'v5/**'
+      - '.github/workflows/safemeal-v5.yml'
+  pull_request:
+    paths:
+      - 'v5/**'
+      - '.github/workflows/safemeal-v5.yml'
+jobs:
+  v5-domain:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.16.0'
+      - run: node --test v5/tests/*.test.mjs

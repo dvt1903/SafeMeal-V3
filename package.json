@@ -1,14 +1,14 @@
 {
-  "name": "safemeal-final-advanced-web",
-  "version": "4.6.0",
+  "name": "safemeal-advanced-capstone",
   "private": true,
+  "version": "5.0.0",
   "type": "module",
   "engines": {
     "node": ">=22.13"
   },
   "scripts": {
-    "dev": "node v4/scripts/start.mjs",
-    "start": "node v4/scripts/start.mjs",
-    "test": "node --test v4/tests/*.test.mjs"
+    "dev": "node v5/server.mjs",
+    "start": "node v5/server.mjs",
+    "test": "node --test v5/tests/*.test.mjs"
   }
 }

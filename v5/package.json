@@ -1,0 +1,1 @@
+{"name":"safemeal-v5-personal-capstone","version":"5.0.0","private":true,"type":"module","engines":{"node":">=22.13"},"scripts":{"dev":"node server.mjs","start":"node server.mjs","test":"node --test tests/*.test.mjs"}}

@@ -1,0 +1,3 @@
+import {decodePassport,passportHtml} from './passport.mjs';
+const root=document.querySelector('#passport-root');const token=location.hash.startsWith('#p=')?location.hash.slice(3):new URLSearchParams(location.search).get('p');
+if(!token){root.innerHTML='<div class="surface" style="padding:32px"><h2>Chưa có hộ chiếu</h2><p>Hãy quét QR được cấp từ trang Kiểm định SafeMeal V5.</p><a href="./">Trở về ứng dụng</a></div>';}else{decodePassport(token).then(p=>root.innerHTML=passportHtml(p)).catch(e=>{root.innerHTML='<div class="surface"><h2>Không xác minh được QR</h2><p class="error-message"></p><p>Vui lòng lấy lại mã từ trang SafeMeal.</p></div>';root.querySelector('.error-message').textContent=e.message;});}
