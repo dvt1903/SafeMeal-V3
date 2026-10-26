@@ -39,3 +39,25 @@ test('AI báo cáo đã hoàn tất một bước không được đăng ký h�
  const {s,users:u}=make();s.inspect(u.farm,'L003',1,valid);
  assert.throws(()=>s.saveAI(u.farm,{lotId:'L003',stage:1,series:safeSeries}),/bước kiểm định tiếp theo/);
 });
+
+
+test('Step 2 fail is returned for remediation, cannot skip or silently overwrite pass',()=>{
+ const {s,users:u}=make();s.inspect(u.farm,'L003',1,valid);
+ s.inspect(u.factory,'L003',2,{...valid,status:'fail',notes:'Bao bì lỗi niêm phong'});
+ assert.throws(()=>s.inspect(u.store,'L003',3,valid),/Bước trước/);
+ assert.throws(()=>s.inspect(u.factory,'L003',2,{...valid,status:'pass'}),/khắc phục/);
+ const fixed=s.inspect(u.factory,'L003',2,{...valid,notes:'Đã xác minh niêm phong mới',remediation:'Đổi bao bì, kiểm lại hồ sơ sản xuất'});
+ assert.equal(fixed.inspections.find(x=>x.step===2).status,'pass');
+ assert.deepEqual(fixed.inspectionHistory.filter(x=>x.step===2).map(x=>x.status),['fail','pass']);
+ assert.equal(s.auditIntegrity().ok,true);
+ assert.throws(()=>s.inspect(u.factory,'L003',2,{...valid,remediation:'Kiểm lại'}),/Bước trước|đã đạt/);
+ s.handoff(u.store,'L003');s.saveAI(u.store,{lotId:'L003',stage:3,series:safeSeries});
+ assert.match(s.inspect(u.store,'L003',3,valid).certificate.code,/^SMKD-L003/);
+});
+
+test('Older SQLite inspection fail is preserved when migrating to reinspection history',()=>{
+ const {s,users:u,db}=make();s.inspect(u.farm,'L003',1,valid);s.inspect(u.factory,'L003',2,{...valid,status:'fail',notes:'Nhãn sai hạn dùng'});
+ db.prepare('DELETE FROM inspection_attempts WHERE lot_id=? AND step=2').run('L003');
+ // Simulate legacy DB: next init of DB path backfills from existing inspections.
+ assert.equal(s.lotDetail('L003').inspections[1].status,'fail');
+});

@@ -65,3 +65,20 @@ test('Changing AI input clears old analysis instead of reusing it',()=>{
  assert.equal(vm.runInContext('aiOutputs.cold',ctx),null);
  assert.equal(vm.runInContext('aiOutputs.nlp',ctx),null);
 });
+
+test('Không đạt tại bước 2 trả về xưởng; sau khắc phục có thể kiểm định lại mà giữ lịch sử',async()=>{
+ const reset = await vm.runInContext('offlineSeed()',ctx);
+ ctx.tmpReset=reset;
+ await vm.runInContext('state={...tmpReset,version:4};currentLot="L003";role="factory";page="pipeline";render()',ctx);
+ ctx.FormData=class{constructor(f){return new Map(Object.entries(f.data))}};
+ ctx.formFail={data:{lot:'L003',step:'2',status:'fail',location:'Xưởng chế biến',notes:'Bị hỏng tem niêm phong',expiry:'2027-12-31'}};
+ await vm.runInContext('doInspect(formFail)',ctx);
+ assert.match(el.innerHTML,/HỒ SƠ KHÔNG ĐẠT/);
+ assert.match(el.innerHTML,/Khắc phục và kiểm định lại bước 2/);
+ assert.doesNotMatch(el.innerHTML,/Bước cần thực hiện: 3\/3/);
+ ctx.formCorrect={data:{...ctx.formFail.data,status:'pass',notes:'Đã kiểm tra đóng gói lại',remediation:'Thay tem niêm phong, đóng gói lại và đối chiếu chứng từ'}};
+ await vm.runInContext('doInspect(formCorrect)',ctx);
+ assert.equal(vm.runInContext('pendingStep(getLot("L003"))',ctx),3);
+ assert.deepEqual(Array.from(vm.runInContext('getLot("L003").inspectionHistory.filter(x=>x.step===2).map(x=>x.status)',ctx)),['fail','pass']);
+ assert.match(el.innerHTML,/Nhật ký kiểm định và khắc phục/);
+});
