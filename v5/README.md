@@ -7,7 +7,7 @@
 
 ## 1. Cách chạy chỉ bằng một lệnh
 
-Cài Node.js **22.13+** rồi chạy từ thư mục gốc repository hoặc thư mục `v5`:
+Cài Node.js **22.13+** rồi chạy từ thư mục `v5`:
 
 ```sh
 npm run dev
@@ -17,13 +17,13 @@ Mở http://127.0.0.1:8000. **Không cần npm install**, không cần API key, 
 
 ## 2. Cách demo từ đầu tới cuối
 
-1. Tại **Tổng quan**, bấm **Bắt đầu với L003** (hoặc dùng lô L001 đã có hộ chiếu mẫu).
+1. Vào **Quản lý lô** → **Tạo lô mới**, nhập mã bất kỳ (ví dụ `L987`), sản phẩm, nơi sản xuất và ngưỡng nhiệt. Hệ thống tự chọn lô mới và đưa sang kiểm định bước 1. Hoặc chọn L003/L001 để xem ví dụ.
 2. **Bước 1**: vai trò Vùng trồng → ghi phiếu Đạt.
 3. **Bước 2**: chuyển sang Xưởng sản xuất → cố tình ghi **Không đạt**, xem hồ sơ bị trả về. Sau đó bấm **Khắc phục và kiểm định lại**; nhập phương án khắc phục, ghi **Đạt**. Lịch sử vẫn lưu cả hai phiếu.
 4. **Bước 3**: chuyển vai trò Điểm bán → xác nhận nhận hàng; truy cập **AI Inspection Lab**, chọn dữ liệu bình thường/CSV rồi bấm **Phân tích** → **Lưu báo cáo AI**.
-5. Trở về **Kiểm định 3 bước**, ghi phiếu bước 3 với nhiệt độ đúng ngưỡng và niêm phong nguyên vẹn. Hệ thống cấp duy nhất **một mã SMKD**.
-6. Mở **Hộ chiếu & QR**, chọn L003 → QR tự sinh. Dùng điện thoại **khác** quét ảnh QR này. Trình duyệt điện thoại sẽ mở `passport.html` và đọc thông tin sản phẩm, xuất xứ, hạn dùng và cả 3 giai đoạn.
-7. Mở **Phản ánh & thu hồi**, nhập mô tả, xem liên kết lô–mẻ ăn, rồi chuyển vai trò Ban kiểm định nếu muốn tạm giữ.
+5. Trở về **Kiểm định 3 bước** (nút ngay trong phòng AI), ghi phiếu bước 3 với nhiệt độ đúng ngưỡng và niêm phong nguyên vẹn. Hệ thống cấp duy nhất **một mã SMKD**.
+6. Mở **Hộ chiếu & QR**, chọn lô vừa tạo → QR tự sinh. Dùng điện thoại **khác** quét ảnh QR này. Trình duyệt điện thoại sẽ mở `passport.html` và đọc thông tin sản phẩm, xuất xứ, hạn dùng và cả 3 giai đoạn.
+7. Mở **Phản ánh & thu hồi**, chọn lô của bạn, nhập một mẻ ăn (tên, số suất, lượng nguyên liệu) để có dữ liệu truy vết; tạo phản ánh rồi chuyển vai trò Ban kiểm định nếu cần tạm giữ.
 
 **Dữ liệu đi kèm:** `/fixtures` chứa CSV ngưỡng 6°C/8°C; `/assets` chứa ảnh cà rốt, ảnh sữa và ảnh nhãn L003/L004 phục vụ demo thử OCR/MobileNet. Chúng là **dữ liệu minh họa**, không phải mẫu thử phòng thí nghiệm.
 
@@ -64,14 +64,24 @@ npm test
 
 Các bài test kiểm soát thứ tự bước, phân quyền, khắc phục khi Không đạt, AI làm điều kiện bước 3, chống cấp trùng, QR tự chứa, hết hạn, tạm giữ, NLP, OCR và dữ liệu cảm biến.
 
-## Báo cáo học phần phiên bản V5
-
-- [Báo cáo cuối kỳ V5 — PDF 8 trang](docs/BaoCao_SafeMeal_V5.pdf), cập nhật đúng mã nguồn và các giới hạn kiểm thử.
-- Video V4 trước đây **không phải** bản quay liên tục của V5; trước ngày nộp cần quay video 3–5 phút theo [kịch bản bảo vệ](docs/HUONG_DAN_BAO_VE.md).
-
 ## 7. Tác giả và tính chất nghiên cứu
 
 **Đoàn Văn Tâm — bài làm cá nhân (100%).** Giảng viên hướng dẫn: **TS. Võ Thái Anh**. Đây là **nguyên mẫu nghiên cứu/học tập**, không phải chứng nhận an toàn thực phẩm thực tế. Công cụ AI được dùng để hỗ trợ thiết kế và phát triển phần mềm; mọi phần cần được sinh viên giải thích và kiểm chứng trước khi nộp.
 
-## V5.1 — Không giới hạn ở 4 lô mẫu
-Lô mới tạo ở **Quản lý lô** đi xuyên suốt kiểm định, AI, QR, phản ánh, nhật ký. Xem `docs/HUONG_DAN_LO_MOI.md`. Dữ liệu mẫu tự điều chỉnh ngưỡng cho lô tùy ý, không gán ảnh cà rốt/sữa cho lô khác. Có sao lưu JSON, không phải đồng bộ đa máy tự động.
+## 8. Quản lý lô không giới hạn ở bốn lô mẫu (nâng cấp V5.1)
+
+- Trang **Quản lý lô** trong menu hiển thị mọi lô đã tạo, kể cả `L987`, `TRAU-2026-01`, v.v.; mỗi lô có các nút **Kiểm định / AI / QR / Phản ánh**.
+- Tạo lô ở trang Tổng quan, Quản lý lô hoặc trong Kiểm định. Lô mới tự được chọn và bắt đầu bước 1; kết quả kiểm định, báo cáo AI, QR và sự cố đều gắn theo **mã lô đang chọn**.
+- Dữ liệu cảm biến mẫu tự sinh quanh **ngưỡng riêng của lô** thay vì dùng cố định 6°C/8°C. Ảnh mẫu chỉ dùng cho L003/L004; lô khác cần tải ảnh của sản phẩm thật, tránh gán sai loại.
+- Có thể gắn mẻ ăn mới với lô vừa tạo bằng tên mẻ, số suất và lượng nguyên liệu sử dụng.
+- **Xuất bản sao lưu JSON / Nhập lại bản sao lưu** ở Quản lý lô hỗ trợ chuyển trạng thái đã nhập sang trình duyệt khác. Để máy khác quét QR hộ chiếu đã cấp, chỉ cần dùng URL trong QR (không cần nhập JSON).
+- **Không có đồng bộ tự động đa máy:** website hiện chạy trên GitHub Pages tĩnh, dữ liệu nghiệp vụ của lô mới lưu trên máy đã tạo. Nếu cần người dùng trên các máy khác cùng thấy các lô đang xử lý và các thay đổi thu hồi theo thời gian thực, cần triển khai API, DB và quyền truy cập server.
+- Chạy `npm test` kiểm tra bộ test tạo lô mới L987 và toàn bộ quy trình từ bước 1 đến QR.
+
+## 9. Bản V5.2 — sửa lỗi lô mới không xuất hiện (26/10/2026)
+
+- Đã đối chiếu bản V5.1 cục bộ với mã nguồn đang phục vụ trên GitHub, tìm thấy file app.mjs của website vẫn thuộc V5 cũ, khiến bảng Quản lý lô mới không được triển khai.
+- Trang Quản lý lô hiển thị ngay lô vừa tạo bằng khung xác nhận và hàng đánh dấu màu, có nút Kiểm định và AI. Có thể tạo ở Tổng quan hoặc trang này.
+- Chỉ báo lưu thành công nếu đọc lại được hồ sơ trong localStorage; nếu thất bại thì không báo đã lưu.
+- Khi tải lại trang, lô được lấy từ bộ nhớ cục bộ; các tab cùng origin đồng bộ khi thay đổi. Không hỗ trợ đồng bộ tự động giữa các thiết bị.
+- Có bài kiểm tra tạo lô L987, hoàn thành 3 bước/AI/QR và kiểm tra lại danh sách sau khi tạo.

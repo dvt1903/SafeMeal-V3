@@ -1,49 +1,77 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {createContext,runInContext} from 'node:vm';
-import {webcrypto} from 'node:crypto';
+import {createContext, runInContext} from 'node:vm';
 import * as engine from '../js/engine.mjs';
 import * as ai from '../js/ai.mjs';
 import * as passport from '../js/passport.mjs';
+import {webcrypto} from 'node:crypto';
 
-test('UI can add L987 and carry it across inspection, AI, QR and the lot list',async()=>{
- const nodes=new Map(),saved=new Map(),session=new Map();
- const el=s=>{if(!nodes.has(s))nodes.set(s,{innerHTML:'',textContent:'',value:'',classList:{remove(){},add(){}},dataset:{}});return nodes.get(s)};
- const storage=m=>({getItem:k=>m.get(k)??null,setItem:(k,v)=>m.set(k,v),removeItem:k=>m.delete(k)});
- class Form {constructor(x){return Object.entries(x.fields||{})}}
- let source=await readFile(new URL('../js/app.mjs',import.meta.url),'utf8');
- source=source.replace(/^import .*;\s*$/gm,'').replace(/\ninit\(\);\s*$/,'');
- const context=createContext({...engine,...ai,...passport,qrSVG:()=>'<svg></svg>',crypto:webcrypto,
-  document:{querySelector:el,querySelectorAll:()=>[],addEventListener(){}},
-  localStorage:storage(saved),sessionStorage:storage(session),FormData:Form,
-  window:{},URL:{revokeObjectURL(){}},setTimeout:()=>1,clearTimeout:()=>{},
-  console,Blob,TextEncoder,TextDecoder,Response,CompressionStream,DecompressionStream,
-  prompt:()=>null,confirm:()=>true
+const elements=new Map();
+const element=selector=>{if(!elements.has(selector))elements.set(selector,{innerHTML:'',textContent:'',value:'',classList:{remove(){},add(){}},dataset:{}});return elements.get(selector)};
+const local=new Map(),session=new Map();
+const storage=m=>({getItem:k=>m.get(k)??null,setItem:(k,v)=>m.set(k,v),removeItem:k=>m.delete(k)});
+class FakeFormData {constructor(form){return Object.entries(form.fields||{})}}
+let context;
+async function loadUI(){
+ const source=await readFile(new URL('../js/app.mjs',import.meta.url),'utf8');
+ const edited=source.replace(/^import .*;\s*$/gm,'').replace(/\ninit\(\);\s*$/,'');
+ context=createContext({...engine,...ai,...passport,qrSVG:url=>'<svg data-url="'+url.slice(0,50)+'"></svg>',crypto:webcrypto,
+  document:{querySelector:element,querySelectorAll:()=>[],addEventListener(){}},
+  localStorage:storage(local),sessionStorage:storage(session),FormData:FakeFormData,
+  window:{addEventListener(){}}, URL:{revokeObjectURL(){}},setTimeout:()=>1,clearTimeout:()=>{},console,
+  Blob,TextEncoder,TextDecoder,Response,CompressionStream,DecompressionStream,
+  prompt:()=>null,confirm:()=>true,
  });
- const run=x=>runInContext(x,context);
- const submit=(id,fields)=>run('handleForm')({id,fields});
- runInContext(source,context);
- run('db=seed();page="lots";role="farm";render()');
- assert.match(el('#app').innerHTML,/Toàn bộ lô sản phẩm/);
- await submit('new-lot-form',{id:'L987',name:'Rau cải mới',origin:'HTX Đức Trọng',qty:'45',unit:'kg',threshold:'3.5'});
- assert.equal(run('getLot().id'),'L987');assert.equal(run('nextStep(getLot())'),1);
- assert.equal(JSON.parse(saved.get('safemeal_v5_individual_demo')).lots.length,5);
- await submit('inspect-form',{step:'1',result:'pass',location:'Đức Trọng',notes:'Đã kiểm tra nguồn gốc rau cải'});
+ runInContext(edited,context);
+ runInContext('db=seed();page="lots";role="farm";render();',context);
+}
+const run=script=>runInContext(script,context);
+const form=(id,fields)=>({id,fields});
+test('freshly created unseeded L987 appears in all screens and completes full workflow',async()=>{
+ await loadUI();
+ assert.match(element('#app').innerHTML,/Toàn bộ lô sản phẩm/);
+ assert.match(element('#navigation').innerHTML,/Quản lý lô/);
+ await run('handleForm')(form('new-lot-form',{id:'L987',name:'Rau cải mới thử nghiệm',origin:'HTX Đức Trọng',qty:'45',unit:'kg',threshold:'3.5'}));
+ assert.match(element('#app').innerHTML,/L987/);
+ assert.equal(run('getLot()').id,'L987');
+ assert.equal(run('page'),'lots');
+ assert.match(element('#app').innerHTML,/id="new-lot-confirmation"/);
+ assert.match(element('#app').innerHTML,/data-lot-id="L987"/);
+ await run('onAction')('open-lot','L987');
+ assert.equal(run('page'),'workflow');
+ assert.equal(JSON.parse(local.get('safemeal_v5_individual_demo')).lots.length,5);
+ assert.equal(JSON.parse(local.get('safemeal_v5_individual_demo')).active,'L987');
+ assert.match(element('#app').innerHTML,/Ghi phiếu kiểm định bước 1/);
+ await run('handleForm')(form('inspect-form',{step:'1',result:'pass',location:'Trang trại Đức Trọng',notes:'Nhật ký thu hoạch có chữ ký'}));
+ assert.equal(run('nextStep(getLot())'),2);
  await run('onAction')('set-role','factory');
- await submit('inspect-form',{step:'2',result:'pass',location:'Xưởng chế biến',notes:'Niêm phong và hồ sơ đạt',expiry:'2028-12-31'});
+ await run('handleForm')(form('inspect-form',{step:'2',result:'pass',location:'Xưởng chế biến',notes:'Hồ sơ đóng gói hợp lệ',expiry:'2028-12-31'}));
+ assert.equal(run('nextStep(getLot())'),3);
  await run('onAction')('set-role','retailer');
  await run('onAction')('handoff');
  await run('onAction')('lot-to-ai','L987');
- assert.match(el('#app').innerHTML,/3.5°C/);
+ assert.match(element('#app').innerHTML,/Ngưỡng 3.5°C/);
+ assert.match(run('aiSeriesFor(getLot(),"normal")'),/08:00/);
  run('aiCSV=aiSeriesFor(getLot(),"normal");aiResult=analyzeTemperature(aiCSV,getLot().threshold)');
  await run('onAction')('ai-save');
+ assert.equal(run('getLot().aiReports.length'),1);
  await run('onAction')('goto','workflow');
- await submit('inspect-form',{step:'3',result:'pass',location:'Quầy số 1',notes:'Bảo quản tốt niêm phong nguyên',temperature:'1.5',seal:'intact'});
- assert.match(run('getLot().certificate.code'),/^SMKD-L987-/);
+ assert.match(element('#app').innerHTML,/Ghi phiếu kiểm định bước 3/);
+ await run('handleForm')(form('inspect-form',{step:'3',result:'pass',location:'Quầy thực phẩm Đức Trọng',notes:'Niêm phong nguyên và đo thực tế đạt',temperature:'1.3',seal:'intact'}));
+ assert.equal(run('getLot().certificate.code').startsWith('SMKD-L987-'),true);
  await run('onAction')('lot-to-passport','L987');
- await new Promise(ok=>setTimeout(ok,30));
- assert.match(el('#qr-output').innerHTML,/QR mang thông tin sản phẩm/);
+ await new Promise(resolve=>setTimeout(resolve,140));
+ assert.match(element('#qr-output').innerHTML,/QR mang thông tin sản phẩm/);
+ await run('onAction')('lot-to-incident','L987');
+ await run('handleForm')(form('new-meal-form',{name:'Canh cải tươi',servings:'50',amount:'2'}));
+ assert.match(element('#app').innerHTML,/Canh cải tươi/);
  await run('onAction')('goto','lots');
- assert.match(el('#app').innerHTML,/L987/);
+ assert.match(element('#app').innerHTML,/L987/);
+ assert.match(element('#app').innerHTML,/data-id="L987"/);
+ assert.equal(run('db.meals.find(x=>x.name==="Canh cải tươi").ingredients[0].qty'),2);
+ assert.equal(JSON.parse(local.get('safemeal_v5_individual_demo')).lots[0].id,'L987');
+ await run('init()');
+ assert.equal(run('getLot().id'),'L987');
+ assert.match(element('#app').innerHTML,/L987/);
 });

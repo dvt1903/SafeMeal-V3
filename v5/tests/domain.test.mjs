@@ -14,27 +14,59 @@ test('cold chain and data validation',()=>{const text='08:00,4.1\n08:30,4.2\n09:
 test('NLP and OCR support investigation but do not automatically certify',()=>{const n=classifyComplaint('Tem mã QR không khớp mã lô trên bao bì');assert(n.confidence>0);const r=matchOCR('L009 CA ROT HUU CO','L003' in {}?{id:'L009'}:{id:'L003'});assert.equal(r.match,false);assert.deepEqual(r.found,['L009']);});
 test('AI evidence fusion escalates OCR identity mismatch',async()=>{const {fuseEvidence}=await import('../js/ai.mjs');const cold=analyzeTemperature('08:00,4.0\n08:30,4.1\n09:00,4.2\n09:30,4.3',8);assert.equal(fuseEvidence({cold}).level,'low');const flagged=fuseEvidence({cold,ocr:{match:false}});assert.equal(flagged.level,'high');assert(flagged.reasons.some(x=>x.includes('OCR')));});
 
-test('one-command local HTTP serves root and /v5 aliases',async()=>{
- const {spawn}=await import('node:child_process');
- const url=new URL('../server.mjs',import.meta.url);
- const p=spawn(process.execPath,[url.pathname],{env:{...process.env,HOST:'127.0.0.1',PORT:'18247'},stdio:'ignore'});
- try{
-  let ok=false;
-  for(let n=0;n<50;n++){try{const r=await fetch('http://127.0.0.1:18247/');ok=r.ok;break}catch{await new Promise(resolve=>setTimeout(resolve,90))}}
-  assert(ok,'Local server did not start');
-  for(const path of ['/v5/','/v5/index.html','/passport.html','/v5/passport.html','/v5/js/passport-view.mjs','/v5/assets/style.css']){
-   const r=await fetch('http://127.0.0.1:18247'+path);assert.equal(r.status,200,path);assert((await r.text()).length>100,path);
+test('repeated QR passports preserve product data and failed checks cannot issue code',async()=>{
+  const db=seed();await seedCertified(db);
+  for(const l of db.lots.filter(x=>x.certificate)){
+    const pass=await createPassport(l),again=await decodePassport(pass.token);
+    assert.equal(again.record.n,l.name);
+    assert.equal(again.record.o,l.origin);
+    assert.equal(again.record.id,l.id);
+    assert.equal(again.record.st.length,3);
+    assert.equal(again.record.c,l.certificate.code);
+    assert(pass.url.startsWith('https://dvt1903.github.io/SafeMeal-V3/v5/passport.html#p='));
   }
-  const missing=await fetch('http://127.0.0.1:18247/missing.html');assert.equal(missing.status,404);
- }finally{p.kill('SIGTERM')}
+  const failed=lot();await go1(failed);await inspect(failed,{step:2,result:'fail',actor:'factory',location:'Xưởng thử nghiệm',notes:'Niêm phong sản phẩm không đạt',expiry:'2027-12-31'});
+  await assert.rejects(issueCertificate(failed),/Chưa đủ ba phiếu/);
 });
-test('portable QR self-contained snapshot retains identity and stages',async()=>{
- const db=seed();await seedCertified(db);const l=db.lots[0];
- const p=await createPassport(l),decoded=await decodePassport(p.token);
- assert.equal(decoded.record.n,l.name);assert.equal(decoded.record.o,l.origin);
- assert.equal(decoded.record.st.length,3);assert.equal(decoded.record.c,l.certificate.code);
- assert(p.url.startsWith('https://dvt1903.github.io/SafeMeal-V3/v5/passport.html#p='));
+
+test('local preview HTTP serves root and /v5 aliases including passport module',async()=>{
+  const {spawn}=await import('node:child_process');
+  const serverPath=new URL('../server.mjs',import.meta.url);
+  const proc=spawn(process.execPath,[serverPath.pathname],{env:{...process.env,HOST:'127.0.0.1',PORT:'18247'},stdio:'ignore'});
+  try{
+    let res;
+    for(let i=0;i<40;i++){
+      try{res=await fetch('http://127.0.0.1:18247/');break}catch{await new Promise(r=>setTimeout(r,100))}
+    }
+    assert.equal(res?.status,200,'preview server failed');
+    for(const path of ['/index.html','/v5/','/v5/index.html','/passport.html','/v5/passport.html','/v5/js/passport-view.mjs','/v5/assets/style.css']){
+      const response=await fetch('http://127.0.0.1:18247'+path);assert.equal(response.status,200,path);
+      const body=await response.text();assert(body.length>100,path+' blank');
+    }
+    const bad=await fetch('http://127.0.0.1:18247/no-such-file.html');assert.equal(bad.status,404);
+  } finally{proc.kill('SIGTERM')}
 });
 
 
-test('custom lot L987: create through domain, inspect, AI, QR',async()=>{const s=seed(),l=makeLot({id:'L987',name:'Rau cải thử nghiệm',origin:'Đức Trọng',qty:45,unit:'kg',threshold:3.5});s.lots.push(l);await inspect(l,{step:1,result:'pass',actor:'farm',location:'Nông trại Đức Trọng',notes:'Đã đối chiếu nhật ký thu hoạch'});await inspect(l,{step:2,result:'pass',actor:'factory',location:'Xưởng chế biến',notes:'Bao bì và hạn dùng đạt',expiry:'2028-12-31'});handoff(l,'retailer');l.aiReports.push({stage:3,created:new Date(Date.now()+500).toISOString(),risk:{level:'low',score:10}});await inspect(l,{step:3,result:'pass',actor:'retailer',location:'Quầy bán hàng',notes:'Niêm phong đạt yêu cầu',temperature:1.5,seal:'intact'});await issueCertificate(l);const p=await createPassport(l);const v=await decodePassport(p.token);assert.equal(v.record.id,'L987');assert.equal(v.record.st.length,3);assert.equal(s.lots.length,5);});
+test('freshly created custom lot L987 runs farm, factory, AI, POS and cross-device QR',async()=>{
+ const db=seed();const batch=makeLot({id:'L987',name:'Rau cải thử nghiệm mới',origin:'Hợp tác xã Đức Trọng',qty:42,unit:'kg',threshold:3.5});
+ db.lots.unshift(batch);db.active=batch.id;assert.equal(db.lots.length,5);assert.equal(batch.id,'L987');assert.equal(nextStep(batch),1);
+ await inspect(batch,{step:1,result:'pass',actor:'farm',location:'Vùng trồng Đức Trọng',notes:'Kiểm tra nhật ký thu hoạch có ghi giờ và người phụ trách'});
+ await inspect(batch,{step:2,result:'fail',actor:'factory',location:'Xưởng mới',notes:'Bao bì hư hỏng cần đóng gói lại',expiry:'2028-12-31'});
+ assert.equal(nextStep(batch),2);
+ await inspect(batch,{step:2,result:'pass',actor:'factory',location:'Xưởng mới',notes:'Đã kiểm tra lại các chứng từ và niêm phong',expiry:'2028-12-31',correction:'Đã thay bao bì và kiểm tra lại từng kiện hàng'});
+ handoff(batch,'retailer');const {analyzeTemperature,fuseEvidence}=await import('../js/ai.mjs');
+ const series='08:00,1.1\n08:30,1.2\n09:00,1.3\n09:30,1.1\n10:00,1.4';const risk=fuseEvidence({cold:analyzeTemperature(series,batch.threshold)});
+ batch.aiReports.push({id:'AI-L987',stage:3,created:new Date(Date.now()+2000).toISOString(),risk,source:'manual_input',series});
+ await inspect(batch,{step:3,result:'pass',actor:'retailer',location:'Quầy thực phẩm',notes:'Nhiệt độ đạt, niêm phong nguyên',temperature:1.4,seal:'intact'});
+ const issued=await issueCertificate(batch);assert.match(issued.code,/^SMKD-L987-[A-F0-9]{12}$/);
+ const p=await createPassport(batch);const imported=await decodePassport(p.token);assert.equal(imported.record.n,'Rau cải thử nghiệm mới');assert.equal(imported.record.id,'L987');assert.equal(imported.record.st.length,3);assert.equal(imported.record.o,'Hợp tác xã Đức Trọng');assert.equal(batch.inspections.length,4);assert.equal(nextStep(batch),4);
+ db.meals.push({id:'M987',name:'Canh rau cải',servings:42,ingredients:[{lot:'L987',qty:0}]});
+ assert.equal((await import('../js/engine.mjs')).relatedMeals(db,'L987').length,1);
+});
+
+test('custom batch IDs validate and static data survives JSON export/import',()=>{
+ assert.throws(()=>makeLot({id:'abc space',name:'Cải xanh',origin:'Lâm Đồng',qty:3,threshold:5}),/Mã lô/);
+ const state=seed();state.lots.unshift(makeLot({id:'MUA-XUAN-88',name:'Bắp cải',origin:'Đà Lạt',qty:30,threshold:5}));state.active='MUA-XUAN-88';
+ const copy=JSON.parse(JSON.stringify(state));assert.equal(copy.lots.length,5);assert.equal(copy.lots[0].name,'Bắp cải');assert.equal(copy.active,'MUA-XUAN-88');
+});
