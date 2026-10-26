@@ -92,3 +92,10 @@ Các bài test kiểm soát thứ tự bước, phân quyền, khắc phục khi
 - Khi lưu báo cáo AI mức thấp, tự trở về Kiểm định và mở phiếu bước 3, không cần chọn thủ công vai trò. Quy trình vẫn bắt buộc nhập nhiệt độ, tình trạng niêm phong và ghi chú thực tế trước khi cấp mã QR.
 - Nếu AI đã lưu trước bàn giao thì phải lập báo cáo mới sau bàn giao; không hợp thức hóa báo cáo cũ.
 - Vai trò chỉ được đổi tự động trong giao diện mô phỏng của bản GitHub Pages, **không phải phân quyền backend thực**.
+
+## Hồ sơ nộp phiên bản V5.4
+
+- **Link demo:** https://dvt1903.github.io/SafeMeal-V3/v5/
+- **Mã nguồn phiên bản cuối:** https://github.com/dvt1903/SafeMeal-V3/tree/final
+- **Danh mục tài liệu và điều kiện nộp:** [Hướng dẫn nộp bài](../docs/NOP_BAI_HUONG_DAN.md).
+- Giới hạn hệ thống: dữ liệu được lưu theo trình duyệt; mã QR tự mang bản tóm tắt, không đồng bộ trạng thái thu hồi thời gian thực.
